@@ -1,0 +1,8 @@
+# VSCode
+.vscode
+
+# C
+cub3D
+objs
+*.o
+*.out
