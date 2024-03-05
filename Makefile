@@ -44,6 +44,7 @@ MLX			:= $(MLX_DIR)/libmlx.a
 define LIB	:=
 	$(LIBFT)
 	$(MLX)
+	-lXext -lX11 -lm
 endef
 LIB 		:= $(strip $(LIB))
 
