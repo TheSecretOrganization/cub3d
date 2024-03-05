@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:54:10 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/05 22:57:31 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:30:29 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	free_collector(t_collector *collector)
 		next = collector->next;
 		if (collector->mlx)
 		{
+			mlx = collector;
 			collector = next;
 			continue ;
 		}
