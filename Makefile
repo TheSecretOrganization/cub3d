@@ -50,6 +50,7 @@ LIB 		:= $(strip $(LIB))
 
 define SRC	:=
 	main.c
+	read_file.c
 	window.c
 endef
 SRC			:= $(strip $(SRC))
