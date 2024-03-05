@@ -25,4 +25,7 @@ typedef struct s_window
 	void	*ptr;
 }	t_window;
 
+int		create_window(t_window *window);
+void	delete_window(t_window *window);
+
 #endif
