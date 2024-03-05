@@ -49,7 +49,9 @@ endef
 LIB 		:= $(strip $(LIB))
 
 define SRC	:=
+	collector.c
 	main.c
+	utils.c
 	window.c
 endef
 SRC			:= $(strip $(SRC))
