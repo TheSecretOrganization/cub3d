@@ -16,6 +16,9 @@
 # include "libft.h"
 # include "mlx.h"
 
+# define WIDTH 600
+# define HEIGHT 800
+
 typedef struct s_window
 {
 	void	*mlx;
