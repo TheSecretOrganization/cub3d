@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/05 14:24:15 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/05 14:32:46 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "libft.h"
 # include "mlx.h"
+
+# include <stdio.h>
 
 # define WIDTH 600
 # define HEIGHT 800
