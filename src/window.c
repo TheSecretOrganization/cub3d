@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:12:32 by averin            #+#    #+#             */
-/*   Updated: 2024/03/05 17:31:47 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/05 22:48:04 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	create_window(t_window *window, t_collector *collector)
 		(free_collector(collector), error("Cannot open window"));
 	window->ptr = mlx_new_window(window->mlx, WIDTH, HEIGHT, "cub3d");
 	if (!window->ptr)
-		(free(window->ptr),
+		(mlx_destroy_display(window->mlx), free(window->ptr),
 			free_collector(collector), error("Cannot open window"));
 	add_collector(collector, window, &delete_window);
+	give_mlx_priority(collector);
 }

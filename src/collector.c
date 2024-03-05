@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:54:10 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/05 17:31:07 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/05 22:57:31 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,24 @@
 void	free_collector(t_collector *collector)
 {
 	t_collector	*next;
+	t_collector	*mlx;
 
+	mlx = NULL;
 	while (collector)
 	{
 		next = collector->next;
+		if (collector->mlx)
+		{
+			collector = next;
+			continue ;
+		}
 		if (collector->el)
 			collector->f(collector->el);
 		free(collector);
 		collector = next;
 	}
+	if (mlx)
+		(collector->f(collector->el), free(collector));
 }
 
 t_collector	*init_collector(void)
@@ -50,6 +59,14 @@ void	add_collector(t_collector *collector, void *el, void (*f)(void *))
 	next->next->el = el;
 	next->next->f = f;
 	next->next->next = NULL;
+	next->next->mlx = 0;
+}
+
+void	give_mlx_priority(t_collector *collector)
+{
+	while (collector->next)
+		collector = collector->next;
+	collector->mlx = 1;
 }
 
 void	*ccalloc(size_t nmemb, size_t size, t_collector *collector)
