@@ -53,6 +53,7 @@ define SRC	:=
 	main.c
 	parse_file.c
 	read_file.c
+	texture.c
 	utils.c
 	window.c
 endef
