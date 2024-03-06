@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:54:10 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/06 10:46:29 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/06 12:23:10 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_collector	*init_collector(void)
 	return (collector);
 }
 
-void	add_collector(t_collector *collector, void *el, void (*f)(void *))
+void	*add_collector(t_collector *collector, void *el, void (*f)(void *))
 {
 	t_collector	*next;
 
@@ -62,6 +62,7 @@ void	add_collector(t_collector *collector, void *el, void (*f)(void *))
 	next->next->f = f;
 	next->next->next = NULL;
 	next->next->mlx = 0;
+	return (el);
 }
 
 void	give_mlx_priority(t_collector *collector)
