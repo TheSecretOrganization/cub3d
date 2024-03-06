@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:03:32 by averin            #+#    #+#             */
-/*   Updated: 2024/03/06 10:46:46 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/06 10:48:07 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	clear_file(void *v)
 	ft_lstclear((t_list **) &v, &free);
 }
 
-t_list	*read_file(char *file, t_collector *collector)
+t_list	*read_file(const char *file, t_collector *collector)
 {
 	t_list	*lst;
 	t_list	*new_element;
