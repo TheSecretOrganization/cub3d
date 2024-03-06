@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collector.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:54:10 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/06 12:23:10 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/06 14:16:00 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	*ccalloc(size_t nmemb, size_t size, t_collector *collector)
 	void	*el;
 
 	el = ft_calloc(nmemb, size);
-	if (el)
+	if (!el)
 		cerror("Malloc failed", collector);
 	add_collector(collector, el, &free);
 	return (el);
