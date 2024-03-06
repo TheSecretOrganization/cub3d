@@ -6,11 +6,12 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:54:10 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/06 10:32:17 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/06 10:46:29 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "collector.h"
+#include "utils.h"
 #include <stdio.h>
 
 void	free_collector(t_collector *collector)

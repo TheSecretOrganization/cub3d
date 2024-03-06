@@ -6,11 +6,12 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:03:32 by averin            #+#    #+#             */
-/*   Updated: 2024/03/06 10:40:27 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/06 10:46:46 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "utils.h"
 
 #define MALLOC_ERROR "Malloc failed"
 #define OPEN_ERROR "Cannot open file"

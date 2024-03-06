@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   collector.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:48:40 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/05 22:47:50 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:46:21 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLLECTOR_H
 # define COLLECTOR_H
 
-# include "utils.h"
+# include <sys/types.h>
 
 typedef struct s_collector
 {
