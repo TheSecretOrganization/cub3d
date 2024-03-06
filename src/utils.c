@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/05 17:25:37 by abasdere         ###   ########.fr       */
+/*   Created: 2024/03/05 16:59:20 by abasdere          #+#    #+#             */
+/*   Updated: 2024/03/05 17:02:33 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "utils.h"
 
-# include "libft.h"
-# include "mlx.h"
-# include "utils.h"
-
-# include <stdio.h>
-
-#endif
+void	error(char *message)
+{
+	ft_dprintf(2, "Error\n%s\n", message);
+	exit(1);
+}
