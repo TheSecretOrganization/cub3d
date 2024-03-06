@@ -50,10 +50,10 @@ LIB 		:= $(strip $(LIB))
 
 define SRC	:=
 	collector.c
+	graphic.c
 	main.c
 	parse_file.c
 	read_file.c
-	texture.c
 	utils.c
 	window.c
 endef
