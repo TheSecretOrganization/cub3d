@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:54:10 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/06 12:28:17 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/06 13:57:53 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_collector	*init_collector(void)
 
 	collector = ft_calloc(1, sizeof(t_collector));
 	if (!collector)
-		error("Malloc failed");
+		error(MALLOC_ERROR);
 	return (collector);
 }
 
