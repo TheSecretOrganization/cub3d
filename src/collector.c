@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   collector.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:54:10 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/05 23:44:42 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:46:29 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "collector.h"
+#include "utils.h"
 #include <stdio.h>
 
 void	free_collector(t_collector *collector)
@@ -56,7 +57,7 @@ void	add_collector(t_collector *collector, void *el, void (*f)(void *))
 		next = next->next;
 	next->next = ft_calloc(1, sizeof(t_collector));
 	if (!next->next)
-		(free_collector(collector), error("Malloc failed"));
+		cerror("Malloc failed", collector);
 	next->next->el = el;
 	next->next->f = f;
 	next->next->next = NULL;
@@ -76,7 +77,7 @@ void	*ccalloc(size_t nmemb, size_t size, t_collector *collector)
 
 	el = ft_calloc(nmemb, size);
 	if (el)
-		(free_collector(collector), error("Malloc failed"));
+		cerror("Malloc failed", collector);
 	add_collector(collector, el, &free);
 	return (el);
 }
