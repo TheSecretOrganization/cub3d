@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/06 11:16:53 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:10:12 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft.h"
 # include "mlx.h"
 # include "utils.h"
-# include "texture.h"
+# include "graphic.h"
 
 # include <stdio.h>
 
@@ -30,7 +30,7 @@ typedef struct s_map
 {
 	char		**map;
 	t_vector	player;
-	t_texure	*texure;
+	t_graphic	*graphic;
 }	t_map;
 
 #endif
