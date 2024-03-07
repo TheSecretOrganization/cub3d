@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:03:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/07 13:58:49 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/07 14:00:50 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,4 @@ void	parse_map(t_list *line, t_map *map, t_collector *collector)
 {
 	parse_lines(line, map, collector);
 	create_rectangle(line, map, collector);
-	for (size_t i = 0; map->map[i]; i++)
-	{
-		write(1, map->map[i], map->width);
-		write(1, "\n", 1);
-	}
 }
