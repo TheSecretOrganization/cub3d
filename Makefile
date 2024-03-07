@@ -53,6 +53,7 @@ define SRC	:=
 	graphic.c
 	main.c
 	parse_file.c
+	parse_map.c
 	read_file.c
 	utils.c
 	window.c
