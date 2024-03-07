@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:56:21 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/07 11:19:38 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:26:16 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	is_texture(const char *line, int found_map)
 	return (alpha);
 }
 
-void	check_rules(t_texure *texture, t_color *color, t_collector *collector)
+static void	check_rules(t_texure *texture, t_color *color, t_collector *col)
 {
 	int			rules;
 
@@ -55,7 +55,7 @@ void	check_rules(t_texure *texture, t_color *color, t_collector *collector)
 		color = color->next;
 	}
 	if (rules != 6)
-		cerror(RULES_ERROR, collector);
+		cerror(RULES_ERROR, col);
 }
 
 void	parse_file(t_map *map, const char *argv, t_collector *collector)
