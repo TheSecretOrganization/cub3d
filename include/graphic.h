@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:15:07 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/07 08:56:05 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:23:23 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft.h"
 # include "collector.h"
 
-typedef struct	s_color
+typedef struct s_color
 {
 	char			*key;
 	int				red;
@@ -25,19 +25,18 @@ typedef struct	s_color
 	struct s_color	*next;
 }	t_color;
 
-typedef struct	s_texture
+typedef struct s_texture
 {
 	char				*key;
 	char				*value;
 	struct s_texture	*next;
 }	t_texure;
 
-typedef	struct s_graphic
+typedef struct s_graphic
 {
 	t_color		*color;
 	t_texure	*texture;
 }	t_graphic;
-
 
 void	parse_graphic(char *line, t_graphic *graphic, t_collector *collector);
 
