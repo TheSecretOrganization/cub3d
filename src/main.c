@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/07 12:34:02 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/07 13:02:19 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char const *argv[])
 	if (argc != 2)
 		error(USAGE_ERROR);
 	window = (t_window){NULL, NULL};
-	map = (t_map){0, {{0, 0}, {0, 0}}, {NULL, NULL}};
+	map = (t_map){0, {{0, 0}, {0, 0}}, {NULL, NULL}, 0, 0};
 	collector = init_collector();
 	parse_file(&map, argv[1], collector);
 	create_window(&window, collector);

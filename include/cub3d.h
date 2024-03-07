@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/07 12:34:05 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/07 13:02:05 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct s_map
 	char		**map;
 	t_player	player;
 	t_graphic	graphic;
+	size_t		heigh;
+	size_t		width;
 }	t_map;
 
 #endif
