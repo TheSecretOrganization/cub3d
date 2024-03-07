@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:56:21 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/07 13:04:44 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/07 13:32:05 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,28 +61,28 @@ static void	check_rules(t_texure *texture, t_color *color, t_collector *col)
 void	parse_file(t_map *map, const char *argv, t_collector *collector)
 {
 	t_list	*file;
-	t_pmap	pmap;
+	t_list	*line;
 	int		found_map;
 	int		code;
 
 	file = read_file(argv, collector);
 	found_map = 0;
-	pmap = (t_pmap){NULL, 0};
+	line = NULL;
 	while (file)
 	{
 		code = is_texture((const char *)file->content, found_map);
 		if (code == -1)
 			cerror(MAP_NOT_LAST, collector);
-		else if (code == 0 && ++(pmap.size))
+		else if (code == 0 && ++(map->heigh))
 		{
 			found_map = 1;
-			if (pmap.size == 1)
-				pmap.map = file;
+			if (map->heigh == 1)
+				line = file;
 		}
 		else if (code == 1)
 			parse_graphic((char *)file->content, &map->graphic, collector);
 		file = file->next;
 	}
-	parse_map(&pmap, map, collector);
+	parse_map(line, map, collector);
 	check_rules(map->graphic.texture, map->graphic.color, collector);
 }
