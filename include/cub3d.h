@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/07 11:22:18 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/07 12:34:05 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,16 @@ typedef struct s_vector
 	double	y;
 }	t_vector;
 
+typedef struct s_player
+{
+	t_vector	pos;
+	t_vector	view;
+}	t_player;
+
 typedef struct s_map
 {
 	char		**map;
-	t_vector	player;
+	t_player	player;
 	t_graphic	graphic;
 }	t_map;
 
