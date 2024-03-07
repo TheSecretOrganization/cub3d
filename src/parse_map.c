@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:03:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/07 14:00:50 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/07 14:02:01 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ static void	parse_lines(t_list *line, t_map *map, t_collector *collector)
 		len = ft_strlen(line->content);
 		if (len > map->width)
 			map->width = len;
-		(i++, line = line->next);
+		i++;
+		line = line->next;
 	}
 }
 
