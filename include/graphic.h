@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:15:07 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/06 16:08:17 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/07 08:56:05 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,29 @@
 # include "libft.h"
 # include "collector.h"
 
-
-typedef enum s_graphic_type
-{
-	COLOR,
-	TEXTURE
-}	t_graphic_type;
-
 typedef struct	s_color
 {
-	int	red;
-	int	green;
-	int	blue;
+	char			*key;
+	int				red;
+	int				green;
+	int				blue;
+	struct s_color	*next;
 }	t_color;
 
 typedef struct	s_texture
 {
 	char				*key;
 	char				*value;
+	struct s_texture	*next;
 }	t_texure;
 
 typedef	struct s_graphic
 {
-	void				*el;
-	t_graphic_type		type;
-	struct s_graphic	*next;
+	t_color		*color;
+	t_texure	*texture;
 }	t_graphic;
 
 
-void	parse_texture(char *line, t_texure **texture, t_collector *collector);
+void	parse_graphic(char *line, t_graphic *graphic, t_collector *collector);
 
 #endif
