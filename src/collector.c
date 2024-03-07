@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:54:10 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/06 13:57:53 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/07 09:01:17 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	*add_collector(t_collector *collector, void *el, void (*f)(void *))
 		next = next->next;
 	next->next = ft_calloc(1, sizeof(t_collector));
 	if (!next->next)
-		cerror(MALLOC_ERROR, collector);
+		(f(el), cerror(MALLOC_ERROR, collector));
 	next->next->el = el;
 	next->next->f = f;
 	next->next->next = NULL;
@@ -79,7 +79,7 @@ void	*ccalloc(size_t nmemb, size_t size, t_collector *collector)
 	void	*el;
 
 	el = ft_calloc(nmemb, size);
-	if (el)
+	if (!el)
 		cerror(MALLOC_ERROR, collector);
 	add_collector(collector, el, &free);
 	return (el);
