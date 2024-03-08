@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:35:32 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/08 12:05:52 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:07:41 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,8 @@ void	parse_graphic(char *line, t_graphic *graphic, t_collector *collector)
 {
 	size_t	i;
 	char	**split;
-	char	*key;
-	char	*value;
+	const char	*key;
+	const char	*value;
 
 	i = -1;
 	while (line[++i])
