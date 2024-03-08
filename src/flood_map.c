@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:40:19 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/08 11:44:19 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:45:14 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	find_starting_points(char **map, size_t *rules)
 		while (++x < rules[1])
 			if (map[y][x] != '1' && map[y][x] != '\0'
 				&& flood(map, rules, x, y))
-					return (1);
+				return (1);
 	}
 	return (0);
 }
