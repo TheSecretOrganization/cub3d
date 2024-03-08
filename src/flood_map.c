@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   flood_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 16:04:30 by averin            #+#    #+#             */
-/*   Updated: 2024/03/08 10:41:32 by abasdere         ###   ########.fr       */
+/*   Created: 2024/03/08 10:40:19 by abasdere          #+#    #+#             */
+/*   Updated: 2024/03/08 10:41:28 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "parsing.h"
 
-# include "libft.h"
-# include "cub3d.h"
-# include "collector.h"
-
-# include <fcntl.h>
-# include <sys/stat.h>
-
-t_list	*read_file(const char *file, t_collector *collector);
-void	parse_file(t_map *map, const char *argv, t_collector *collector);
-void	parse_map(t_list *line, t_map *map, t_collector *collector);
-void	flood_map(t_map *map, t_collector *collector);
-
-#endif
+void	flood_map(t_map *map, t_collector *collector)
+{
+	
+}
