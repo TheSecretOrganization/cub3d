@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:35:32 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/08 12:04:30 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:05:52 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,19 +102,19 @@ static void	add_color(t_color **x, const char *k, const char *v, t_collector *c)
 	}
 }
 
-static void	dispatch(t_graphic *g, const char *k, const char *v, t_collector *col)
+static void	dispatch(t_graphic *g, const char *k, const char *v, t_collector *c)
 {
 	size_t		len;
 	t_graphic	cpy;
 
 	if (k[1] && !ft_isalpha(k[1]))
-		cerror(KEY_ERROR, col);
+		cerror(KEY_ERROR, c);
 	cpy = (t_graphic){g->color, g->texture};
 	while (cpy.color || cpy.texture)
 	{
 		if ((cpy.color && !ft_strncmp(cpy.color->key, k, ft_strlen(k)))
 			|| (cpy.texture && !ft_strncmp(cpy.texture->key, k, ft_strlen(k))))
-			cerror(UNIQUE_KEY_ERROR, col);
+			cerror(UNIQUE_KEY_ERROR, c);
 		if (cpy.color)
 			cpy.color = cpy.color->next;
 		if (cpy.texture)
@@ -123,9 +123,9 @@ static void	dispatch(t_graphic *g, const char *k, const char *v, t_collector *co
 	len = ft_strlen(v);
 	if (len >= 4 && v[len - 4] == '.' && v[len - 3] == 'x' && v[len - 2] == 'p'
 		&& v[len - 1] == 'm')
-		add_text(&g->texture, k, v, col);
+		add_text(&g->texture, k, v, c);
 	else
-		add_color(&g->color, k, v, col);
+		add_color(&g->color, k, v, c);
 }
 
 void	parse_graphic(char *line, t_graphic *graphic, t_collector *collector)
