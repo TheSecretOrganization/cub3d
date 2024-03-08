@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:35:32 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/08 11:54:35 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:04:30 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ static void	add_color(t_color **x, const char *k, const char *v, t_collector *c)
 	}
 }
 
-static void	dispatch(t_graphic *g, char *k, char *v, t_collector *col)
+static void	dispatch(t_graphic *g, const char *k, const char *v, t_collector *col)
 {
 	size_t		len;
 	t_graphic	cpy;
