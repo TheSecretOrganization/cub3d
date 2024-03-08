@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:35:32 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/07 11:19:20 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:54:35 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ It must be either a path to <texture.xpm> or a <R,G,B> color"
 there value must be between 0 and 255"
 #define TEXTURE_ERROR "Texture couldn't be loaded"
 
-static void	add_texture(t_texure **texture, char *k, char *v, t_collector *col)
+static void	add_text(t_texure **t, const char *k, const char *v, t_collector *c)
 {
 	t_texure	*new;
 	t_texure	*last;
@@ -33,17 +33,17 @@ static void	add_texture(t_texure **texture, char *k, char *v, t_collector *col)
 
 	fd = open(v, O_RDONLY);
 	if (fd == -1)
-		cerror(TEXTURE_ERROR, col);
+		cerror(TEXTURE_ERROR, c);
 	close(fd);
-	new = ccalloc(1, sizeof(t_texure), col);
+	new = ccalloc(1, sizeof(t_texure), c);
 	new->key = k;
 	new->value = v;
 	new->next = NULL;
-	if (!*texture)
-		*texture = new;
+	if (!*t)
+		*t = new;
 	else
 	{
-		last = *texture;
+		last = *t;
 		while (last->next)
 			last = last->next;
 		last->next = new;
@@ -78,24 +78,24 @@ static void	split_atoi(char **split, t_color *new, t_collector *collector)
 	}
 }
 
-static void	add_color(t_color **color, char *key, char *value, t_collector *col)
+static void	add_color(t_color **x, const char *k, const char *v, t_collector *c)
 {
 	t_color	*new;
 	t_color	*last;
 	char	**split;
 
-	new = ccalloc(1, sizeof(t_color), col);
-	new->key = key;
+	new = ccalloc(1, sizeof(t_color), c);
+	new->key = k;
 	new->next = NULL;
-	split = ft_split(value, ',');
+	split = ft_split(v, ',');
 	if (!split)
-		cerror(MALLOC_ERROR, col);
-	(split_atoi(split, new, col), ft_fsplit(split));
-	if (!*color)
-		*color = new;
+		cerror(MALLOC_ERROR, c);
+	(split_atoi(split, new, c), ft_fsplit(split));
+	if (!*x)
+		*x = new;
 	else
 	{
-		last = *color;
+		last = *x;
 		while (last->next)
 			last = last->next;
 		last->next = new;
@@ -123,7 +123,7 @@ static void	dispatch(t_graphic *g, char *k, char *v, t_collector *col)
 	len = ft_strlen(v);
 	if (len >= 4 && v[len - 4] == '.' && v[len - 3] == 'x' && v[len - 2] == 'p'
 		&& v[len - 1] == 'm')
-		add_texture(&g->texture, k, v, col);
+		add_text(&g->texture, k, v, col);
 	else
 		add_color(&g->color, k, v, col);
 }

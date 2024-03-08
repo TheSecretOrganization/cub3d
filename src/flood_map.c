@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:40:19 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/08 11:45:14 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:46:50 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	find_starting_points(char **map, size_t *rules)
 	return (0);
 }
 
-void	flood_map(t_map *map, t_collector *collector)
+void	flood_map(const t_map *map, t_collector *collector)
 {
 	char	**cpy;
 	size_t	y;

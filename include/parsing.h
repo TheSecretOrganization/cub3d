@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:04:30 by averin            #+#    #+#             */
-/*   Updated: 2024/03/08 10:41:32 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:46:56 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@
 t_list	*read_file(const char *file, t_collector *collector);
 void	parse_file(t_map *map, const char *argv, t_collector *collector);
 void	parse_map(t_list *line, t_map *map, t_collector *collector);
-void	flood_map(t_map *map, t_collector *collector);
+void	flood_map(const t_map *map, t_collector *collector);
 
 #endif

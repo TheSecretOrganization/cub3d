@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:03:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/08 11:02:59 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:57:49 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	create_rectangle(t_list *line, t_map *map, t_collector *collector)
 	}
 }
 
-static int	parse_player(size_t i, size_t j, t_map *map, char *line)
+static int	parse_player(size_t i, size_t j, t_map *map, const char *line)
 {
 	if (map->player.pos.x != 0 && map->player.pos.y != 0)
 		return (1);
