@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:35:32 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/08 12:08:26 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/08 14:56:00 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	split_atoi(char **split, t_color *new, t_collector *collector)
 		if (ft_strncmp(tmp, split[i], ft_strlen(tmp)))
 			(free(tmp), ft_fsplit(split), cerror(COLOR_ERROR, collector));
 		if (number < 0 || number > 255)
-			(ft_fsplit(split), cerror(COLOR_ERROR, collector));
+			(free(tmp), ft_fsplit(split), cerror(COLOR_ERROR, collector));
 		if (i == 0)
 			(free(tmp), new->red = number);
 		else if (i == 1)
@@ -139,6 +139,8 @@ void	parse_graphic(char *line, t_graphic *graphic, t_collector *collector)
 	while (line[++i])
 		if (line[i] == '\t')
 			line[i] = ' ';
+	if (!ft_strnstr(line, ".xpm", ft_strlen(line)))
+		remove_space(line);
 	split = ft_split(line, ' ');
 	if (!split)
 		cerror(MALLOC_ERROR, collector);

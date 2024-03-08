@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:15:07 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/08 12:01:15 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/08 14:49:36 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ typedef struct s_graphic
 }	t_graphic;
 
 void	parse_graphic(char *line, t_graphic *graphic, t_collector *collector);
+void	remove_space(char *line);
 
 #endif

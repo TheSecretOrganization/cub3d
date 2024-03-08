@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:03:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/08 11:57:49 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/08 14:04:33 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #define VALID_CHAR "10NSEW "
 #define PLAYER_VIEW "NSEW"
 #define CHAR_ERROR "Invalid char found in the map"
-#define MULTIPLE_PLAYER "Multiple starting player postion found"
+#define NO_PLAYER "No starting position was found"
+#define MULTIPLE_PLAYER "Multiple starting position found"
 #define MALLOC_ERROR "Malloc failed"
 
 static void	create_rectangle(t_list *line, t_map *map, t_collector *collector)
@@ -82,6 +83,8 @@ static void	parse_lines(t_list *line, t_map *map, t_collector *collector)
 		i++;
 		line = line->next;
 	}
+	if (map->player.pos.x == 0 && map->player.pos.y == 0)
+		cerror(NO_PLAYER, collector);
 }
 
 void	parse_map(t_list *line, t_map *map, t_collector *collector)

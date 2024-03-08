@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:56:21 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/07 13:32:05 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/08 14:41:31 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "utils.h"
 
 #define SPACE " \t"
-#define MAP_NOT_LAST "The map content always has to be the last element"
+#define FILE_ERROR "The <file.cub> is invalid"
 #define RULES_ERROR "The map doesn't contain all required graphical elements"
 
 static int	is_texture(const char *line, int found_map)
@@ -25,10 +25,12 @@ static int	is_texture(const char *line, int found_map)
 	i = 0;
 	while (line[i] && ft_strchr(SPACE, line[i]))
 		i++;
+	if (!line[i] && found_map)
+		return (-1);
 	if (!line[i])
 		return (2);
 	alpha = ft_isalpha(line[i]);
-	if (found_map && alpha)
+	if ((!alpha && !ft_isdigit(line[i])) || (found_map && alpha))
 		return (-1);
 	return (alpha);
 }
@@ -72,7 +74,7 @@ void	parse_file(t_map *map, const char *argv, t_collector *collector)
 	{
 		code = is_texture((const char *)file->content, found_map);
 		if (code == -1)
-			cerror(MAP_NOT_LAST, collector);
+			cerror(FILE_ERROR, collector);
 		else if (code == 0 && ++(map->heigh))
 		{
 			found_map = 1;
