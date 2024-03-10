@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:35:32 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/08 14:56:00 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/10 14:22:17 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,15 @@ static void	split_atoi(char **split, t_color *new, t_collector *collector)
 			(ft_fsplit(split), cerror(MALLOC_ERROR, collector));
 		if (ft_strncmp(tmp, split[i], ft_strlen(tmp)))
 			(free(tmp), ft_fsplit(split), cerror(COLOR_ERROR, collector));
+		free(tmp);
 		if (number < 0 || number > 255)
-			(free(tmp), ft_fsplit(split), cerror(COLOR_ERROR, collector));
+			(ft_fsplit(split), cerror(COLOR_ERROR, collector));
 		if (i == 0)
-			(free(tmp), new->red = number);
+			new->red = number;
 		else if (i == 1)
-			(free(tmp), new->blue = number);
+			new->blue = number;
 		else
-			(free(tmp), new->green = number);
+			new->green = number;
 	}
 }
 
