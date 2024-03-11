@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:35:32 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/10 14:22:17 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/11 11:04:37 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ static void	add_color(t_color **x, const char *k, const char *v, t_collector *c)
 	t_color	*last;
 	char	**split;
 
+	if (check_commas(v) != 2)
+		cerror(EL_ERROR, c);
 	new = ccalloc(1, sizeof(t_color), c);
 	new->key = k;
 	new->next = NULL;

@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:47:32 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/08 15:07:23 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/11 11:02:21 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,17 @@ void	remove_space(char *line)
 		return ;
 	i++;
 	move_space(line + i);
+}
+
+size_t	check_commas(const char *value)
+{
+	size_t	i;
+	size_t	commas;
+
+	i = -1;
+	commas = 0;
+	while (value[++i])
+		if (value[i] == ',')
+			commas++;
+	return (commas);
 }
