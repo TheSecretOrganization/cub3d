@@ -50,6 +50,7 @@ LIB 		:= $(strip $(LIB))
 
 define SRC	:=
 	collector.c
+	draw.c
 	main.c
 	read_file.c
 	utils.c
