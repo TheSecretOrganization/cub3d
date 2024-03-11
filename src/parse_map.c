@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:03:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/08 14:04:33 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/11 11:20:47 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ static void	parse_lines(t_list *line, t_map *map, t_collector *collector)
 		{
 			if (!ft_strchr(VALID_CHAR, ((char *)line->content)[j]))
 				cerror(CHAR_ERROR, collector);
-			if (ft_strchr(PLAYER_VIEW, ((char *)line->content)[j]))
-				if (parse_player(i, j, map, (char *)line->content))
-					cerror(MULTIPLE_PLAYER, collector);
+			if (ft_strchr(PLAYER_VIEW, ((char *)line->content)[j])
+				&& parse_player(i, j, map, (char *)line->content))
+				cerror(MULTIPLE_PLAYER, collector);
 		}
 		len = ft_strlen(line->content);
 		if (len > map->width)
