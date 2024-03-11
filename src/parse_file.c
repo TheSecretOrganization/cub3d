@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:56:21 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/08 14:41:31 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/11 11:10:16 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 #define SPACE " \t"
 #define FILE_ERROR "The <file.cub> is invalid"
-#define RULES_ERROR "The map doesn't contain all required graphical elements"
+#define TEXTURE_ERROR "The map doesn't contain all required textures: \
+NO, SO, WE and EA"
+#define COLOR_ERROR "The map doesn't contain all required colors: F and C"
 
 static int	is_texture(const char *line, int found_map)
 {
@@ -49,6 +51,8 @@ static void	check_rules(t_texure *texture, t_color *color, t_collector *col)
 			rules++;
 		texture = texture->next;
 	}
+	if (rules != 4)
+		cerror(TEXTURE_ERROR, col);
 	while (color)
 	{
 		if (!ft_strncmp("F\0", color->key, 2)
@@ -57,7 +61,7 @@ static void	check_rules(t_texure *texture, t_color *color, t_collector *col)
 		color = color->next;
 	}
 	if (rules != 6)
-		cerror(RULES_ERROR, col);
+		cerror(COLOR_ERROR, col);
 }
 
 void	parse_file(t_map *map, const char *argv, t_collector *collector)
