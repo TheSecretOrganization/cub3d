@@ -53,6 +53,7 @@ define SRC	:=
 	flood_map.c
 	graphic_utils.c
 	graphic.c
+	loop.c
 	main.c
 	parse_file.c
 	parse_map.c

@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/11 12:42:54 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/11 12:56:02 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ typedef struct s_data
 	t_collector	*collector;
 	t_window	window;
 }	t_data;
+
+void	init_hook(t_data *data);
 
 #endif

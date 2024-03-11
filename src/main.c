@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/11 12:44:31 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/11 12:56:26 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ int	main(int argc, char const *argv[])
 	data.collector = init_collector();
 	parse_file(&data.map, argv[1], data.collector);
 	create_window(&data.window, data.collector);
+	init_hook(&data);
+	mlx_loop(data.window.mlx);
 	return (free_collector(data.collector), 0);
 }
