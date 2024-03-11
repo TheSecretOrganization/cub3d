@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:04:30 by averin            #+#    #+#             */
-/*   Updated: 2024/03/06 10:48:12 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/08 11:46:56 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,15 @@
 # define PARSING_H
 
 # include "libft.h"
+# include "cub3d.h"
 # include "collector.h"
 
 # include <fcntl.h>
 # include <sys/stat.h>
 
 t_list	*read_file(const char *file, t_collector *collector);
+void	parse_file(t_map *map, const char *argv, t_collector *collector);
+void	parse_map(t_list *line, t_map *map, t_collector *collector);
+void	flood_map(const t_map *map, t_collector *collector);
 
 #endif

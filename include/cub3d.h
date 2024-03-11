@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/05 17:25:37 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/11 10:54:01 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,29 @@
 # include "libft.h"
 # include "mlx.h"
 # include "utils.h"
+# include "graphic.h"
 
 # include <stdio.h>
+
+typedef struct s_vector
+{
+	float	x;
+	float	y;
+}	t_vector;
+
+typedef struct s_player
+{
+	t_vector	pos;
+	t_vector	view;
+}	t_player;
+
+typedef struct s_map
+{
+	char		**map;
+	t_player	player;
+	t_graphic	graphic;
+	size_t		heigh;
+	size_t		width;
+}	t_map;
 
 #endif
