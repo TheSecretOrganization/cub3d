@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:45:31 by averin            #+#    #+#             */
-/*   Updated: 2024/03/12 11:48:04 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/12 11:48:58 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static int	handle_key(int keycode, t_data *data)
 static int	handle_destroy(t_data *data)
 {
 	mlx_loop_end(data->window.mlx);
-	free_collector(data->collector);
 	return (0);
 }
 
