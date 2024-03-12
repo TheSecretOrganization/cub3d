@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/07 13:02:19 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:56:26 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@
 
 int	main(int argc, char const *argv[])
 {
-	t_window	window;
-	t_collector	*collector;
-	t_map		map;
+	t_data	data;
 
 	if (argc != 2)
 		error(USAGE_ERROR);
-	window = (t_window){NULL, NULL};
-	map = (t_map){0, {{0, 0}, {0, 0}}, {NULL, NULL}, 0, 0};
-	collector = init_collector();
-	parse_file(&map, argv[1], collector);
-	create_window(&window, collector);
-	return (free_collector(collector), 0);
+	data.window = (t_window){NULL, NULL};
+	data.map = (t_map){0, {{0, 0}, {0, 0}}, {NULL, NULL}, 0, 0};
+	data.collector = init_collector();
+	parse_file(&data.map, argv[1], data.collector);
+	create_window(&data.window, data.collector);
+	init_hook(&data);
+	mlx_loop(data.window.mlx);
+	return (free_collector(data.collector), 0);
 }

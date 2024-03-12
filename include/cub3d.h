@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/11 10:54:01 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:56:02 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "mlx.h"
 # include "utils.h"
 # include "graphic.h"
+# include "window.h"
 
 # include <stdio.h>
 
@@ -40,5 +41,14 @@ typedef struct s_map
 	size_t		heigh;
 	size_t		width;
 }	t_map;
+
+typedef struct s_data
+{
+	t_map		map;
+	t_collector	*collector;
+	t_window	window;
+}	t_data;
+
+void	init_hook(t_data *data);
 
 #endif
