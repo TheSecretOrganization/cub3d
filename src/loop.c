@@ -44,6 +44,7 @@ static int	handle_destroy(t_data *data)
 {
 	mlx_loop_end(data->window.mlx);
 	free_collector(data->collector);
+	return (0);
 }
 
 void	init_hook(t_data *data)
