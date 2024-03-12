@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:45:31 by averin            #+#    #+#             */
-/*   Updated: 2024/03/12 11:49:33 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/12 11:52:39 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	handle_key(int keycode, t_data *data)
 
 void	init_hook(t_data *data)
 {
-	mlx_hook(data->window.ptr, DestroyNotify, 0, handle_destroy, data);
-	mlx_hook(data->window.ptr, KeyPress, KeyPressMask, handle_key, data);
-	mlx_loop_hook(data->window.mlx, handle_loop, data);
+	mlx_hook(data->window.ptr, DestroyNotify, 0, &handle_destroy, data);
+	mlx_hook(data->window.ptr, KeyPress, KeyPressMask, &handle_key, data);
+	mlx_loop_hook(data->window.mlx, &handle_loop, data);
 }
