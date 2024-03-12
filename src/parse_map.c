@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:03:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/11 11:20:47 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:49:52 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	parse_player(size_t i, size_t j, t_map *map, const char *line)
 {
 	if (map->player.pos.x != 0 && map->player.pos.y != 0)
 		return (1);
-	map->player = (t_player){{i, j}, {0, 0}};
+	map->player = (t_player){{j, i}, {0, 0}};
 	if (line[j] == 'S')
 		map->player.view.y = 1;
 	else if (line[j] == 'W')
