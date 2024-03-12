@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/11 12:56:02 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/12 14:18:11 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_player
 
 typedef struct s_map
 {
-	char		**map;
+	char		**content;
 	t_player	player;
 	t_graphic	graphic;
 	size_t		heigh;

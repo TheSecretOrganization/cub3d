@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:40:19 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/08 11:46:50 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:18:11 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	flood_map(const t_map *map, t_collector *collector)
 			(ft_fsplit(cpy), cerror(MALLOC_ERROR, collector));
 		x = -1;
 		while (++x < map->width)
-			cpy[y][x] = map->map[y][x];
+			cpy[y][x] = map->content[y][x];
 	}
 	if (find_starting_points(cpy, (size_t[2]){map->heigh, map->width}))
 		(ft_fsplit(cpy), cerror(WALL_ERROR, collector));

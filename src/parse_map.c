@@ -26,7 +26,7 @@ static void	create_rectangle(t_list *line, t_map *map, t_collector *collector)
 	size_t	len;
 
 	i = 0;
-	map->map = ccalloc(map->heigh + 1, sizeof(char *), collector);
+	map->content = ccalloc(map->heigh + 1, sizeof(char *), collector);
 	while (line)
 	{
 		len = ft_strlen((char *)line->content);
@@ -42,7 +42,7 @@ static void	create_rectangle(t_list *line, t_map *map, t_collector *collector)
 		while (((char *)line->content)[++len])
 			if (((char *)line->content)[len] == ' ')
 				((char *)line->content)[len] = '\0';
-		map->map[i++] = line->content;
+		map->content[i++] = line->content;
 		line = line->next;
 	}
 }
