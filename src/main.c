@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/13 10:05:01 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/13 10:33:38 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ float	raycast(t_vector *position, t_vector *direction, t_map *map)
 	return (distance);
 }
 
+
+
 int	main(int argc, char const *argv[])
 {
 	t_data	data;
@@ -91,7 +93,7 @@ int	main(int argc, char const *argv[])
 	if (argc != 2)
 		error(USAGE_ERROR);
 	data.window = (t_window){NULL, NULL};
-	data.map = (t_map){0, {{0, 0}, {0, 0}}, {NULL, NULL}, 0, 0};
+	data.map = (t_map){0, {{0, 0}, {0, 0}, {0, 0.66}}, {NULL, NULL}, 0, 0};
 	data.collector = init_collector();
 	parse_file(&data.map, argv[1], data.collector);
 	create_window(&data.window, data.collector);

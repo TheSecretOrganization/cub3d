@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:45:31 by averin            #+#    #+#             */
-/*   Updated: 2024/03/12 11:52:39 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/13 10:32:16 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static int	handle_key(int keycode, t_data *data)
 	if (keycode == XK_Escape)
 		handle_destroy(data);
 	if (keycode == XK_Left)
-		data->map.player.view.x += 0.2;
+		data->map.player.cam.x += 0.2;
 	if (keycode == XK_Right)
-		data->map.player.view.x -= 0.2;
+		data->map.player.cam.x -= 0.2;
 	if (keycode == XK_a)
 		data->map.player.pos.y -= 0.2;
 	if (keycode == XK_d)
