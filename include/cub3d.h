@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/13 10:32:44 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/13 10:46:50 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_vector
 typedef struct s_player
 {
 	t_vector	pos;
-	t_vector	cam;
+	t_vector	dir;
 	t_vector	plane;
 }	t_player;
 
