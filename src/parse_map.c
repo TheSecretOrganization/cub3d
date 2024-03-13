@@ -6,17 +6,19 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:03:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/13 10:46:50 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/13 11:01:08 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "window.h"
 
 #define VALID_CHAR "10NSEW "
 #define PLAYER_VIEW "NSEW"
 #define CHAR_ERROR "Invalid char found in the map"
 #define NO_PLAYER "No starting position was found"
 #define MULTIPLE_PLAYER "Multiple starting position found"
+#define MAP_TOO_BIG "The map is too big, a 300x300 is the maximum"
 #define MALLOC_ERROR "Malloc failed"
 
 static void	create_rectangle(t_list *line, t_map *map, t_collector *collector)
@@ -90,7 +92,11 @@ static void	parse_lines(t_list *line, t_map *map, t_collector *collector)
 
 void	parse_map(t_list *line, t_map *map, t_collector *collector)
 {
+	if (map->heigh > 300)
+		cerror(MAP_TOO_BIG, collector);
 	parse_lines(line, map, collector);
+	if (map->width > 300)
+		cerror(MAP_TOO_BIG, collector);
 	create_rectangle(line, map, collector);
 	flood_map(map, collector);
 }
