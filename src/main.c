@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/12 15:39:22 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/13 10:05:01 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ float	raycast(t_vector *position, t_vector *direction, t_map *map)
 	};
 	float	distance = -1;
 
-	// printf("starting map pos: %d %d\n", map_pos[0], map_pos[1]);
 	if (direction->x < 0)
 	{
 		step.x = -1;
@@ -52,9 +51,6 @@ float	raycast(t_vector *position, t_vector *direction, t_map *map)
 		step.y = 1;
 		side.y = (position->y + 1 - (int) position->y) * delta.y;
 	}
-
-	printf("step: %f %f\nside %f %f\ndelta: %f %f\n", step.x, step.y, side.x, side.y, delta.x, delta.y);
-
 	while (hit == 0)
 	{
 		if (side.x < side.y)
@@ -69,11 +65,8 @@ float	raycast(t_vector *position, t_vector *direction, t_map *map)
 			map_pos[1] += step.y;
 			face = 1;
 		}
-		printf("side: %f %f\tmap %d %d\n", side.x, side.y, map_pos[0], map_pos[1]);
 		if (map->content[map_pos[1]][map_pos[0]] == '1') hit = 1;
 	}
-	printf("WALL\n");
-	printf("step: %f %f\nside %f %f\ndelta: %f %f\n", step.x, step.y, side.x, side.y, delta.x, delta.y);
 	if (face == 0)
 	{
 		if (step.x < 0)
@@ -88,7 +81,6 @@ float	raycast(t_vector *position, t_vector *direction, t_map *map)
 		else
 			distance = side.y - delta.y * 2;
 	}
-	printf("distance: %f\n", distance);
 	return (distance);
 }
 
