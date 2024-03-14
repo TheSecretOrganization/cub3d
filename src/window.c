@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:12:32 by averin            #+#    #+#             */
-/*   Updated: 2024/03/06 10:57:30 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/14 14:52:53 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,29 @@
 #include <stdio.h>
 
 #define WINDOW_ERROR "Cannot open window"
+#define IMAGE_ERROR "Cannot create new image"
 
-void	delete_window(void *window)
+static void	delete_image(void *win)
+{
+	t_window	*twin;
+
+	twin = (t_window *)win;
+	mlx_destroy_image(twin->mlx, twin->img.ptr);
+}
+
+static int	create_img(t_window *win)
+{
+	win->img.ptr = mlx_new_image(win->mlx, WIDTH, HEIGHT);
+	if (!win->img.ptr)
+		return (1);
+	win->img.content = mlx_get_data_addr(win->img.ptr,
+		&win->img.bpp, &win->img.size_line,	&win->img.endian);
+	if (!win->img.content)
+		return (mlx_destroy_image(win->mlx, win->img.ptr), 1);
+	return (0);
+}
+
+static void	delete_window(void *window)
 {
 	t_window	*w;
 
@@ -39,4 +60,17 @@ void	create_window(t_window *window, t_collector *collector)
 			cerror(WINDOW_ERROR, collector));
 	add_collector(collector, window, &delete_window);
 	give_mlx_priority(collector);
+	if (create_img(window))
+		cerror(IMAGE_ERROR, collector);
+	add_collector(collector, window, &delete_image);
+}
+
+void	img_pixel_put(t_img *img, int x, int y, int color)
+{
+	char	*pixel;
+
+	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+		return ;
+	pixel = img->content + (y * img->size_line + x * (img->bpp / 8));
+	*(int *)pixel = color;
 }

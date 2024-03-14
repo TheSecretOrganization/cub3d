@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/13 10:46:50 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/14 14:34:37 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 
 # include <stdio.h>
 
+# define RAD(deg) (deg * M_PI / 180)
+
 typedef struct s_vector
 {
 	float	x;
@@ -30,8 +32,7 @@ typedef struct s_vector
 typedef struct s_player
 {
 	t_vector	pos;
-	t_vector	dir;
-	t_vector	plane;
+	int			dir;
 }	t_player;
 
 typedef struct s_map
@@ -51,5 +52,6 @@ typedef struct s_data
 }	t_data;
 
 void	init_hook(t_data *data);
+void	print_image(t_data *data);
 
 #endif

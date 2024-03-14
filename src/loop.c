@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:45:31 by averin            #+#    #+#             */
-/*   Updated: 2024/03/13 10:46:50 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/14 14:34:22 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 static int	handle_loop(t_data *data)
 {
-	(void) data;
+	print_image(data);
 	return (0);
 }
 
@@ -32,9 +32,9 @@ static int	handle_key(int keycode, t_data *data)
 	if (keycode == XK_Escape)
 		handle_destroy(data);
 	if (keycode == XK_Left)
-		data->map.player.dir.x += 0.2;
+		data->map.player.dir += 0.2;
 	if (keycode == XK_Right)
-		data->map.player.dir.x -= 0.2;
+		data->map.player.dir -= 0.2;
 	if (keycode == XK_a)
 		data->map.player.pos.y -= 0.2;
 	if (keycode == XK_d)
