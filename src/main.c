@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/15 11:13:34 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/20 13:53:49 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,8 @@ void	draw_line(int start, int end, int x, t_window *win)
 	int	y;
 
 	y = start - 1;
-	while (++y < end)
-	{
+	while (++y <= end)
 		img_pixel_put(&win->img, x, y, 0xfecaca);
-	}
 }
 
 void	print_image(t_data *data)
@@ -107,7 +105,7 @@ void	print_image(t_data *data)
 	i = -1;
 	angle_increment = 66.0f / (WIDTH - 1);
 	half_fov = 66.0f / 2.0f;
-	while (++i < WIDTH)
+	while (++i <= WIDTH)
 	{
 		angle = RAD(-half_fov + i * angle_increment);
 		dis = raycast(data->map.player.pos,
