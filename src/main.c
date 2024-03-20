@@ -154,8 +154,7 @@ int	main(int argc, char const *argv[])
 	data.collector = init_collector();
 	parse_file(&data.map, argv[1], data.collector);
 	create_window(&data.window, data.collector);
-	// mlx_set_font(data.window.mlx, data.window.ptr, "Roboto-Regular.ttf");
-	// print_image(&data);
+	print_image(&data);
 	init_hook(&data);
 	mlx_loop(data.window.mlx);
 	return (free_collector(data.collector), 0);
