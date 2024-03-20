@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/20 13:53:49 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/20 18:32:57 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,9 @@ float	raycast(t_vector position, t_vector direction, t_map map)
 		if (map.content[map_pos[1]][map_pos[0]] == '1') hit = 1;
 	}
 	if (face == 0)
-	{
-		if (step.x < 0)
-			distance = side.x - delta.x;
-		else
-			distance = side.x - delta.x * 2;
-	}
+		distance = side.x - delta.x;
 	else
-	{
-		if (step.y < 0)
-			distance = side.y - delta.y;
-		else
-			distance = side.y - delta.y * 2;
-	}
+		distance = side.y - delta.y;
 	return (distance);
 }
 
@@ -96,20 +86,18 @@ void	draw_line(int start, int end, int x, t_window *win)
 void	print_image(t_data *data)
 {
 	int		i;
-	float	half_fov;
-	float	angle_increment;
-	float	angle;
 	float	dis;
 
 	ft_bzero(data->window.img.content, HEIGHT * data->window.img.size_line + WIDTH * (data->window.img.bpp / 8));
 	i = -1;
-	angle_increment = 66.0f / (WIDTH - 1);
-	half_fov = 66.0f / 2.0f;
 	while (++i <= WIDTH)
 	{
-		angle = RAD(-half_fov + i * angle_increment);
+		double cameraX = 2 * i / (double) WIDTH -1;
 		dis = raycast(data->map.player.pos,
-			(t_vector){cos(angle), sin(angle)}, data->map);
+			(t_vector){
+				cos(data->map.player.dir) + 0 * cameraX,
+				sin(data->map.player.dir) + 0.66f * cameraX,
+			}, data->map);
 		int lineHeight = (int)(HEIGHT / dis);
 		int start = -lineHeight / 2 + HEIGHT / 2;
 		if (start < 0)
@@ -117,28 +105,30 @@ void	print_image(t_data *data)
 		int end = lineHeight / 2 + HEIGHT / 2;
 		if(end >= HEIGHT)
 			end = HEIGHT - 1;
+		if (i > WIDTH - 100 && i % 5 == 0)
+			printf("%d: %0.3f\n", i, dis);
 		draw_line(start, end, i, &data->window);
 	}
-	i = 10;
-	while (i < WIDTH)
-	{
-		angle = RAD(-half_fov + i * angle_increment);
-		dis = raycast(data->map.player.pos,
-			(t_vector){cos(angle), sin(angle)}, data->map);
-		int lineHeight = (int)(HEIGHT / dis);
-		int start = -lineHeight / 2 + HEIGHT / 2;
-    	if (start < 0)
-			start = 0;
-    	int end = lineHeight / 2 + HEIGHT / 2;
-    	if(end >= HEIGHT)
-	  		end = HEIGHT - 1;
-			
-		printf("%d: %f\t%d - %d\t%d\n", i, dis, start, end, end - start);
-		char str[200];
-		sprintf(str, "%0.3f %d", dis, end - start);
-		mlx_string_put(data->window.mlx, data->window.ptr, i, 100, 0x00FF00, str);
-		i += 100;
-	}
+	// i = 10;
+	// while (i < WIDTH)
+	// {
+	// 	angle = RAD(-half_fov + i * angle_increment);
+	// 	dis = raycast(data->map.player.pos,
+	// 		(t_vector){cos(angle), sin(angle)}, data->map);
+	// 	int lineHeight = (int)(HEIGHT / dis);
+	// 	int start = -lineHeight / 2 + HEIGHT / 2;
+    // 	if (start < 0)
+	// 		start = 0;
+    // 	int end = lineHeight / 2 + HEIGHT / 2;
+    // 	if(end >= HEIGHT)
+	//   		end = HEIGHT - 1;
+
+	// 	printf("%d: %f\t%d - %d\t%d\n", i, dis, start, end, end - start);
+	// 	char str[200];
+	// 	sprintf(str, "%0.3f %d", dis, end - start);
+	// 	mlx_string_put(data->window.mlx, data->window.ptr, i, 100, 0x00FF00, str);
+	// 	i += 100;
+	// }
 	mlx_put_image_to_window(data->window.mlx, data->window.ptr, data->window.img.ptr, 0, 0);
 }
 
