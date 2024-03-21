@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:45:31 by averin            #+#    #+#             */
-/*   Updated: 2024/03/15 10:16:27 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/21 12:50:44 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "mlx.h"
 #include <X11/keysym.h>
 #include <X11/X.h>
+#include <math.h>
 
 static int	handle_loop(t_data *data)
 {
@@ -28,23 +29,39 @@ static int	handle_destroy(t_data *data)
 	return (0);
 }
 
+void	move(t_vector v, t_player *player)
+{
+	player->pos.x += player->direction.x * v.x;
+	player->pos.y += player->direction.y * v.y;
+}
+
+void	rotate(float v, t_player *player)
+{
+	float olddx = player->direction.x;
+	player->direction.x = olddx * cos(v) - player->direction.y * sin(v);
+	player->direction.y = olddx * sin(v) + player->direction.y * cos(v);
+	float oldpx = player->plane.x;
+	player->plane.x = oldpx * cos(v) - player->plane.y * sin(v);
+	player->plane.x = oldpx * sin(v) + player->plane.y * cos(v);
+}
+
 static int	handle_key(int keycode, t_data *data)
 {
 	if (keycode == XK_Escape)
 		handle_destroy(data);
 	if (keycode == XK_Left)
-		data->map.player.dir += 5;
+		rotate(0.2f, &data->map.player);
 	if (keycode == XK_Right)
-		data->map.player.dir -= 5;
+		rotate(-0.2f, &data->map.player);
 	if (keycode == XK_a)
-		data->map.player.pos.y -= 0.2;
+		move((t_vector){0, -0.2f}, &data->map.player);
 	if (keycode == XK_d)
-		data->map.player.pos.y += 0.2;
+		move((t_vector){0, 0.2f}, &data->map.player);
 	if (keycode == XK_w)
-		data->map.player.pos.x += 0.2;
+		move((t_vector){0.2f, 0}, &data->map.player);
 	if (keycode == XK_s)
-		data->map.player.pos.x -= 0.2;
-	printf("%f %f - %d\n", data->map.player.pos.x, data->map.player.pos.y, data->map.player.dir);
+		move((t_vector){-0.2f, 0}, &data->map.player);
+	printf("%f %f\n", data->map.player.pos.x, data->map.player.pos.y);
 	print_image(data);
 	return (0);
 }

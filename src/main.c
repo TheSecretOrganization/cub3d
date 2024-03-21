@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/20 18:32:57 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/21 14:35:23 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 float	raycast(t_vector position, t_vector direction, t_map map)
 {
 	int hit = 0;
-	int face;
+	int face = 0;
 	t_vector step = {0, 0};
 	t_vector side = {0, 0};
 	int map_pos[2] = {(int) position.x, (int) position.y};
@@ -34,22 +34,22 @@ float	raycast(t_vector position, t_vector direction, t_map map)
 	if (direction.x < 0)
 	{
 		step.x = -1;
-		side.x = (position.x - (int) position.x) * delta.x;
+		side.x = (position.x - map_pos[0]) * delta.x;
 	}
 	else
 	{
 		step.x = 1;
-		side.x = (position.x + 1 - (int) position.x) * delta.x;
+		side.x = (position.x + 1.0f - map_pos[0]) * delta.x;
 	}
 	if (direction.y >= 0)
 	{
 		step.y = -1;
-		side.y = (position.y - (int) position.y) * delta.y;
+		side.y = (position.y - map_pos[1]) * delta.y;
 	}
 	else
 	{
 		step.y = 1;
-		side.y = (position.y + 1 - (int) position.y) * delta.y;
+		side.y = (position.y + 1.0f - map_pos[1]) * delta.y;
 	}
 	while (hit == 0)
 	{
@@ -95,8 +95,8 @@ void	print_image(t_data *data)
 		double cameraX = 2 * i / (double) WIDTH -1;
 		dis = raycast(data->map.player.pos,
 			(t_vector){
-				cos(data->map.player.dir) + 0 * cameraX,
-				sin(data->map.player.dir) + 0.66f * cameraX,
+				data->map.player.direction.x + data->map.player.plane.x * cameraX,
+				data->map.player.direction.y + data->map.player.plane.y * cameraX
 			}, data->map);
 		int lineHeight = (int)(HEIGHT / dis);
 		int start = -lineHeight / 2 + HEIGHT / 2;
@@ -105,7 +105,7 @@ void	print_image(t_data *data)
 		int end = lineHeight / 2 + HEIGHT / 2;
 		if(end >= HEIGHT)
 			end = HEIGHT - 1;
-		if (i > WIDTH - 100 && i % 5 == 0)
+		if (i % 100 == 0)
 			printf("%d: %0.3f\n", i, dis);
 		draw_line(start, end, i, &data->window);
 	}
@@ -140,7 +140,7 @@ int	main(int argc, char const *argv[])
 		error(USAGE_ERROR);
 	data.window = (t_window){NULL, NULL,
 		{NULL, NULL, 0, 0, 0}};
-	data.map = (t_map){0, {{0, 0}, 0}, {NULL, NULL}, 0, 0};
+	data.map = (t_map){0, {{0, 0}, {0, 0.66f}, {-1, 0}}, {NULL, NULL}, 0, 0};
 	data.collector = init_collector();
 	parse_file(&data.map, argv[1], data.collector);
 	create_window(&data.window, data.collector);

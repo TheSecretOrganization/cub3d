@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:03:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/14 12:46:21 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/21 10:36:30 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,15 @@ static int	parse_player(size_t i, size_t j, t_map *map, const char *line)
 		return (1);
 	map->player.pos.x = j;
 	map->player.pos.y = i;
-	if (line[j] == 'E')
-		map->player.dir = 0;
-	else if (line[j] == 'N')
-		map->player.dir = 90;
-	else if (line[j] == 'S')
-		map->player.dir = 270;
-	else if (line[j] == 'W')
-		map->player.dir = 180;
+	(void) line;
+	// if (line[j] == 'E')
+	// 	map->player.dir = 0;
+	// else if (line[j] == 'N')
+	// 	map->player.dir = 90;
+	// else if (line[j] == 'S')
+	// 	map->player.dir = 270;
+	// else if (line[j] == 'W')
+	// 	map->player.dir = 180;
 	return (0);
 }
 
