@@ -6,24 +6,11 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:35:32 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/11 11:04:37 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/22 10:36:28 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graphic.h"
-#include "parsing.h"
-#include "utils.h"
-
-#define MALLOC_ERROR "Malloc failed"
-#define NB_ERROR "There must be one key value couple by element"
-#define KEY_ERROR "Element key is invalid: \
-It must be a one to two char long alphabetical string"
-#define UNIQUE_KEY_ERROR "Element key is invalid: each key must be unique"
-#define EL_ERROR "Element value is invalid: \
-It must be either a path to <texture.xpm> or a <R,G,B> color"
-#define COLOR_ERROR "Color's must be compose by three integer, \
-there value must be between 0 and 255"
-#define TEXTURE_ERROR "Texture couldn't be loaded"
+#include "cub3d.h"
 
 static void	add_text(t_texure **t, const char *k, const char *v, t_collector *c)
 {
