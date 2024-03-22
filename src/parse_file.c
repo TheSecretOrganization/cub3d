@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:56:21 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/22 10:47:38 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:16:31 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	check_rules(t_texure *texture, t_color *color, t_collector *col)
 		texture = texture->next;
 	}
 	if (rules != 4)
-		cerror(MAN_TEXTURE_ERROR, col);
+		cerror(MAN_TEXTURE_ERROR, NULL, col);
 	while (color)
 	{
 		if (!ft_strncmp("F\0", color->key, 2)
@@ -56,7 +56,7 @@ static void	check_rules(t_texure *texture, t_color *color, t_collector *col)
 		color = color->next;
 	}
 	if (rules != 6)
-		cerror(MAN_COLOR_ERROR, col);
+		cerror(MAN_COLOR_ERROR, NULL, col);
 }
 
 void	parse_file(t_data *d, const char *argv)
@@ -73,7 +73,7 @@ void	parse_file(t_data *d, const char *argv)
 	{
 		code = is_texture((const char *)file->content, found_map);
 		if (code == -1)
-			cerror(FILE_ERROR, d->collector);
+			cerror(FILE_ERROR, (const char *)file->content, d->collector);
 		else if (code == 0 && ++(d->map.heigh))
 		{
 			found_map = 1;

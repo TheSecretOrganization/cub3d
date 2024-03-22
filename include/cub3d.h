@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/22 10:57:05 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:17:49 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ typedef struct s_data
 
 void		init_hook(t_data *data);
 
-void		cerror(char *message, t_collector *collector);
-void		error(char *message);
+void		cerror(const char *message, const char *el, t_collector *collector);
+void		error(const char *message, const char *el);
 
 t_collector	*init_collector(void);
 void		free_collector(t_collector *col);

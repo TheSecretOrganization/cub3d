@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:03:32 by averin            #+#    #+#             */
-/*   Updated: 2024/03/22 10:37:44 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:12:45 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,20 @@ t_list	*read_file(const char *file, t_collector *collector)
 
 	lst = NULL;
 	if (check_suffix(file))
-		cerror(SUFFIX_ERROR, collector);
+		cerror(SUFFIX_ERROR, file, collector);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		cerror(OPEN_ERROR, collector);
+		cerror(OPEN_ERROR, file, collector);
 	while (oget_next_line(fd, &line))
 	{
 		line = ft_fstrtrim(line, "\n");
 		if (!line)
 			(ft_lstclear(&lst, &free), close(fd),
-				cerror(MALLOC_ERROR, collector));
+				cerror(MALLOC_ERROR, "read_file", collector));
 		new_element = ft_lstnew(line);
 		if (!new_element)
 			(ft_lstclear(&lst, &free), free(line), close(fd),
-				cerror(MALLOC_ERROR, collector));
+				cerror(MALLOC_ERROR, "read_file", collector));
 		ft_lstadd_back(&lst, new_element);
 	}
 	(close(fd), add_collector(collector, lst, &clear_file));
