@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/22 16:02:37 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:56:54 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void		create_window(t_window *window, t_collector *col);
 void		parse_graphic(t_data *data, char *line);
 void		remove_space(char *line);
 size_t		check_commas(const char *value);
+t_texture	*init_text(t_data *data, const char *k, const char *v);
 
 t_list		*read_file(const char *file, t_collector *collector);
 void		parse_file(t_data *data, const char *argv);

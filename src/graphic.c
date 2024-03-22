@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:35:32 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/22 16:01:43 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:56:30 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,15 @@
 
 static void	add_text(t_data *data, const char *k, const char *v)
 {
-	t_texure	*new;
-	t_texure	*last;
+	t_texture	*new;
+	t_texture	*last;
 	int			fd;
 
 	fd = open(v, O_RDONLY);
 	if (fd == -1)
 		cerror(TEXTURE_ERROR, v, data->collector);
 	close(fd);
-	new = ccalloc(1, sizeof(t_texure), data->collector);
-	new->key = k;
-	new->mlx = data->window.mlx;
-	new->ptr = NULL;
-	new->next = NULL;
+	new = init_text(data, k, v);
 	if (!data->map.graphic.texture)
 		data->map.graphic.texture = new;
 	else
