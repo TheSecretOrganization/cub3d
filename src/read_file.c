@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:03:32 by averin            #+#    #+#             */
-/*   Updated: 2024/03/10 14:52:50 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/22 10:37:44 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include "utils.h"
-
-#define MALLOC_ERROR "Malloc failed"
-#define OPEN_ERROR "Cannot open file"
-#define SUFFIX_ERROR "Invalid suffix, use a <map.cub>"
+#include "cub3d.h"
 
 void	clear_file(void *v)
 {

@@ -6,14 +6,11 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:12:32 by averin            #+#    #+#             */
-/*   Updated: 2024/03/06 10:57:30 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/22 10:37:55 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "window.h"
-#include <stdio.h>
-
-#define WINDOW_ERROR "Cannot open window"
+#include "cub3d.h"
 
 void	delete_window(void *window)
 {

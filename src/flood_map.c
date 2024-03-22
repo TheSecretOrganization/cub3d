@@ -6,14 +6,11 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:40:19 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/08 11:46:50 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/22 10:48:36 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-
-#define MALLOC_ERROR "Malloc failed"
-#define WALL_ERROR "There is a hole in the walls"
+#include "cub3d.h"
 
 static int	flood(char **map, size_t *rules, size_t x, size_t y)
 {
@@ -72,7 +69,7 @@ void	flood_map(const t_map *map, t_collector *collector)
 			(ft_fsplit(cpy), cerror(MALLOC_ERROR, collector));
 		x = -1;
 		while (++x < map->width)
-			cpy[y][x] = map->map[y][x];
+			cpy[y][x] = map->content[y][x];
 	}
 	if (find_starting_points(cpy, (size_t[2]){map->heigh, map->width}))
 		(ft_fsplit(cpy), cerror(WALL_ERROR, collector));

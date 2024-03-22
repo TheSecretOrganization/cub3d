@@ -6,20 +6,11 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:03:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/13 11:04:22 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/22 10:55:53 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include "window.h"
-
-#define VALID_CHAR "10NSEW "
-#define PLAYER_VIEW "NSEW"
-#define CHAR_ERROR "Invalid char found in the map"
-#define NO_PLAYER "No starting position was found"
-#define MULTIPLE_PLAYER "Multiple starting position found"
-#define MAP_TOO_BIG "The map is too big, a 300x300 is the maximum"
-#define MALLOC_ERROR "Malloc failed"
+#include "cub3d.h"
 
 static void	create_rectangle(t_list *line, t_map *map, t_collector *collector)
 {
@@ -28,7 +19,7 @@ static void	create_rectangle(t_list *line, t_map *map, t_collector *collector)
 	size_t	len;
 
 	i = 0;
-	map->map = ccalloc(map->heigh + 1, sizeof(char *), collector);
+	map->content = ccalloc(map->heigh + 1, sizeof(char *), collector);
 	while (line)
 	{
 		len = ft_strlen((char *)line->content);
@@ -44,24 +35,24 @@ static void	create_rectangle(t_list *line, t_map *map, t_collector *collector)
 		while (((char *)line->content)[++len])
 			if (((char *)line->content)[len] == ' ')
 				((char *)line->content)[len] = '\0';
-		map->map[i++] = line->content;
+		map->content[i++] = line->content;
 		line = line->next;
 	}
 }
 
-static int	parse_player(size_t i, size_t j, t_map *map, const char *line)
+static int	parse_player(size_t i, size_t j, t_player *p, const char *line)
 {
-	if (map->player.pos.x != 0 && map->player.pos.y != 0)
+	if (p->pos.x != 0 && p->pos.y != 0)
 		return (1);
-	map->player = (t_player){{i, j}, {0, 0}};
+	*p = (t_player){{i, j}, {0, 0}};
 	if (line[j] == 'S')
-		map->player.view.y = 1;
+		p->view.y = 1;
 	else if (line[j] == 'W')
-		map->player.view.x = 1;
+		p->view.x = 1;
 	return (0);
 }
 
-static void	parse_lines(t_list *line, t_map *map, t_collector *collector)
+static void	parse_lines(t_data *data, t_list *line)
 {
 	size_t	i;
 	size_t	j;
@@ -74,28 +65,28 @@ static void	parse_lines(t_list *line, t_map *map, t_collector *collector)
 		while (((char *)line->content)[++j])
 		{
 			if (!ft_strchr(VALID_CHAR, ((char *)line->content)[j]))
-				cerror(CHAR_ERROR, collector);
+				cerror(CHAR_ERROR, data->collector);
 			if (ft_strchr(PLAYER_VIEW, ((char *)line->content)[j])
-				&& parse_player(i, j, map, (char *)line->content))
-				cerror(MULTIPLE_PLAYER, collector);
+				&& parse_player(i, j, &data->player, (char *)line->content))
+				cerror(MULTIPLE_PLAYER, data->collector);
 		}
 		len = ft_strlen(line->content);
-		if (len > map->width)
-			map->width = len;
+		if (len > data->map.width)
+			data->map.width = len;
 		i++;
 		line = line->next;
 	}
-	if (map->player.pos.x == 0 && map->player.pos.y == 0)
-		cerror(NO_PLAYER, collector);
+	if (data->player.pos.x == 0 && data->player.pos.y == 0)
+		cerror(NO_PLAYER, data->collector);
 }
 
-void	parse_map(t_list *line, t_map *map, t_collector *collector)
+void	parse_map(t_data *data, t_list *line)
 {
-	if (map->heigh > 300)
-		cerror(MAP_TOO_BIG, collector);
-	parse_lines(line, map, collector);
-	if (map->width > 300)
-		cerror(MAP_TOO_BIG, collector);
-	create_rectangle(line, map, collector);
-	flood_map(map, collector);
+	if (data->map.heigh > 300)
+		cerror(MAP_TOO_BIG, data->collector);
+	parse_lines(data, line);
+	if (data->map.width > 300)
+		cerror(MAP_TOO_BIG, data->collector);
+	create_rectangle(line, &data->map, data->collector);
+	flood_map(&data->map, data->collector);
 }

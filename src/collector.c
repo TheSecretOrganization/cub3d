@@ -6,15 +6,11 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 15:54:10 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/08 11:20:12 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/22 10:36:39 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collector.h"
-#include "utils.h"
-#include <stdio.h>
-
-#define MALLOC_ERROR "Malloc failed"
+#include "cub3d.h"
 
 void	free_collector(t_collector *collector)
 {
