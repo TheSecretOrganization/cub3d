@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/22 14:17:49 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:02:37 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ void		*ccalloc(size_t nmemb, size_t size, t_collector *col);
 
 void		create_window(t_window *window, t_collector *col);
 
-void		parse_graphic(char *line, t_graphic *graphic,
-				t_collector *collector);
+void		parse_graphic(t_data *data, char *line);
 void		remove_space(char *line);
 size_t		check_commas(const char *value);
 

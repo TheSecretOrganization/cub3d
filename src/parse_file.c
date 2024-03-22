@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:56:21 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/22 14:16:31 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:03:11 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	parse_file(t_data *d, const char *argv)
 				line = file;
 		}
 		else if (code == 1)
-			parse_graphic((char *)file->content, &d->map.graphic, d->collector);
+			parse_graphic(d, (char *)file->content);
 		file = file->next;
 	}
 	parse_map(d, line);

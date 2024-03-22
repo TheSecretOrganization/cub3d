@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:15:07 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/22 11:28:02 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:42:58 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ typedef struct s_color
 typedef struct s_texture
 {
 	const char			*key;
-	const char			*value;
+	void				*ptr;
+	void				*mlx;
 	struct s_texture	*next;
 }	t_texure;
 
