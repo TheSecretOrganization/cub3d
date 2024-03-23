@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/23 16:12:03 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/23 16:30:04 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 #define USAGE_ERROR "Usage: ./cub3d <file.cub>"
 
-float	raycast(t_vector position, t_vector direction, t_map map)
+float	raycast(t_vector position, t_vector direction, t_map map, int *color)
 {
 	int hit = 0;
 	int face = 0;
@@ -71,16 +71,27 @@ float	raycast(t_vector position, t_vector direction, t_map map)
 		distance = side.x - delta.x;
 	else
 		distance = side.y - delta.y;
+	
+	if (face == 0 && direction.x > 0)
+		*color = 0xfecaca;
+	else if (face == 0 && direction.x <= 0)
+		*color = 0xbeef00;
+	else if (face == 1 && direction.y > 0)
+		*color = 0xfadeff;
+	else if (face == 1 && direction.y <= 0)
+		*color = 0x363042;
+	else
+		*color = 0xffffff;
 	return (distance);
 }
 
-void	draw_line(int start, int end, int x, t_window *win)
+void	draw_line(int start, int end, int x, t_window *win, int color)
 {
 	int	y;
 
 	y = start - 1;
 	while (++y <= end)
-		img_pixel_put(&win->img, x, y, 0xfecaca);
+		img_pixel_put(&win->img, x, y, color);
 }
 
 void	print_image(t_data *data)
@@ -92,12 +103,13 @@ void	print_image(t_data *data)
 	i = -1;
 	while (++i <= WIDTH)
 	{
+		int color = 0;
 		double cameraX = 2 * i / (double) WIDTH -1;
 		dis = raycast(data->map.player.pos,
 			(t_vector){
 				data->map.player.direction.x + data->map.player.plane.x * cameraX,
 				data->map.player.direction.y + data->map.player.plane.y * cameraX
-			}, data->map);
+			}, data->map, &color);
 		int lineHeight = (int)(HEIGHT / dis);
 		int start = -lineHeight / 2 + HEIGHT / 2;
 		if (start < 0)
