@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:03:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/22 10:55:53 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:12:05 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	create_rectangle(t_list *line, t_map *map, t_collector *collector)
 		{
 			tmp = ft_calloc(map->width + 1, sizeof(char));
 			if (!tmp)
-				cerror(MALLOC_ERROR, collector);
+				cerror(MALLOC_ERROR, "create_rectangle", collector);
 			ft_memcpy(tmp, (char *)line->content, len);
 			(free(line->content), line->content = tmp);
 		}
@@ -52,41 +52,41 @@ static int	parse_player(size_t i, size_t j, t_player *p, const char *line)
 	return (0);
 }
 
-static void	parse_lines(t_data *data, t_list *line)
+static void	parse_lines(t_data *d, t_list *l)
 {
 	size_t	i;
 	size_t	j;
 	size_t	len;
 
 	i = 0;
-	while (line)
+	while (l)
 	{
 		j = -1;
-		while (((char *)line->content)[++j])
+		while (((char *)l->content)[++j])
 		{
-			if (!ft_strchr(VALID_CHAR, ((char *)line->content)[j]))
-				cerror(CHAR_ERROR, data->collector);
-			if (ft_strchr(PLAYER_VIEW, ((char *)line->content)[j])
-				&& parse_player(i, j, &data->player, (char *)line->content))
-				cerror(MULTIPLE_PLAYER, data->collector);
+			if (!ft_strchr(VALID_CHAR, ((char *)l->content)[j]))
+				cerror(CHAR_ERROR, &(((char *)l->content)[j]), d->collector);
+			if (ft_strchr(PLAYER_VIEW, ((char *)l->content)[j])
+				&& parse_player(i, j, &d->player, (char *)l->content))
+				cerror(MULTIPLE_PLAYER, (char *)l->content, d->collector);
 		}
-		len = ft_strlen(line->content);
-		if (len > data->map.width)
-			data->map.width = len;
+		len = ft_strlen(l->content);
+		if (len > d->map.width)
+			d->map.width = len;
 		i++;
-		line = line->next;
+		l = l->next;
 	}
-	if (data->player.pos.x == 0 && data->player.pos.y == 0)
-		cerror(NO_PLAYER, data->collector);
+	if (d->player.pos.x == 0 && d->player.pos.y == 0)
+		cerror(NO_PLAYER, NULL, d->collector);
 }
 
 void	parse_map(t_data *data, t_list *line)
 {
 	if (data->map.heigh > 300)
-		cerror(MAP_TOO_BIG, data->collector);
+		cerror(MAP_TOO_BIG, NULL, data->collector);
 	parse_lines(data, line);
 	if (data->map.width > 300)
-		cerror(MAP_TOO_BIG, data->collector);
+		cerror(MAP_TOO_BIG, NULL, data->collector);
 	create_rectangle(line, &data->map, data->collector);
 	flood_map(&data->map, data->collector);
 }

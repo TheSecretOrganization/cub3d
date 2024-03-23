@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:40:19 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/22 10:48:36 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:42:39 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,18 @@ void	flood_map(const t_map *map, t_collector *collector)
 
 	cpy = ft_calloc(map->heigh + 1, sizeof(char *));
 	if (!cpy)
-		cerror(MALLOC_ERROR, collector);
+		cerror(MALLOC_ERROR, "flood_map", collector);
 	y = -1;
 	while (++y < map->heigh)
 	{
 		cpy[y] = ft_calloc(map->width + 1, sizeof(char));
 		if (!cpy[y])
-			(ft_fsplit(cpy), cerror(MALLOC_ERROR, collector));
+			(ft_fsplit(cpy), cerror(MALLOC_ERROR, "flood_map", collector));
 		x = -1;
 		while (++x < map->width)
 			cpy[y][x] = map->content[y][x];
 	}
 	if (find_starting_points(cpy, (size_t[2]){map->heigh, map->width}))
-		(ft_fsplit(cpy), cerror(WALL_ERROR, collector));
+		(ft_fsplit(cpy), cerror(WALL_ERROR, NULL, collector));
 	ft_fsplit(cpy);
 }
