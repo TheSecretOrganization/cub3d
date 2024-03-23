@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:45:31 by averin            #+#    #+#             */
-/*   Updated: 2024/03/21 12:50:44 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/23 14:01:10 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	rotate(float v, t_player *player)
 	player->direction.y = olddx * sin(v) + player->direction.y * cos(v);
 	float oldpx = player->plane.x;
 	player->plane.x = oldpx * cos(v) - player->plane.y * sin(v);
-	player->plane.x = oldpx * sin(v) + player->plane.y * cos(v);
+	player->plane.y = oldpx * sin(v) + player->plane.y * cos(v);
 }
 
 static int	handle_key(int keycode, t_data *data)
