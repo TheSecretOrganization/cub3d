@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/21 14:35:23 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/23 16:12:03 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ float	raycast(t_vector position, t_vector direction, t_map map)
 	else
 	{
 		step.x = 1;
-		side.x = (position.x + 1.0f - map_pos[0]) * delta.x;
+		side.x = (map_pos[0] + 1.0f - position.x) * delta.x;
 	}
-	if (direction.y >= 0)
+	if (direction.y < 0)
 	{
 		step.y = -1;
 		side.y = (position.y - map_pos[1]) * delta.y;
@@ -49,7 +49,7 @@ float	raycast(t_vector position, t_vector direction, t_map map)
 	else
 	{
 		step.y = 1;
-		side.y = (position.y + 1.0f - map_pos[1]) * delta.y;
+		side.y = (map_pos[1] + 1.0f - position.y) * delta.y;
 	}
 	while (hit == 0)
 	{
