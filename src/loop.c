@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:45:31 by averin            #+#    #+#             */
-/*   Updated: 2024/03/23 16:20:21 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/25 13:32:11 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static int	handle_destroy(t_data *data)
 
 void	move(t_vector v, t_player *player)
 {
-	player->pos.x += v.x;
-	player->pos.y += v.y;
+	player->pos.x += v.x * player->direction.x;
+	player->pos.y += v.x * player->direction.y;
 }
 
 void	rotate(float v, t_player *player)

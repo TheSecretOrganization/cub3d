@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/23 16:30:04 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/25 15:36:58 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	print_image(t_data *data)
 			end = HEIGHT - 1;
 		if (i % 100 == 0)
 			printf("%d: %0.3f\n", i, dis);
-		draw_line(start, end, i, &data->window);
+		draw_line(start, end, i, &data->window, color);
 	}
 	// i = 10;
 	// while (i < WIDTH)
