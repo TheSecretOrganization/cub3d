@@ -92,4 +92,7 @@ void		parse_file(t_data *data, const char *argv);
 void		parse_map(t_data *data, t_list *line);
 void		flood_map(const t_map *map, t_collector *collector);
 
+void		raycast(t_vector position, t_vector direction, t_map map,
+				t_hit *hit);
+
 #endif

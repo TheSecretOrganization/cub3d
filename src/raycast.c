@@ -6,8 +6,13 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:29:25 by averin            #+#    #+#             */
-/*   Updated: 2024/03/26 10:09:34 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/26 10:10:21 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	raycast(t_vector position, t_vector direction, t_map map, t_hit *hit)
+{
+	return (0);
+}
