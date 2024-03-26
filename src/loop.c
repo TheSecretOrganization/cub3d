@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:45:31 by averin            #+#    #+#             */
-/*   Updated: 2024/03/26 13:25:11 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/26 14:38:46 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,17 @@ static int	handle_destroy(t_data *data)
 	return (0);
 }
 
-void	move(t_vector v, t_player *player)
+void	move(t_vector v, t_player *player, t_map map)
 {
+	size_t	x;
+	size_t	y;
+
+	x = (size_t)(player->pos.x + v.x * player->direction.x);
+	y = (size_t)(player->pos.y + v.x * player->direction.y);
+	if (x < 0 || x > map.width || y < 0 || y > map.heigh)
+		return ;
+	if (map.content[y][x] == '1' || map.content[y][x] == '\0')
+		return ;
 	player->pos.x += v.x * player->direction.x;
 	player->pos.y += v.x * player->direction.y;
 }
@@ -51,13 +60,13 @@ static int	handle_key(int keycode, t_data *data)
 	if (keycode == XK_Right)
 		rotate(-0.2f, &data->player);
 	if (keycode == XK_a)
-		move((t_vector){0, -0.2f}, &data->player);
+		move((t_vector){0, -0.2f}, &data->player, data->map);
 	if (keycode == XK_d)
-		move((t_vector){0, 0.2f}, &data->player);
+		move((t_vector){0, 0.2f}, &data->player, data->map);
 	if (keycode == XK_w)
-		move((t_vector){0.2f, 0}, &data->player);
+		move((t_vector){0.2f, 0}, &data->player, data->map);
 	if (keycode == XK_s)
-		move((t_vector){-0.2f, 0}, &data->player);
+		move((t_vector){-0.2f, 0}, &data->player, data->map);
 	printf("%f %f\n", data->player.pos.x, data->player.pos.y);
 	print_image(data);
 	return (0);
