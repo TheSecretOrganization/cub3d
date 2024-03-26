@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:45:31 by averin            #+#    #+#             */
-/*   Updated: 2024/03/26 14:38:46 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:13:43 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	move(t_vector v, t_player *player, t_map map)
 	y = (size_t)(player->pos.y + v.x * player->direction.y);
 	if (x < 0 || x > map.width || y < 0 || y > map.heigh)
 		return ;
-	if (map.content[y][x] == '1' || map.content[y][x] == '\0')
-		return ;
-	player->pos.x += v.x * player->direction.x;
-	player->pos.y += v.x * player->direction.y;
+	if (!ft_strchr("1\0", map.content[(size_t)player->pos.y][x]))
+		player->pos.x += v.x * player->direction.x;
+	if (!ft_strchr("1\0", map.content[y][(size_t)player->pos.x]))
+		player->pos.y += v.x * player->direction.y;
 }
 
 void	rotate(float v, t_player *player)
