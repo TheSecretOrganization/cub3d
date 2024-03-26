@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/25 15:35:37 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/28 11:31:35 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,18 @@ typedef struct s_data
 	t_window	window;
 }	t_data;
 
+enum	e_dir
+{
+	EA,
+	WE,
+	NO,
+	SO
+};
+
 typedef struct s_hit
 {
-	float	distance;
-	enum
-	{
-		EA,
-		WE,
-		NO,
-		SO
-	}		face;
+	float		distance;
+	enum e_dir	face;
 }	t_hit;
 
 void		init_hook(t_data *data);
