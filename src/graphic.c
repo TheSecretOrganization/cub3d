@@ -6,70 +6,54 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:35:32 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/11 11:04:37 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:56:30 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graphic.h"
-#include "parsing.h"
-#include "utils.h"
+#include "cub3d.h"
 
-#define MALLOC_ERROR "Malloc failed"
-#define NB_ERROR "There must be one key value couple by element"
-#define KEY_ERROR "Element key is invalid: \
-It must be a one to two char long alphabetical string"
-#define UNIQUE_KEY_ERROR "Element key is invalid: each key must be unique"
-#define EL_ERROR "Element value is invalid: \
-It must be either a path to <texture.xpm> or a <R,G,B> color"
-#define COLOR_ERROR "Color's must be compose by three integer, \
-there value must be between 0 and 255"
-#define TEXTURE_ERROR "Texture couldn't be loaded"
-
-static void	add_text(t_texure **t, const char *k, const char *v, t_collector *c)
+static void	add_text(t_data *data, const char *k, const char *v)
 {
-	t_texure	*new;
-	t_texure	*last;
+	t_texture	*new;
+	t_texture	*last;
 	int			fd;
 
 	fd = open(v, O_RDONLY);
 	if (fd == -1)
-		cerror(TEXTURE_ERROR, c);
+		cerror(TEXTURE_ERROR, v, data->collector);
 	close(fd);
-	new = ccalloc(1, sizeof(t_texure), c);
-	new->key = k;
-	new->value = v;
-	new->next = NULL;
-	if (!*t)
-		*t = new;
+	new = init_text(data, k, v);
+	if (!data->map.graphic.texture)
+		data->map.graphic.texture = new;
 	else
 	{
-		last = *t;
+		last = data->map.graphic.texture;
 		while (last->next)
 			last = last->next;
 		last->next = new;
 	}
 }
 
-static void	split_atoi(char **split, t_color *new, t_collector *collector)
+static void	split_atoi(char **s, t_color *new, t_collector *col, const char *v)
 {
 	char	*tmp;
 	size_t	i;
 	int		number;
 
 	i = -1;
-	while (split[++i])
+	while (s[++i])
 	{
 		if (i > 2)
-			(ft_fsplit(split), cerror(EL_ERROR, collector));
-		number = ft_atoi(split[i]);
+			(ft_fsplit(s), cerror(EL_ERROR, v, col));
+		number = ft_atoi(s[i]);
 		tmp = ft_itoa(number);
 		if (!tmp)
-			(ft_fsplit(split), cerror(MALLOC_ERROR, collector));
-		if (ft_strncmp(tmp, split[i], ft_strlen(tmp)))
-			(free(tmp), ft_fsplit(split), cerror(COLOR_ERROR, collector));
+			(ft_fsplit(s), cerror(MALLOC_ERROR, "split_atoi", col));
+		if (ft_strncmp(tmp, s[i], ft_strlen(tmp)))
+			(free(tmp), ft_fsplit(s), cerror(COLOR_ERROR, v, col));
 		free(tmp);
 		if (number < 0 || number > 255)
-			(ft_fsplit(split), cerror(COLOR_ERROR, collector));
+			(ft_fsplit(s), cerror(COLOR_ERROR, v, col));
 		if (i == 0)
 			new->red = number;
 		else if (i == 1)
@@ -79,45 +63,45 @@ static void	split_atoi(char **split, t_color *new, t_collector *collector)
 	}
 }
 
-static void	add_color(t_color **x, const char *k, const char *v, t_collector *c)
+static void	add_color(t_data *data, const char *k, const char *v)
 {
 	t_color	*new;
 	t_color	*last;
 	char	**split;
 
 	if (check_commas(v) != 2)
-		cerror(EL_ERROR, c);
-	new = ccalloc(1, sizeof(t_color), c);
+		cerror(EL_ERROR, v, data->collector);
+	new = ccalloc(1, sizeof(t_color), data->collector);
 	new->key = k;
 	new->next = NULL;
 	split = ft_split(v, ',');
 	if (!split)
-		cerror(MALLOC_ERROR, c);
-	(split_atoi(split, new, c), ft_fsplit(split));
-	if (!*x)
-		*x = new;
+		cerror(MALLOC_ERROR, "add_color", data->collector);
+	(split_atoi(split, new, data->collector, v), ft_fsplit(split));
+	if (!data->map.graphic.color)
+		data->map.graphic.color = new;
 	else
 	{
-		last = *x;
+		last = data->map.graphic.color;
 		while (last->next)
 			last = last->next;
 		last->next = new;
 	}
 }
 
-static void	dispatch(t_graphic *g, const char *k, const char *v, t_collector *c)
+static void	dispatch(t_data *data, const char *k, const char *v)
 {
 	size_t		len;
 	t_graphic	cpy;
 
 	if (k[1] && !ft_isalpha(k[1]))
-		cerror(KEY_ERROR, c);
-	cpy = (t_graphic){g->color, g->texture};
+		cerror(KEY_ERROR, k, data->collector);
+	cpy = (t_graphic){data->map.graphic.color, data->map.graphic.texture};
 	while (cpy.color || cpy.texture)
 	{
 		if ((cpy.color && !ft_strncmp(cpy.color->key, k, ft_strlen(k)))
 			|| (cpy.texture && !ft_strncmp(cpy.texture->key, k, ft_strlen(k))))
-			cerror(UNIQUE_KEY_ERROR, c);
+			cerror(UNIQUE_KEY_ERROR, k, data->collector);
 		if (cpy.color)
 			cpy.color = cpy.color->next;
 		if (cpy.texture)
@@ -126,12 +110,12 @@ static void	dispatch(t_graphic *g, const char *k, const char *v, t_collector *c)
 	len = ft_strlen(v);
 	if (len >= 4 && v[len - 4] == '.' && v[len - 3] == 'x' && v[len - 2] == 'p'
 		&& v[len - 1] == 'm')
-		add_text(&g->texture, k, v, c);
+		add_text(data, k, v);
 	else
-		add_color(&g->color, k, v, c);
+		add_color(data, k, v);
 }
 
-void	parse_graphic(char *line, t_graphic *graphic, t_collector *collector)
+void	parse_graphic(t_data *data, char *line)
 {
 	size_t		i;
 	char		**split;
@@ -146,14 +130,14 @@ void	parse_graphic(char *line, t_graphic *graphic, t_collector *collector)
 		remove_space(line);
 	split = ft_split(line, ' ');
 	if (!split)
-		cerror(MALLOC_ERROR, collector);
+		cerror(MALLOC_ERROR, "parse_graphic", data->collector);
 	i = -1;
 	while (split[++i])
 		;
 	if (i != 2)
-		(ft_fsplit(split), cerror(NB_ERROR, collector));
-	(add_collector(collector, split[0], &free), key = split[0]);
-	(add_collector(collector, split[1], &free), value = split[1]);
+		(ft_fsplit(split), cerror(NB_ERROR, line, data->collector));
+	(add_collector(data->collector, split[0], &free), key = split[0]);
+	(add_collector(data->collector, split[1], &free), value = split[1]);
 	(free(split[2]), free(split));
-	dispatch(graphic, key, value, collector);
+	dispatch(data, key, value);
 }

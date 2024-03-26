@@ -6,17 +6,12 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/26 10:31:25 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/26 13:29:48 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "collector.h"
-#include "parsing.h"
-#include "window.h"
 #include <math.h>
-
-#define USAGE_ERROR "Usage: ./cub3d <file.cub>"
 
 float	raycast(t_vector position, t_vector direction, t_map map, int *color)
 {
@@ -105,10 +100,10 @@ void	print_image(t_data *data)
 	{
 		int color = 0;
 		double cameraX = 2 * i / (double) WIDTH -1;
-		dis = raycast(data->map.player.pos,
+		dis = raycast(data->player.pos,
 			(t_vector){
-				data->map.player.direction.x + data->map.player.plane.x * cameraX,
-				data->map.player.direction.y + data->map.player.plane.y * cameraX
+				data->player.direction.x + data->player.plane.x * cameraX,
+				data->player.direction.y + data->player.plane.y * cameraX
 			}, data->map, &color);
 		int lineHeight = (int)(HEIGHT / dis);
 		int start = -lineHeight / 2 + HEIGHT / 2;
@@ -127,13 +122,14 @@ int	main(int argc, char const *argv[])
 	t_data	data;
 
 	if (argc != 2)
-		error(USAGE_ERROR);
+		error(USAGE_ERROR, NULL);
 	data.window = (t_window){NULL, NULL,
-		{NULL, NULL, 0, 0, 0}};
-	data.map = (t_map){0, {{0, 0}, {0, 0.66f}, {-1, 0}}, {NULL, NULL}, 0, 0};
+		{NULL, NULL, 0, 0, 0, 0, 0}};
+	data.player = (t_player){{0, 0}, {0, 0.66f}, {-1, 0}};
+	data.map = (t_map){0, {NULL, NULL}, 0, 0};
 	data.collector = init_collector();
-	parse_file(&data.map, argv[1], data.collector);
 	create_window(&data.window, data.collector);
+	parse_file(&data, argv[1]);
 	print_image(&data);
 	init_hook(&data);
 	mlx_loop(data.window.mlx);

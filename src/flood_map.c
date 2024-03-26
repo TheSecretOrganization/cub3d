@@ -6,14 +6,11 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:40:19 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/12 14:18:11 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/26 11:24:35 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-
-#define MALLOC_ERROR "Malloc failed"
-#define WALL_ERROR "There is a hole in the walls"
+#include "cub3d.h"
 
 static int	flood(char **map, size_t *rules, size_t x, size_t y)
 {
@@ -63,18 +60,18 @@ void	flood_map(const t_map *map, t_collector *collector)
 
 	cpy = ft_calloc(map->heigh + 1, sizeof(char *));
 	if (!cpy)
-		cerror(MALLOC_ERROR, collector);
+		cerror(MALLOC_ERROR, "flood_map", collector);
 	y = -1;
 	while (++y < map->heigh)
 	{
 		cpy[y] = ft_calloc(map->width + 1, sizeof(char));
 		if (!cpy[y])
-			(ft_fsplit(cpy), cerror(MALLOC_ERROR, collector));
+			(ft_fsplit(cpy), cerror(MALLOC_ERROR, "flood_map", collector));
 		x = -1;
 		while (++x < map->width)
 			cpy[y][x] = map->content[y][x];
 	}
 	if (find_starting_points(cpy, (size_t[2]){map->heigh, map->width}))
-		(ft_fsplit(cpy), cerror(WALL_ERROR, collector));
+		(ft_fsplit(cpy), cerror(WALL_ERROR, NULL, collector));
 	ft_fsplit(cpy);
 }

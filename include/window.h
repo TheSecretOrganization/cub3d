@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:14:09 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/14 14:32:45 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/26 11:23:57 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define WINDOW_H
 
 # include "mlx.h"
-# include "collector.h"
-# include "utils.h"
 
 # define WIDTH 800
 # define HEIGHT 600
@@ -27,6 +25,8 @@ typedef struct t_img
 	int		bpp;
 	int		size_line;
 	int		endian;
+	int		width;
+	int		height;
 }	t_img;
 
 typedef struct s_window
@@ -35,8 +35,5 @@ typedef struct s_window
 	void	*ptr;
 	t_img	img;
 }	t_window;
-
-void	create_window(t_window *window, t_collector *col);
-void	img_pixel_put(t_img *img, int x, int y, int color);
 
 #endif

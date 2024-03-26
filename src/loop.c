@@ -6,14 +6,11 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:45:31 by averin            #+#    #+#             */
-/*   Updated: 2024/03/25 13:32:11 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/26 13:25:11 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "mlx.h"
-#include <X11/keysym.h>
-#include <X11/X.h>
 #include <math.h>
 
 static int	handle_loop(t_data *data)
@@ -50,18 +47,18 @@ static int	handle_key(int keycode, t_data *data)
 	if (keycode == XK_Escape)
 		handle_destroy(data);
 	if (keycode == XK_Left)
-		rotate(0.2f, &data->map.player);
+		rotate(0.2f, &data->player);
 	if (keycode == XK_Right)
-		rotate(-0.2f, &data->map.player);
+		rotate(-0.2f, &data->player);
 	if (keycode == XK_a)
-		move((t_vector){0, -0.2f}, &data->map.player);
+		move((t_vector){0, -0.2f}, &data->player);
 	if (keycode == XK_d)
-		move((t_vector){0, 0.2f}, &data->map.player);
+		move((t_vector){0, 0.2f}, &data->player);
 	if (keycode == XK_w)
-		move((t_vector){0.2f, 0}, &data->map.player);
+		move((t_vector){0.2f, 0}, &data->player);
 	if (keycode == XK_s)
-		move((t_vector){-0.2f, 0}, &data->map.player);
-	printf("%f %f\n", data->map.player.pos.x, data->map.player.pos.y);
+		move((t_vector){-0.2f, 0}, &data->player);
+	printf("%f %f\n", data->player.pos.x, data->player.pos.y);
 	print_image(data);
 	return (0);
 }

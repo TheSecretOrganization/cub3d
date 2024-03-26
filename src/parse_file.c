@@ -6,18 +6,13 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:56:21 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/11 11:10:16 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:37:36 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include "utils.h"
+#include "cub3d.h"
 
 #define SPACE " \t"
-#define FILE_ERROR "The <file.cub> is invalid"
-#define TEXTURE_ERROR "The map doesn't contain all required textures: \
-NO, SO, WE and EA"
-#define COLOR_ERROR "The map doesn't contain all required colors: F and C"
 
 static int	is_texture(const char *line, int found_map)
 {
@@ -37,7 +32,7 @@ static int	is_texture(const char *line, int found_map)
 	return (alpha);
 }
 
-static void	check_rules(t_texure *texture, t_color *color, t_collector *col)
+static void	check_rules(t_texture *texture, t_color *color, t_collector *col)
 {
 	int			rules;
 
@@ -52,7 +47,7 @@ static void	check_rules(t_texure *texture, t_color *color, t_collector *col)
 		texture = texture->next;
 	}
 	if (rules != 4)
-		cerror(TEXTURE_ERROR, col);
+		cerror(MAN_TEXTURE_ERROR, NULL, col);
 	while (color)
 	{
 		if (!ft_strncmp("F\0", color->key, 2)
@@ -61,34 +56,34 @@ static void	check_rules(t_texure *texture, t_color *color, t_collector *col)
 		color = color->next;
 	}
 	if (rules != 6)
-		cerror(COLOR_ERROR, col);
+		cerror(MAN_COLOR_ERROR, NULL, col);
 }
 
-void	parse_file(t_map *map, const char *argv, t_collector *collector)
+void	parse_file(t_data *d, const char *argv)
 {
 	t_list	*file;
 	t_list	*line;
 	int		found_map;
 	int		code;
 
-	file = read_file(argv, collector);
+	file = read_file(argv, d->collector);
 	found_map = 0;
 	line = NULL;
 	while (file)
 	{
 		code = is_texture((const char *)file->content, found_map);
 		if (code == -1)
-			cerror(FILE_ERROR, collector);
-		else if (code == 0 && ++(map->heigh))
+			cerror(FILE_ERROR, (const char *)file->content, d->collector);
+		else if (code == 0 && ++(d->map.heigh))
 		{
 			found_map = 1;
-			if (map->heigh == 1)
+			if (d->map.heigh == 1)
 				line = file;
 		}
 		else if (code == 1)
-			parse_graphic((char *)file->content, &map->graphic, collector);
+			parse_graphic(d, (char *)file->content);
 		file = file->next;
 	}
-	parse_map(line, map, collector);
-	check_rules(map->graphic.texture, map->graphic.color, collector);
+	parse_map(d, line);
+	check_rules(d->map.graphic.texture, d->map.graphic.color, d->collector);
 }

@@ -6,20 +6,11 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:03:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/21 10:36:30 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/26 13:34:07 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include "window.h"
-
-#define VALID_CHAR "10NSEW "
-#define PLAYER_VIEW "NSEW"
-#define CHAR_ERROR "Invalid char found in the map"
-#define NO_PLAYER "No starting position was found"
-#define MULTIPLE_PLAYER "Multiple starting position found"
-#define MAP_TOO_BIG "The map is too big, a 300x300 is the maximum"
-#define MALLOC_ERROR "Malloc failed"
+#include "cub3d.h"
 
 static void	create_rectangle(t_list *line, t_map *map, t_collector *collector)
 {
@@ -36,7 +27,7 @@ static void	create_rectangle(t_list *line, t_map *map, t_collector *collector)
 		{
 			tmp = ft_calloc(map->width + 1, sizeof(char));
 			if (!tmp)
-				cerror(MALLOC_ERROR, collector);
+				cerror(MALLOC_ERROR, "create_rectangle", collector);
 			ft_memcpy(tmp, (char *)line->content, len);
 			(free(line->content), line->content = tmp);
 		}
@@ -49,59 +40,55 @@ static void	create_rectangle(t_list *line, t_map *map, t_collector *collector)
 	}
 }
 
-static int	parse_player(size_t i, size_t j, t_map *map, const char *line)
+static int	parse_player(size_t i, size_t j, t_player *p, const char *line)
 {
-	if (map->player.pos.x != 0 && map->player.pos.y != 0)
-		return (1);
-	map->player.pos.x = j;
-	map->player.pos.y = i;
 	(void) line;
-	// if (line[j] == 'E')
-	// 	map->player.dir = 0;
-	// else if (line[j] == 'N')
-	// 	map->player.dir = 90;
-	// else if (line[j] == 'S')
-	// 	map->player.dir = 270;
+	if (p->pos.x != 0 && p->pos.y != 0)
+		return (1);
+	p->pos.x = j;
+	p->pos.y = i;
+	// if (line[j] == 'S')
+	// 	p->view.y = 1;
 	// else if (line[j] == 'W')
-	// 	map->player.dir = 180;
+	// 	p->view.x = 1;
 	return (0);
 }
 
-static void	parse_lines(t_list *line, t_map *map, t_collector *collector)
+static void	parse_lines(t_data *d, t_list *l)
 {
 	size_t	i;
 	size_t	j;
 	size_t	len;
 
 	i = 0;
-	while (line)
+	while (l)
 	{
 		j = -1;
-		while (((char *)line->content)[++j])
+		while (((char *)l->content)[++j])
 		{
-			if (!ft_strchr(VALID_CHAR, ((char *)line->content)[j]))
-				cerror(CHAR_ERROR, collector);
-			if (ft_strchr(PLAYER_VIEW, ((char *)line->content)[j])
-				&& parse_player(i, j, map, (char *)line->content))
-				cerror(MULTIPLE_PLAYER, collector);
+			if (!ft_strchr(VALID_CHAR, ((char *)l->content)[j]))
+				cerror(CHAR_ERROR, &(((char *)l->content)[j]), d->collector);
+			if (ft_strchr(PLAYER_VIEW, ((char *)l->content)[j])
+				&& parse_player(i, j, &d->player, (char *)l->content))
+				cerror(MULTIPLE_PLAYER, (char *)l->content, d->collector);
 		}
-		len = ft_strlen(line->content);
-		if (len > map->width)
-			map->width = len;
+		len = ft_strlen(l->content);
+		if (len > d->map.width)
+			d->map.width = len;
 		i++;
-		line = line->next;
+		l = l->next;
 	}
-	if (map->player.pos.x == 0 && map->player.pos.y == 0)
-		cerror(NO_PLAYER, collector);
+	if (d->player.pos.x == 0 && d->player.pos.y == 0)
+		cerror(NO_PLAYER, NULL, d->collector);
 }
 
-void	parse_map(t_list *line, t_map *map, t_collector *collector)
+void	parse_map(t_data *data, t_list *line)
 {
-	if (map->heigh > 300)
-		cerror(MAP_TOO_BIG, collector);
-	parse_lines(line, map, collector);
-	if (map->width > 300)
-		cerror(MAP_TOO_BIG, collector);
-	create_rectangle(line, map, collector);
-	flood_map(map, collector);
+	if (data->map.heigh > 300)
+		cerror(MAP_TOO_BIG, NULL, data->collector);
+	parse_lines(data, line);
+	if (data->map.width > 300)
+		cerror(MAP_TOO_BIG, NULL, data->collector);
+	create_rectangle(line, &data->map, data->collector);
+	flood_map(&data->map, data->collector);
 }

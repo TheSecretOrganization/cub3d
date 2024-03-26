@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:12:32 by averin            #+#    #+#             */
-/*   Updated: 2024/03/14 14:52:53 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:31:26 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "window.h"
-#include <stdio.h>
-
-#define WINDOW_ERROR "Cannot open window"
-#define IMAGE_ERROR "Cannot create new image"
+#include "cub3d.h"
 
 static void	delete_image(void *win)
 {
@@ -53,15 +49,15 @@ void	create_window(t_window *window, t_collector *collector)
 {
 	window->mlx = mlx_init();
 	if (!window->mlx)
-		cerror(WINDOW_ERROR, collector);
+		cerror(WINDOW_ERROR, "mlx_init", collector);
 	window->ptr = mlx_new_window(window->mlx, WIDTH, HEIGHT, "cub3d");
 	if (!window->ptr)
 		(mlx_destroy_display(window->mlx), free(window->ptr),
-			cerror(WINDOW_ERROR, collector));
+			cerror(WINDOW_ERROR, "mlx_new_window", collector));
 	add_collector(collector, window, &delete_window);
 	give_mlx_priority(collector);
 	if (create_img(window))
-		cerror(IMAGE_ERROR, collector);
+		cerror("IMAGE_ERROR", "create_window", collector);
 	add_collector(collector, window, &delete_image);
 }
 
