@@ -6,14 +6,31 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/26 13:29:48 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/26 15:46:39 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "graphic.h"
 #include <math.h>
 
-float	raycast(t_vector position, t_vector direction, t_map map, int *color)
+t_img	*search_texture(const char *name, t_map map)
+{
+	t_texture *texture = map.graphic.texture;
+
+	// printf("searching texture %s\n", name);
+	while (texture)
+	{
+		if (ft_strncmp(name, texture->key, ft_strlen(name)) == 0)
+			return (&texture->img);
+		texture = texture->next;
+	}
+	printf("not found\n");
+	exit(0);
+	return (NULL);
+}
+
+float	raycast(t_vector position, t_vector direction, t_map map, int *r)
 {
 	int hit = 0;
 	int face = 0;
@@ -68,26 +85,24 @@ float	raycast(t_vector position, t_vector direction, t_map map, int *color)
 		distance = side.y - delta.y;
 	
 	if (face == 0 && direction.x > 0)
-		*color = 0xfecaca;
+		*r = 0;
 	else if (face == 0 && direction.x <= 0)
-		*color = 0xbeef00;
+		*r = 1;
 	else if (face == 1 && direction.y > 0)
-		*color = 0xfadeff;
+		*r = 2;
 	else if (face == 1 && direction.y <= 0)
-		*color = 0x363042;
-	else
-		*color = 0xffffff;
+		*r = 3;
 	return (distance);
 }
 
-void	draw_line(int start, int end, int x, t_window *win, int color)
-{
-	int	y;
+// void	draw_line(int start, int end, int x, t_window *win, int color)
+// {
+// 	int	y;
 
-	y = start - 1;
-	while (++y <= end)
-		img_pixel_put(&win->img, x, y, color);
-}
+// 	y = start - 1;
+// 	while (++y <= end)
+// 		img_pixel_put(&win->img, x, y, color);
+// }
 
 void	print_image(t_data *data)
 {
@@ -98,13 +113,14 @@ void	print_image(t_data *data)
 	i = -1;
 	while (++i <= WIDTH)
 	{
-		int color = 0;
+		int face = 0;
 		double cameraX = 2 * i / (double) WIDTH -1;
-		dis = raycast(data->player.pos,
-			(t_vector){
-				data->player.direction.x + data->player.plane.x * cameraX,
-				data->player.direction.y + data->player.plane.y * cameraX
-			}, data->map, &color);
+		t_player *player = &data->player;
+		t_vector direction = {
+			player->direction.x + player->plane.x * cameraX,
+			player->direction.y + player->plane.y * cameraX
+		};
+		dis = raycast(player->pos, direction, data->map, &face);
 		int lineHeight = (int)(HEIGHT / dis);
 		int start = -lineHeight / 2 + HEIGHT / 2;
 		if (start < 0)
@@ -112,7 +128,44 @@ void	print_image(t_data *data)
 		int end = lineHeight / 2 + HEIGHT / 2;
 		if(end >= HEIGHT)
 			end = HEIGHT - 1;
-		draw_line(start, end, i, &data->window, color);
+		
+		double wallX;
+		if (face == 0 || face == 1)
+			wallX = player->pos.y + dis * direction.y;
+		else
+			wallX = player->pos.x + dis * direction.x;
+		wallX -= floor(wallX);
+
+		int texX = (int) wallX * 64.0f;
+		if ((face == 0 || face == 1) && direction.x > 0) texX = 64 - texX - 1;
+		else if (direction.y < 0) texX = 64 - texX - 1;
+
+		t_img	*tex;
+		if (face == 0)
+			tex = search_texture("NO", data->map);
+		if (face == 1)
+			tex = search_texture("SO", data->map);
+		if (face == 2)
+			tex = search_texture("EA", data->map);
+		if (face == 3)
+			tex = search_texture("WE", data->map);
+		if (!tex)
+		{
+			(printf("no text\n"), mlx_loop_end(data->window.mlx));
+			return ;
+		}
+
+		double step = 1.0f * 64.0f / lineHeight;
+		double texPos = (start - HEIGHT / 2 + lineHeight / 2) * step;
+		int y = start - 1;
+		while (++y < end)
+		{
+			int texY = (int) texPos & (64 - 1);
+			texPos += step;
+			// printf("img: %p\t", &data->window.img);
+			// printf("x=%d y=%d\ttex=%d\n", texX, texY, ((int *)tex->ptr)[]);
+			img_pixel_put(&data->window.img, i, y, ((char *)tex->ptr)[texY * tex->width + texX]);
+		}
 	}
 	mlx_put_image_to_window(data->window.mlx, data->window.ptr, data->window.img.ptr, 0, 0);
 }
@@ -132,6 +185,24 @@ int	main(int argc, char const *argv[])
 	parse_file(&data, argv[1]);
 	print_image(&data);
 	init_hook(&data);
+	t_img *img = search_texture("NO", data.map);
+	mlx_put_image_to_window(data.window.mlx, data.window.ptr, img->ptr, 0, 0);
+	img = search_texture("SO", data.map);
+	mlx_put_image_to_window(data.window.mlx, data.window.ptr, img->ptr, 0, 64);
+	img = search_texture("EA", data.map);
+	mlx_put_image_to_window(data.window.mlx, data.window.ptr, img->ptr, 0, 128);
+	img = search_texture("WE", data.map);
+	mlx_put_image_to_window(data.window.mlx, data.window.ptr, img->ptr, 0, 192);
 	mlx_loop(data.window.mlx);
+	
+	// printf("%x\n", ((int *)img->ptr)[64]);
+	// for (int x = 0; x < img->height; x++)
+	// {
+	// 	for (int y = 0; y < img->width; y++)
+	// 		printf("%x ", ((int *)img->ptr)[x * img->width + y]);
+	// 	printf("\n");
+	// }
+
+	// mlx_loop(data.window.mlx);
 	return (free_collector(data.collector), 0);
 }
