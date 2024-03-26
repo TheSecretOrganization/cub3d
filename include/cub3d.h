@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/22 16:56:54 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:35:37 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,18 @@ typedef struct s_data
 	t_collector	*collector;
 	t_window	window;
 }	t_data;
+
+typedef struct s_hit
+{
+	float	distance;
+	enum
+	{
+		EA,
+		WE,
+		NO,
+		SO
+	}		face;
+}	t_hit;
 
 void		init_hook(t_data *data);
 
