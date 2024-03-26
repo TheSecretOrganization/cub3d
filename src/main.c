@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/25 15:36:58 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/26 10:31:25 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,30 +117,8 @@ void	print_image(t_data *data)
 		int end = lineHeight / 2 + HEIGHT / 2;
 		if(end >= HEIGHT)
 			end = HEIGHT - 1;
-		if (i % 100 == 0)
-			printf("%d: %0.3f\n", i, dis);
 		draw_line(start, end, i, &data->window, color);
 	}
-	// i = 10;
-	// while (i < WIDTH)
-	// {
-	// 	angle = RAD(-half_fov + i * angle_increment);
-	// 	dis = raycast(data->map.player.pos,
-	// 		(t_vector){cos(angle), sin(angle)}, data->map);
-	// 	int lineHeight = (int)(HEIGHT / dis);
-	// 	int start = -lineHeight / 2 + HEIGHT / 2;
-    // 	if (start < 0)
-	// 		start = 0;
-    // 	int end = lineHeight / 2 + HEIGHT / 2;
-    // 	if(end >= HEIGHT)
-	//   		end = HEIGHT - 1;
-
-	// 	printf("%d: %f\t%d - %d\t%d\n", i, dis, start, end, end - start);
-	// 	char str[200];
-	// 	sprintf(str, "%0.3f %d", dis, end - start);
-	// 	mlx_string_put(data->window.mlx, data->window.ptr, i, 100, 0x00FF00, str);
-	// 	i += 100;
-	// }
 	mlx_put_image_to_window(data->window.mlx, data->window.ptr, data->window.img.ptr, 0, 0);
 }
 
