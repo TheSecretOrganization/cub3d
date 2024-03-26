@@ -85,4 +85,6 @@ void		flood_map(const t_map *map, t_collector *collector);
 void		print_image(t_data *data);
 void		img_pixel_put(t_img *img, int x, int y, int color);
 
+void	rotate(float v, t_player *player);
+
 #endif
