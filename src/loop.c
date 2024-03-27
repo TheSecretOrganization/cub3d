@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:45:31 by averin            #+#    #+#             */
-/*   Updated: 2024/03/26 13:25:11 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/27 16:41:56 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static int	handle_key(int keycode, t_data *data)
 		move((t_vector){0.2f, 0}, &data->player);
 	if (keycode == XK_s)
 		move((t_vector){-0.2f, 0}, &data->player);
-	printf("%f %f\n", data->player.pos.x, data->player.pos.y);
 	print_image(data);
 	return (0);
 }

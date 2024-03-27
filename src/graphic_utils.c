@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:47:32 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/27 13:15:58 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:35:59 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,9 @@ t_texture	*init_text(t_data *data, const char *k, const char *v)
 	if (!new->img.ptr)
 		(free(new), cerror(TEXTURE_ERROR, v, data->collector));
 	add_collector(data->collector, new, &destroy_texture);
-	if (!mlx_get_data_addr(new->img.ptr, &new->img.bpp, &new->img.size_line,
-			&new->img.endian))
+	new->img.content = mlx_get_data_addr(new->img.ptr, &new->img.bpp,
+			&new->img.size_line, &new->img.endian);
+	if (!new->img.content)
 		cerror(TEXTURE_ERROR, v, data->collector);
 	return (new);
 }
