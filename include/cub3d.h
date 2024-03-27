@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/26 13:28:01 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/26 15:25:00 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <sys/stat.h>
 # include <X11/keysym.h>
 # include <X11/X.h>
+# include <math.h>
 
 # define RAD(deg) (deg * M_PI / 180)
 
@@ -83,5 +84,7 @@ void		flood_map(const t_map *map, t_collector *collector);
 
 void		print_image(t_data *data);
 void		img_pixel_put(t_img *img, int x, int y, int color);
+
+void	rotate(float v, t_player *player);
 
 #endif

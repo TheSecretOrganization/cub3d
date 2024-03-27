@@ -6,13 +6,11 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/27 16:41:15 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:44:26 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "graphic.h"
-#include <math.h>
 
 t_img	*search_texture(const char *name, t_map map)
 {
