@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:29:25 by averin            #+#    #+#             */
-/*   Updated: 2024/03/28 12:26:02 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/28 14:58:25 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void	init_raycast(t_vector *position, t_vector *step, t_vector *side,
 	t_vector *delta)
 {
 	*delta = (t_vector){ft_abs(1 / position[1].x), ft_abs(1 / position[1].y)};
-	if (position[0].x == 0)
+	if (position[1].x == 0)
 		delta->x = 1e30;
-	if (position[0].y == 0)
+	if (position[1].y == 0)
 		delta->y = 1e30;
 	if (position[1].x < 0)
 	{
@@ -35,7 +35,7 @@ static void	init_raycast(t_vector *position, t_vector *step, t_vector *side,
 		step->x = 1;
 		side->x = ((int) position[0].x + 1.0f - position[0].x) * delta->x;
 	}
-	if (position[1].y)
+	if (position[1].y < 0)
 	{
 		step->y = -1;
 		side->y = (position[0].y - (int) position[0].y) * delta->y;
