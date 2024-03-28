@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/27 16:44:26 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/28 10:22:30 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,10 +131,6 @@ void	print_image(t_data *data)
 			wallX = player->pos.x + dis * direction.x;
 		wallX -= floor(wallX);
 
-		int texX = (int) wallX * 64.0f;
-		if ((face == 0 || face == 1) && direction.x > 0) texX = 64 - texX - 1;
-		else if (direction.y < 0) texX = 64 - texX - 1;
-
 		t_img	*tex;
 		if (face == 0)
 			tex = search_texture("NO", data->map);
@@ -150,12 +146,16 @@ void	print_image(t_data *data)
 			return ;
 		}
 
-		double step = 1.0f * 64.0f / lineHeight;
+		int texX = (int) wallX * (double) tex->width;
+		if ((face == 0 || face == 1) && direction.x > 0) texX = tex->width - texX - 1;
+		else if (direction.y < 0) texX = tex->width - texX - 1;
+
+		double step = 1.0f * tex->width / lineHeight;
 		double texPos = (start - HEIGHT / 2 + lineHeight / 2) * step;
 		int y = start - 1;
 		while (++y < end)
 		{
-			int texY = (int) texPos & (64 - 1);
+			int texY = (int) texPos & (tex->width - 1);
 			texPos += step;
 			int *pixel = (int *)(tex->content + (texY * tex->size_line + texX * (tex->bpp / 8)));
 			img_pixel_put(&data->window.img, i, y, *pixel);
