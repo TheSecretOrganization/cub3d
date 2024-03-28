@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/28 10:42:51 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/28 10:55:22 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,8 +147,8 @@ void	print_image(t_data *data)
 		}
 
 		int texX = wallX * (double) tex->width;
-		if ((face == 0 || face == 1) && direction.x > 0) texX = tex->width - texX - 1;
-		else if (direction.y < 0) texX = tex->width - texX - 1;
+		// if ((face == 0 || face == 1) && direction.x > 0) texX = tex->width - texX - 1;
+		// else if (direction.y < 0) texX = tex->width - texX - 1;
 
 		double step = 1.0f * tex->width / lineHeight;
 		double texPos = (start - HEIGHT / 2 + lineHeight / 2) * step;
