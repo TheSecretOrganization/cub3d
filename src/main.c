@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/29 10:55:41 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/29 10:57:36 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_img	*finf_face_texture(t_dir face, t_map map)
 
 static int	get_pixel(t_img *tex, int x, int y)
 {
-	return (*(tex->content + (y * tex->size_line + x * (tex->bpp / 8))));
+	return (*(int *)(tex->content + (y * tex->size_line + x * (tex->bpp / 8))));
 }
 
 void	init_img_line(t_data *data, int i, t_hit *hit)
