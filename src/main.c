@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/29 09:47:23 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/29 10:52:23 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	print_image(t_data *data)
 			end = HEIGHT - 1;
 
 		double wallX;
-		if (hit.face == 0 || hit.face == 1)
+		if (hit.face == NO || hit.face == SO)
 			wallX = player->pos.y + hit.distance * direction.y;
 		else
 			wallX = player->pos.x + hit.distance * direction.x;
