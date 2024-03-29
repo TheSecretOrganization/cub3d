@@ -33,6 +33,22 @@ float	rad(float deg)
 	return (deg * M_PI / 180);
 }
 
+int	search_color(const char *name, t_map map)
+{
+	t_color	*color;
+
+	color = map.graphic.color;
+	while (color)
+	{
+		if (ft_strncmp(name, color->key, ft_strlen(name)) == 0)
+			return (
+				color->red << 16 | color->blue << 8 | color->green << 4
+			);
+		color = color->next;
+	}
+	return (-1);
+}
+
 t_img	*search_texture(const char *name, t_map map)
 {
 	t_texture	*texture;

@@ -79,6 +79,7 @@ void		cerror(const char *message, const char *el, t_collector *collector);
 void		error(const char *message, const char *el);
 float		rad(float deg);
 t_img		*search_texture(const char *name, t_map map);
+int			search_color(const char *name, t_map map);
 
 t_collector	*init_collector(void);
 void		free_collector(t_collector *col);
