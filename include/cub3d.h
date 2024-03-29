@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/29 09:08:57 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/29 10:00:59 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,20 @@ typedef struct s_data
 	t_window	window;
 }	t_data;
 
+enum	e_dir
+{
+	EA,
+	WE,
+	NO,
+	SO
+};
+
+typedef struct s_hit
+{
+	float		distance;
+	enum e_dir	face;
+}	t_hit;
+
 void		init_hook(t_data *data);
 
 void		cerror(const char *message, const char *el, t_collector *collector);
@@ -90,5 +104,8 @@ void		img_pixel_put(t_img *img, int x, int y, int color);
 void		forward(float step, t_player *player, t_map map);
 void		side(int is_left, t_player *player, t_map map);
 void		rotate(float v, t_player *player);
+
+void		raycast(t_vector position, t_vector direction, t_map map,
+				t_hit *hit);
 
 #endif
