@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/29 08:52:30 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/29 08:59:39 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include <X11/keysym.h>
 # include <X11/X.h>
 # include <math.h>
+
+# define STEP 0.2f
 
 typedef struct s_vector
 {
@@ -84,6 +86,8 @@ void		flood_map(const t_map *map, t_collector *collector);
 void		print_image(t_data *data);
 void		img_pixel_put(t_img *img, int x, int y, int color);
 
+void		forward(float step, t_player *player, t_map map);
+void		side(int is_left, t_player *player, t_map map);
 void		rotate(float v, t_player *player);
 
 #endif

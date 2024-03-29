@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 14:12:32 by averin            #+#    #+#             */
-/*   Updated: 2024/03/26 13:31:26 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/29 08:56:07 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	create_img(t_window *win)
 	if (!win->img.ptr)
 		return (1);
 	win->img.content = mlx_get_data_addr(win->img.ptr,
-		&win->img.bpp, &win->img.size_line,	&win->img.endian);
+			&win->img.bpp, &win->img.size_line, &win->img.endian);
 	if (!win->img.content)
 		return (mlx_destroy_image(win->mlx, win->img.ptr), 1);
 	return (0);
