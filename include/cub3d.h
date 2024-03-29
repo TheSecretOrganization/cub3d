@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/26 15:25:00 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/29 08:52:30 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@
 # include <X11/keysym.h>
 # include <X11/X.h>
 # include <math.h>
-
-# define RAD(deg) (deg * M_PI / 180)
 
 typedef struct s_vector
 {
@@ -63,6 +61,7 @@ void		init_hook(t_data *data);
 
 void		cerror(const char *message, const char *el, t_collector *collector);
 void		error(const char *message, const char *el);
+float		rad(float deg);
 
 t_collector	*init_collector(void);
 void		free_collector(t_collector *col);
@@ -85,6 +84,6 @@ void		flood_map(const t_map *map, t_collector *collector);
 void		print_image(t_data *data);
 void		img_pixel_put(t_img *img, int x, int y, int color);
 
-void	rotate(float v, t_player *player);
+void		rotate(float v, t_player *player);
 
 #endif

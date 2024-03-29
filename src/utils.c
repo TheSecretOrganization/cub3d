@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:59:20 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/22 14:18:22 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/29 08:52:16 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,9 @@ void	cerror(const char *message, const char *el, t_collector *collector)
 void	error(const char *message, const char *el)
 {
 	cerror(message, el, NULL);
+}
+
+float	rad(float deg)
+{
+	return (deg * M_PI / 180);
 }
