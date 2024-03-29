@@ -6,14 +6,14 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:29:25 by averin            #+#    #+#             */
-/*   Updated: 2024/03/29 10:17:29 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/29 11:42:18 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	init_raycast(t_vector *position, t_vector *step, t_vector *side,
-	t_vector *delta)
+static void	init_raycast(const t_vector *position, t_vector *step,
+	t_vector *side, t_vector *delta)
 {
 	*delta = (t_vector){1e30, 1e30};
 	if (position[1].x != 0)
@@ -42,7 +42,7 @@ static void	init_raycast(t_vector *position, t_vector *step, t_vector *side,
 	}
 }
 
-static void	conclude_raycast(int face, t_hit *hit, t_vector *tools)
+static void	conclude_raycast(int face, t_hit *hit, const t_vector *tools)
 {
 	if (face == 0)
 		hit->distance = tools[0].x - tools[1].x;

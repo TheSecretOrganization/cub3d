@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:24:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/29 11:25:40 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/29 11:40:16 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ static int	get_pixel(t_img *tex, int x, int y)
 }
 
 /*
-tools = {
-	0 = start,
-	1 = end,
-	2 = lineHeight,
-	3 = i
-};
-*/
-static void	print_img_line(t_data *data, t_hit *hit, t_vector dir, int *tools)
+ * tools = {
+ * 	0 = start,
+ * 	1 = end,
+ * 	2 = lineHeight,
+ * 	3 = i
+ * };
+ */
+static void	print_img_line(t_data *data, t_hit hit, t_vector dir, int *tools)
 {
 	double	wall_x;
 	int		tex_x;
@@ -47,12 +47,12 @@ static void	print_img_line(t_data *data, t_hit *hit, t_vector dir, int *tools)
 	double	tex_pos;
 	t_img	*tex;
 
-	if (hit->face == NO || hit->face == SO)
-		wall_x = data->player.pos.y + hit->distance * dir.y;
+	if (hit.face == NO || hit.face == SO)
+		wall_x = data->player.pos.y + hit.distance * dir.y;
 	else
-		wall_x = data->player.pos.x + hit->distance * dir.x;
+		wall_x = data->player.pos.x + hit.distance * dir.x;
 	wall_x -= floor(wall_x);
-	tex = finf_face_texture(hit->face, data->map);
+	tex = finf_face_texture(hit.face, data->map);
 	tex_x = wall_x * (double) tex->width;
 	step = 1.0f * tex->width / tools[2];
 	tex_pos = (tools[0] - HEIGHT / 2 + tools[2] / 2) * step;
@@ -66,15 +66,15 @@ static void	print_img_line(t_data *data, t_hit *hit, t_vector dir, int *tools)
 
 static void	init_img_line(t_data *data, int i, t_hit *hit)
 {
-	t_vector	direction;
+	t_vector	dir;
 	int			end;
 	int			start;
 	int			line_height;
 
-	direction = (t_vector){data->player.direction.x + data->player.plane.x
+	dir = (t_vector){data->player.direction.x + data->player.plane.x
 		* (2.0f * i / WIDTH - 1), data->player.direction.y
 		+ data->player.plane.y * (2.0f * i / WIDTH - 1)};
-	raycast(data->player.pos, direction, data->map, hit);
+	raycast(data->player.pos, dir, data->map, hit);
 	line_height = (int)(HEIGHT / hit->distance);
 	start = -line_height / 2 + HEIGHT / 2;
 	if (start < 0)
@@ -82,7 +82,7 @@ static void	init_img_line(t_data *data, int i, t_hit *hit)
 	end = line_height / 2 + HEIGHT / 2;
 	if (end >= HEIGHT)
 		end = HEIGHT - 1;
-	print_img_line(data, hit, direction, (int [4]){start, end, line_height, i});
+	print_img_line(data, *hit, dir, (int [4]){start, end, line_height, i});
 }
 
 void	print_image(t_data *data)

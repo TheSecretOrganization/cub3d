@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 08:57:21 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/29 09:05:35 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/29 11:36:50 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	forward(float step, t_player *player, t_map map)
 
 	x = (size_t)(player->pos.x + step * player->direction.x);
 	y = (size_t)(player->pos.y + step * player->direction.y);
-	if (x < 0 || x > map.width || y < 0 || y > map.heigh)
+	if (x > map.width || y > map.heigh)
 		return ;
 	if (!ft_strchr("1\0", map.content[(size_t)player->pos.y][x]))
 		player->pos.x += step * player->direction.x;
