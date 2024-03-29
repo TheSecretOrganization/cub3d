@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/28 10:55:22 by averin           ###   ########.fr       */
+/*   Updated: 2024/03/29 09:08:23 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-t_img	*search_texture(const char *name, t_map map)
-{
-	t_texture *texture = map.graphic.texture;
-
-	while (texture)
-	{
-		if (ft_strncmp(name, texture->key, ft_strlen(name)) == 0)
-			return (&texture->img);
-		texture = texture->next;
-	}
-	return (NULL);
-}
 
 float	raycast(t_vector position, t_vector direction, t_map map, int *r)
 {
