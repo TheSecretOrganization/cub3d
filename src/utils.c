@@ -40,7 +40,6 @@ int	search_color(const char *name, t_map map)
 	color = map.graphic.color;
 	while (color)
 	{
-		// printf("color: %s\n", color->key);
 		if (ft_strncmp(name, color->key, ft_strlen(name)) == 0)
 			return (
 				color->red << 16 | color->blue << 8 | color->green << 4
