@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_image.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:24:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/29 11:40:16 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/29 15:54:45 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,25 @@ static void	init_img_line(t_data *data, int i, t_hit *hit)
 void	print_image(t_data *data)
 {
 	int		i;
+	int		y;
 	t_hit	hit;
 
 	ft_bzero(data->window.img.content, HEIGHT * data->window.img.size_line
 		+ WIDTH * (data->window.img.bpp / 8));
+	i = -1;
+	while (++i <= WIDTH)
+	{
+		y = -1;
+		while (++y <= HEIGHT)
+		{
+			if (y < HEIGHT / 2)
+				img_pixel_put(&data->window.img, i, y,
+					search_color("C", data->map));
+			else
+				img_pixel_put(&data->window.img, i, y,
+					search_color("F", data->map));
+		}
+	}
 	i = -1;
 	while (++i <= WIDTH)
 		init_img_line(data, i, &hit);
