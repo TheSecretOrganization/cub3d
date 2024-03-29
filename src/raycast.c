@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:29:25 by averin            #+#    #+#             */
-/*   Updated: 2024/03/29 10:01:43 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/29 10:17:29 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	init_raycast(t_vector *position, t_vector *step, t_vector *side,
 	else
 	{
 		step->y = 1;
-		side->y = ((int) position[0].y + 1.0f - position[0].y) - delta->y;
+		side->y = ((int) position[0].y + 1.0f - position[0].y) * delta->y;
 	}
 }
 
