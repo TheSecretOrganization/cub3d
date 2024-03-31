@@ -6,11 +6,13 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:45:31 by averin            #+#    #+#             */
-/*   Updated: 2024/03/29 09:01:31 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/01 00:13:53 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+#define ON_MOUSEMOVE 6
 
 static int	handle_loop(t_data *data)
 {
@@ -44,9 +46,27 @@ static int	handle_key(int keycode, t_data *data)
 	return (0);
 }
 
+static int	handle_mouse(int x, int new_x, t_data *data)
+{
+	(void)data;
+	if (x > WIDTH / 2 + 20)
+		(rotate(-STEP / 4, &data->player), new_x = WIDTH / 2 + 19);
+	else if (x < WIDTH / 2 - 20)
+		(rotate(STEP / 4, &data->player), new_x = WIDTH / 2 - 19);
+	else
+		return (0);
+	print_image(data);
+	if (x > WIDTH / 2 + 10)
+		mlx_mouse_move(data->window.mlx, data->window.ptr, new_x, HEIGHT / 2);
+	else if (x < WIDTH / 2 - 10)
+		mlx_mouse_move(data->window.mlx, data->window.ptr, new_x, HEIGHT / 2);
+	return (0);
+}
+
 void	init_hook(t_data *data)
 {
 	mlx_hook(data->window.ptr, DestroyNotify, 0, &handle_destroy, data);
 	mlx_hook(data->window.ptr, KeyPress, KeyPressMask, &handle_key, data);
+	mlx_hook(data->window.ptr, 6, 1L << 6, &handle_mouse, data);
 	mlx_loop_hook(data->window.mlx, &handle_loop, data);
 }

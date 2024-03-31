@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/03/29 11:25:26 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/01 00:14:54 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	main(int argc, char const *argv[])
 	parse_file(&data, argv[1]);
 	print_image(&data);
 	init_hook(&data);
+	mlx_mouse_move(data.window.mlx, data.window.ptr, WIDTH / 2, HEIGHT / 2);
+	mlx_mouse_hide(data.window.mlx, data.window.ptr);
 	mlx_loop(data.window.mlx);
 	return (free_collector(data.collector), 0);
 }
