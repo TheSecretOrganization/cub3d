@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:29:25 by averin            #+#    #+#             */
-/*   Updated: 2024/03/29 11:42:18 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:22:29 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,17 @@ static void	conclude_raycast(int face, t_hit *hit, const t_vector *tools)
 		hit->face = WE;
 }
 
+static int	check_collision(t_map map, int x, int y, t_hit *hit)
+{
+	char	c;
+
+	c = map.content[y][x];
+	if (c == '\0' || c == '0')
+		return (0);
+	hit->type = c;
+	return (1);
+}
+
 void	raycast(t_vector position, t_vector direction, t_map map, t_hit *hit)
 {
 	int			face;
@@ -81,7 +92,7 @@ void	raycast(t_vector position, t_vector direction, t_map map, t_hit *hit)
 			position.y += step.y;
 			face = 1;
 		}
-		if (map.content[(int)position.y][(int)position.x] == '1')
+		if (check_collision(map, position.x, position.y, hit))
 			break ;
 	}
 	conclude_raycast(face, hit, (t_vector[3]){side, delta, direction});
