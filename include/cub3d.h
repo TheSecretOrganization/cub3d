@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/04/02 14:21:27 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/03 14:46:17 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # include <math.h>
 
 # define STEP 0.2f
+# define VALID_CHAR "10NSEWD "
+# define PLAYER_VIEW "NSEW"
 
 typedef struct s_vector
 {

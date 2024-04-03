@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 11:22:41 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/02 14:16:02 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/03 14:46:26 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ NO, SO, WE and EA"
 # define MAN_COLOR_ERROR "The map doesn't contain all required colors: F and C"
 # define OPEN_ERROR "Cannot open file"
 # define SUFFIX_ERROR "Invalid suffix, use a <map.cub>"
-# define VALID_CHAR "10NSEWD "
-# define PLAYER_VIEW "NSEW"
 # define CHAR_ERROR "Invalid char found in the map"
 # define NO_PLAYER "No starting position was found"
 # define MULTIPLE_PLAYER "Multiple starting position found"

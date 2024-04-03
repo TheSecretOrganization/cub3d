@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:03:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/26 15:19:16 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:33:15 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,19 @@ static void	create_rectangle(t_list *line, t_map *map, t_collector *collector)
 	}
 }
 
-static int	parse_player(size_t i, size_t j, t_player *p, const char view)
+static int	parse_player(size_t i, size_t j, t_player *p, char *view)
 {
 	if (p->pos.x != 0 && p->pos.y != 0)
 		return (1);
-	p->pos.x = j;
-	p->pos.y = i;
-	if (view == 'N')
+	p->pos.x = j + 0.5;
+	p->pos.y = i + 0.5;
+	if (*view == 'N')
 		rotate(M_PI / 2, p);
-	else if (view == 'S')
+	else if (*view == 'S')
 		rotate(-M_PI / 2, p);
-	else if (view == 'E')
+	else if (*view == 'E')
 		rotate(M_PI, p);
+	*view = '0';
 	return (0);
 }
 
@@ -70,7 +71,7 @@ static void	parse_lines(t_data *d, t_list *l)
 			if (!ft_strchr(VALID_CHAR, ((char *)l->content)[j]))
 				cerror(CHAR_ERROR, &(((char *)l->content)[j]), d->collector);
 			if (ft_strchr(PLAYER_VIEW, ((char *)l->content)[j])
-				&& parse_player(i, j, &d->player, ((char *)l->content)[j]))
+				&& parse_player(i, j, &d->player, &((char *)l->content)[j]))
 				cerror(MULTIPLE_PLAYER, (char *)l->content, d->collector);
 		}
 		len = ft_strlen(l->content);
