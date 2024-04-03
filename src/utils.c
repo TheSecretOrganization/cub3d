@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:59:20 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/22 14:18:22 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/29 09:09:36 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,39 @@ void	cerror(const char *message, const char *el, t_collector *collector)
 void	error(const char *message, const char *el)
 {
 	cerror(message, el, NULL);
+}
+
+float	rad(float deg)
+{
+	return (deg * M_PI / 180);
+}
+
+int	search_color(const char *name, t_map map)
+{
+	t_color	*color;
+
+	color = map.graphic.color;
+	while (color)
+	{
+		if (ft_strncmp(name, color->key, ft_strlen(name)) == 0)
+			return (
+				color->red << 16 | color->blue << 8 | color->green << 4
+			);
+		color = color->next;
+	}
+	return (-1);
+}
+
+t_img	*search_texture(const char *name, t_map map)
+{
+	t_texture	*texture;
+
+	texture = map.graphic.texture;
+	while (texture)
+	{
+		if (ft_strncmp(name, texture->key, ft_strlen(name)) == 0)
+			return (&texture->img);
+		texture = texture->next;
+	}
+	return (NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:14:09 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/22 16:49:39 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/26 11:23:57 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_window
 {
 	void	*mlx;
 	void	*ptr;
+	t_img	img;
 }	t_window;
 
 #endif

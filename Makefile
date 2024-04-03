@@ -55,8 +55,11 @@ define SRC	:=
 	graphic.c
 	loop.c
 	main.c
+	move.c
 	parse_file.c
 	parse_map.c
+	print_image.c
+	raycast.c
 	read_file.c
 	utils.c
 	window.c
