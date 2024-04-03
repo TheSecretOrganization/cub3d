@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 11:22:41 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/03 11:09:27 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:15:27 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define WALL_ERROR "There is a hole in the walls"
 # define NB_ERROR "There must be one key value couple by element"
 # define KEY_ERROR "Element key is invalid: \
-It must be a one to two char long alphabetical string"
+It must be start by one or two alphabetical char"
 # define UNIQUE_KEY_ERROR "Element key is invalid: each key must be unique"
 # define EL_ERROR "Element value is invalid: \
 It must be either a path to <texture.xpm> or a <R,G,B> color"
