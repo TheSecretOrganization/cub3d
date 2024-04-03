@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:15:07 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/03 14:50:55 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/03 14:51:14 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ typedef struct	s_wall_state
 
 typedef struct s_graphic
 {
-	t_color		*color;
-	t_texture	*texture;
+	t_color			*color;
+	t_texture		*texture;
+	t_wall_state	*wall_state;
 }	t_graphic;
 
 #endif
