@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:15:07 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/03 14:51:14 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/03 15:11:36 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 
 # define OPEN 1
 # define CLOSE 0
+
+typedef struct s_vector
+{
+	float	x;
+	float	y;
+}	t_vector;
 
 typedef struct s_color
 {
