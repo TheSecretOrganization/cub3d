@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:03:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/03 11:33:15 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:32:21 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+#define DOOR "D"
 
 static void	create_rectangle(t_list *line, t_map *map, t_collector *collector)
 {
@@ -56,6 +58,17 @@ static int	parse_player(size_t i, size_t j, t_player *p, char *view)
 	return (0);
 }
 
+static void	parse_door(t_data *data, size_t i, size_t j)
+{
+	t_wall_state	*ws;
+
+	ws = ccalloc(1, sizeof(t_wall_state), data->collector);
+	ws->position = (t_vector){j, i};
+	ws->state = CLOSE;
+	ws->next = data->map.graphic.wall_state;
+	data->map.graphic.wall_state = ws;
+}
+
 static void	process_char(t_data *data, char *c, size_t i, size_t j)
 {
 	if (!ft_strchr(VALID_CHAR, *c))
@@ -63,6 +76,8 @@ static void	process_char(t_data *data, char *c, size_t i, size_t j)
 	if (ft_strchr(PLAYER_VIEW, *c)
 		&& parse_player(i, j, &data->player, c))
 		cerror(MULTIPLE_PLAYER, c, data->collector);
+	if (ft_strchr(DOOR, *c))
+		parse_door(data, i, j);
 }
 
 static void	parse_lines(t_data *d, t_list *l)
