@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/03/29 11:26:04 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:09:34 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # include <math.h>
 
 # define STEP 0.2f
+# define VALID_CHAR "10NSEW "
+# define PLAYER_VIEW "NSEW"
 
 typedef struct s_vector
 {
