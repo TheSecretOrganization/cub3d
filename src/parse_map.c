@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:03:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/02 14:39:26 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/03 11:33:15 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static int	parse_player(size_t i, size_t j, t_player *p, char *view)
 {
 	if (p->pos.x != 0 && p->pos.y != 0)
 		return (1);
-	p->pos.x = j;
-	p->pos.y = i;
+	p->pos.x = j + 0.5;
+	p->pos.y = i + 0.5;
 	if (*view == 'N')
 		rotate(M_PI / 2, p);
 	else if (*view == 'S')
