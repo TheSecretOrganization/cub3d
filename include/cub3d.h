@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/04/03 11:09:34 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:43:47 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,7 @@
 # define STEP 0.2f
 # define VALID_CHAR "10NSEW "
 # define PLAYER_VIEW "NSEW"
-
-typedef struct s_vector
-{
-	float	x;
-	float	y;
-}	t_vector;
+# define NB_SPRITE 1
 
 typedef struct s_player
 {
@@ -94,7 +89,8 @@ void		create_window(t_window *window, t_collector *col);
 void		parse_graphic(t_data *data, char *line);
 void		remove_space(char *line);
 size_t		check_commas(const char *value);
-t_texture	*init_text(t_data *data, const char *k, const char *v);
+void		add_text(t_data *data, const char *k, const char *v);
+void		add_sprite(t_data *data, const char *k, const char *v);
 
 t_list		*read_file(const char *file, t_collector *collector);
 void		parse_file(t_data *data, const char *argv);

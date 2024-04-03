@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:47:32 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/27 16:35:59 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:44:52 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,36 +54,4 @@ size_t	check_commas(const char *value)
 		if (value[i] == ',')
 			commas++;
 	return (commas);
-}
-
-static void	destroy_texture(void *text)
-{
-	t_texture	*texture;
-
-	texture = (t_texture *)text;
-	mlx_destroy_image(texture->mlx, texture->img.ptr);
-	free(texture);
-}
-
-t_texture	*init_text(t_data *data, const char *k, const char *v)
-{
-	t_texture	*new;
-
-	new = ft_calloc(1, sizeof(t_texture));
-	if (!new)
-		cerror(MALLOC_ERROR, "init_text", data->collector);
-	new->key = k;
-	new->next = NULL;
-	new->mlx = data->window.mlx;
-	new->img = (t_img){NULL, 0, 0, 0, 0, 0, 0};
-	new->img.ptr = mlx_xpm_file_to_image(new->mlx, (char *)v,
-			&new->img.width, &new->img.height);
-	if (!new->img.ptr)
-		(free(new), cerror(TEXTURE_ERROR, v, data->collector));
-	add_collector(data->collector, new, &destroy_texture);
-	new->img.content = mlx_get_data_addr(new->img.ptr, &new->img.bpp,
-			&new->img.size_line, &new->img.endian);
-	if (!new->img.content)
-		cerror(TEXTURE_ERROR, v, data->collector);
-	return (new);
 }

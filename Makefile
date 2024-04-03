@@ -61,6 +61,8 @@ define SRC	:=
 	print_image.c
 	raycast.c
 	read_file.c
+	sprite.c
+	texture.c
 	utils.c
 	window.c
 endef

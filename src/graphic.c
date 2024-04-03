@@ -6,33 +6,11 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:35:32 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/22 16:56:30 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:00:53 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	add_text(t_data *data, const char *k, const char *v)
-{
-	t_texture	*new;
-	t_texture	*last;
-	int			fd;
-
-	fd = open(v, O_RDONLY);
-	if (fd == -1)
-		cerror(TEXTURE_ERROR, v, data->collector);
-	close(fd);
-	new = init_text(data, k, v);
-	if (!data->map.graphic.texture)
-		data->map.graphic.texture = new;
-	else
-	{
-		last = data->map.graphic.texture;
-		while (last->next)
-			last = last->next;
-		last->next = new;
-	}
-}
 
 static void	split_atoi(char **s, t_color *new, t_collector *col, const char *v)
 {
@@ -89,26 +67,40 @@ static void	add_color(t_data *data, const char *k, const char *v)
 	}
 }
 
-static void	dispatch(t_data *data, const char *k, const char *v)
+static void	check_keys(t_data *data, const char *k)
 {
-	size_t		len;
 	t_graphic	cpy;
 
+	cpy = (t_graphic){data->map.graphic.color, data->map.graphic.texture,
+		data->map.graphic.sprite};
 	if (k[1] && !ft_isalpha(k[1]))
 		cerror(KEY_ERROR, k, data->collector);
-	cpy = (t_graphic){data->map.graphic.color, data->map.graphic.texture};
-	while (cpy.color || cpy.texture)
+	while (cpy.color || cpy.texture
+		|| cpy.sprite)
 	{
 		if ((cpy.color && !ft_strncmp(cpy.color->key, k, ft_strlen(k)))
-			|| (cpy.texture && !ft_strncmp(cpy.texture->key, k, ft_strlen(k))))
+			|| (cpy.texture && !ft_strncmp(cpy.texture->key, k, ft_strlen(k)))
+			|| (cpy.sprite && !ft_strncmp(cpy.sprite->key, k, ft_strlen(k))))
 			cerror(UNIQUE_KEY_ERROR, k, data->collector);
 		if (cpy.color)
 			cpy.color = cpy.color->next;
 		if (cpy.texture)
 			cpy.texture = cpy.texture->next;
+		if (cpy.sprite)
+			cpy.sprite = cpy.sprite->next;
 	}
+}
+
+static void	dispatch(t_data *data, const char *k, const char *v)
+{
+	size_t		len;
+
+	check_keys(data, k);
 	len = ft_strlen(v);
 	if (len >= 4 && v[len - 4] == '.' && v[len - 3] == 'x' && v[len - 2] == 'p'
+		&& v[len - 1] == 'm' && k[0] == 'S' && k[1] == 'P' && k[2] == '_')
+		add_sprite(data, k, v);
+	else if (len >= 4 && v[len - 4] == '.' && v[len - 3] == 'x' && v[len - 2] == 'p'
 		&& v[len - 1] == 'm')
 		add_text(data, k, v);
 	else
