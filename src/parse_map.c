@@ -56,6 +56,15 @@ static int	parse_player(size_t i, size_t j, t_player *p, char *view)
 	return (0);
 }
 
+static void	process_char(t_data *data, char *c, size_t i, size_t j)
+{
+	if (!ft_strchr(VALID_CHAR, *c))
+		cerror(CHAR_ERROR, c, data->collector);
+	if (ft_strchr(PLAYER_VIEW, *c)
+		&& parse_player(i, j, &data->player, c))
+		cerror(MULTIPLE_PLAYER, c, data->collector);
+}
+
 static void	parse_lines(t_data *d, t_list *l)
 {
 	size_t	i;
@@ -67,13 +76,7 @@ static void	parse_lines(t_data *d, t_list *l)
 	{
 		j = -1;
 		while (((char *)l->content)[++j])
-		{
-			if (!ft_strchr(VALID_CHAR, ((char *)l->content)[j]))
-				cerror(CHAR_ERROR, &(((char *)l->content)[j]), d->collector);
-			if (ft_strchr(PLAYER_VIEW, ((char *)l->content)[j])
-				&& parse_player(i, j, &d->player, &((char *)l->content)[j]))
-				cerror(MULTIPLE_PLAYER, (char *)l->content, d->collector);
-		}
+			process_char(d, &((char *)l->content)[j], i, j);
 		len = ft_strlen(l->content);
 		if (len > d->map.width)
 			d->map.width = len;
