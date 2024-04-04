@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:24:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/02 14:27:11 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/04 18:05:37 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	init_img_line(t_data *data, int i, t_hit *hit)
 	dir = (t_vector){data->player.direction.x + data->player.plane.x
 		* (2.0f * i / WIDTH - 1), data->player.direction.y
 		+ data->player.plane.y * (2.0f * i / WIDTH - 1)};
-	raycast(data->player.pos, dir, data->map, hit);
+	raycast((t_vector [2]){data->player.pos, dir}, data->map, hit);
 	line_height = (int)(HEIGHT / hit->distance);
 	start = -line_height / 2 + HEIGHT / 2;
 	if (start < 0)
