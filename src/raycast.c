@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:29:25 by averin            #+#    #+#             */
-/*   Updated: 2024/04/04 18:24:22 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/04 18:53:42 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ static int	check_collision(t_map map, int x, int y, t_hit *hit, int option)
 	if (c == '\0' || c == '0')
 		return (0);
 	hit->type = c;
+	hit->position.x = x;
+	hit->position.y = y;
 	return (1);
 }
 

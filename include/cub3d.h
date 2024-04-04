@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/04/04 18:22:52 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/04 18:39:11 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef enum e_dir
 typedef struct s_hit
 {
 	float		distance;
+	t_vector	position;
 	t_dir		face;
 	char		type;
 }	t_hit;
