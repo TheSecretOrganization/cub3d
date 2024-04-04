@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:15:07 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/03 15:48:46 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/04 18:09:08 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,18 @@ typedef struct s_texture
 	struct s_texture	*next;
 }	t_texture;
 
-typedef struct s_wall_state
+typedef struct s_ws
 {
-	t_vector			position;
-	int					state;
-	struct s_wall_state	*next;
-}	t_wall_state;
+	t_vector	position;
+	int			state;
+	struct s_ws	*next;
+}	t_ws;
 
 typedef struct s_graphic
 {
 	t_color			*color;
 	t_texture		*texture;
-	t_wall_state	*wall_state;
+	t_ws	*wall_state;
 }	t_graphic;
 
 #endif

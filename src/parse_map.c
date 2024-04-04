@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:03:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/03 15:32:21 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/04 18:08:54 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ static int	parse_player(size_t i, size_t j, t_player *p, char *view)
 
 static void	parse_door(t_data *data, size_t i, size_t j)
 {
-	t_wall_state	*ws;
+	t_ws	*ws;
 
-	ws = ccalloc(1, sizeof(t_wall_state), data->collector);
+	ws = ccalloc(1, sizeof(t_ws), data->collector);
 	ws->position = (t_vector){j, i};
 	ws->state = CLOSE;
 	ws->next = data->map.graphic.wall_state;
