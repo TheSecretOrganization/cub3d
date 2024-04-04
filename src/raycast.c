@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:29:25 by averin            #+#    #+#             */
-/*   Updated: 2024/04/04 18:06:47 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/04 18:24:22 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	conclude_raycast(int face, t_hit *hit, const t_vector *tools)
 		hit->face = WE;
 }
 
-static int	check_collision(t_map map, int x, int y, t_hit *hit)
+static int	check_collision(t_map map, int x, int y, t_hit *hit, int option)
 {
 	char	c;
 
@@ -72,7 +72,7 @@ static int	check_collision(t_map map, int x, int y, t_hit *hit)
 /*
  * view { position, direction }
 */
-void	raycast(t_vector *view, t_map map, t_hit *hit)
+void	raycast(t_vector *view, t_map map, t_hit *hit, int option)
 {
 	int			face;
 	t_vector	step;
@@ -95,7 +95,7 @@ void	raycast(t_vector *view, t_map map, t_hit *hit)
 			view[0].y += step.y;
 			face = 1;
 		}
-		if (check_collision(map, view[0].x, view[0].y, hit))
+		if (check_collision(map, view[0].x, view[0].y, hit, option))
 			break ;
 	}
 	conclude_raycast(face, hit, (t_vector[3]){side, delta, view[1]});

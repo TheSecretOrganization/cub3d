@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/04/04 18:09:16 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/04 18:22:52 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void		forward(float step, t_player *player, t_map map);
 void		side(int is_left, t_player *player, t_map map);
 void		rotate(float v, t_player *player);
 
-void		raycast(t_vector *view, t_map map, t_hit *hit);
+void		raycast(t_vector *view, t_map map, t_hit *hit, int option);
 
 t_ws		*get_wall_state(int x, int y, t_map map);
 int			is_door_open(int x, int y, t_map map);
