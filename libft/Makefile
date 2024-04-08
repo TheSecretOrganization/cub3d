@@ -48,6 +48,7 @@ define SRC	:=
 	print_str.c \
 	print_unsigned_int.c)
 	ft_abs.c
+	ft_atof.c
 	ft_atoi.c
 	ft_atol.c
 	ft_bzero.c
