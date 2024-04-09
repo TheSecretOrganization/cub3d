@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:15:07 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/04 18:09:08 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/09 16:55:03 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ typedef struct s_ws
 
 typedef struct s_graphic
 {
-	t_color			*color;
-	t_texture		*texture;
-	t_ws	*wall_state;
+	t_color		*color;
+	t_texture	*texture;
+	t_ws		*wall_state;
 }	t_graphic;
 
 #endif
