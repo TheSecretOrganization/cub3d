@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:29:25 by averin            #+#    #+#             */
-/*   Updated: 2024/04/09 16:54:18 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/09 17:01:37 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	conclude_raycast(int face, t_hit *hit, const t_vector *tools)
 		hit->face = WE;
 }
 
-static int	check_collision(t_map map, int *pos, t_hit *hit, int option)
+static int	check_collision(t_map map, const int *pos, t_hit *hit, int option)
 {
 	char	c;
 
