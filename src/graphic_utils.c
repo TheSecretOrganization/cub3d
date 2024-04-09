@@ -6,42 +6,11 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:47:32 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/03 14:44:52 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:10:07 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	move_space(char *line)
-{
-	size_t		len;
-	size_t		i;
-
-	len = ft_strlen(line);
-	i = -1;
-	while (++i < len)
-	{
-		if (line[i] == ' ')
-		{
-			ft_memcpy(&(line[i]), &(line[i + 1]), len - i);
-			len--;
-			i--;
-		}
-	}
-}
-
-void	remove_space(char *line)
-{
-	size_t	i;
-
-	i = 0;
-	while (line[i] && line[i] != ' ')
-		i++;
-	if (!line[i])
-		return ;
-	i++;
-	move_space(line + i);
-}
 
 size_t	check_commas(const char *value)
 {
@@ -54,4 +23,14 @@ size_t	check_commas(const char *value)
 		if (value[i] == ',')
 			commas++;
 	return (commas);
+}
+
+void	replace_char(char *s, char target, char replace)
+{
+	size_t	i;
+
+	i = -1;
+	while (s[++i])
+		if (s[i] == target)
+			s[i] = replace;
 }

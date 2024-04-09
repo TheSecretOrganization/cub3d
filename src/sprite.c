@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 13:42:04 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/03 14:21:47 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:20:35 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,23 @@ static t_sprite	*init_sprite(t_data *data, const char *k, const char *v)
 	return (new);
 }
 
-void	add_sprite(t_data *data, const char *k, const char *v)
+void	add_sprite(t_data *data, const char **kvsp)
 {
 	t_sprite	*new;
 	t_sprite	*last;
 	int			fd;
 
-	fd = open(v, O_RDONLY);
+	fd = open(kvsp[1], O_RDONLY);
 	if (fd == -1)
-		cerror(TEXTURE_ERROR, v, data->collector);
+		cerror(TEXTURE_ERROR, kvsp[1], data->collector);
 	close(fd);
-	new = init_sprite(data, k, v);
+	new = init_sprite(data, kvsp[0], kvsp[1]);
+	new->pos = (t_vector){ft_atof(kvsp[2]), ft_atof(kvsp[3])};
+	if (new->pos.x <= 0 || (int)new->pos.x >= WIDTH - 1
+		|| new->pos.y <= 0 || (int)new->pos.y >= HEIGHT - 1)
+		cerror(SPRITE_POS_ERROR_1, kvsp[0], data->collector);
+	if (check_sprite_pos(data->map.graphic.sprite, new->pos))
+		cerror(SPRITE_POS_ERROR_2, kvsp[0], data->collector);
 	if (!data->map.graphic.sprite)
 		data->map.graphic.sprite = new;
 	else
@@ -65,4 +71,29 @@ void	add_sprite(t_data *data, const char *k, const char *v)
 			last = last->next;
 		last->next = new;
 	}
+}
+
+void	check_sprite_free_space(t_data *data)
+{
+	t_sprite	*s;
+
+	s = data->map.graphic.sprite;
+	while (s)
+	{
+		if (data->map.content[(int)s->pos.y][(int)s->pos.x] != '0')
+			cerror(SPRITE_POS_ERROR_2, s->key, data->collector);
+		s = s->next;
+	}
+}
+
+t_sprite	*check_sprite_pos(t_sprite *sprite, t_vector pos)
+{
+	while (sprite)
+	{
+		if ((int)sprite->pos.x == (int)pos.x
+			&& (int)sprite->pos.y == (int)pos.y)
+			return (sprite);
+		sprite = sprite->next;
+	}
+	return (NULL);
 }

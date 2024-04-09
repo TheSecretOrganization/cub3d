@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:35:32 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/03 15:00:53 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/08 18:34:34 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,45 +91,45 @@ static void	check_keys(t_data *data, const char *k)
 	}
 }
 
-static void	dispatch(t_data *data, const char *k, const char *v)
+static void	dispatch(t_data *data, const char **kvsp)
 {
-	size_t		len;
+	size_t		l;
 
-	check_keys(data, k);
-	len = ft_strlen(v);
-	if (len >= 4 && v[len - 4] == '.' && v[len - 3] == 'x' && v[len - 2] == 'p'
-		&& v[len - 1] == 'm' && k[0] == 'S' && k[1] == 'P' && k[2] == '_')
-		add_sprite(data, k, v);
-	else if (len >= 4 && v[len - 4] == '.' && v[len - 3] == 'x' && v[len - 2] == 'p'
-		&& v[len - 1] == 'm')
-		add_text(data, k, v);
+	(check_keys(data, kvsp[0]), l = ft_strlen(kvsp[1]));
+	if (kvsp[2] && l >= 4 && kvsp[1][l - 4] == '.' && kvsp[1][l - 3] == 'x'
+		&& kvsp[1][l - 2] == 'p' && kvsp[1][l - 1] == 'm')
+		add_sprite(data, kvsp);
+	else if (kvsp[2])
+		cerror(NB_ERROR, kvsp[0], data->collector);
+	else if (l >= 4 && kvsp[1][l - 4] == '.' && kvsp[1][l - 3] == 'x'
+		&& kvsp[1][l - 2] == 'p' && kvsp[1][l - 1] == 'm')
+		add_text(data, kvsp[0], kvsp[1]);
 	else
-		add_color(data, k, v);
+		add_color(data, kvsp[0], kvsp[1]);
 }
 
 void	parse_graphic(t_data *data, char *line)
 {
 	size_t		i;
 	char		**split;
-	const char	*key;
-	const char	*value;
+	const char	*kvsp[4];
 
-	i = -1;
-	while (line[++i])
-		if (line[i] == '\t')
-			line[i] = ' ';
-	if (!ft_strnstr(line, ".xpm", ft_strlen(line)))
-		remove_space(line);
+	(replace_char(line, '\t', ' '), i = -1);
 	split = ft_split(line, ' ');
 	if (!split)
 		cerror(MALLOC_ERROR, "parse_graphic", data->collector);
-	i = -1;
 	while (split[++i])
 		;
-	if (i != 2)
+	if (i != 2 && i != 4)
 		(ft_fsplit(split), cerror(NB_ERROR, line, data->collector));
-	(add_collector(data->collector, split[0], &free), key = split[0]);
-	(add_collector(data->collector, split[1], &free), value = split[1]);
-	(free(split[2]), free(split));
-	dispatch(data, key, value);
+	(add_collector(data->collector, split[0], &free), kvsp[0] = split[0]);
+	(add_collector(data->collector, split[1], &free), kvsp[1] = split[1]);
+	if (i == 4)
+	{
+		(add_collector(data->collector, split[2], &free), kvsp[2] = split[2]);
+		(add_collector(data->collector, split[3], &free), kvsp[3] = split[3]);
+	}
+	else
+		kvsp[2] = NULL;
+	(free(split[i]), free(split), dispatch(data, kvsp));
 }

@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/04/03 14:43:47 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:18:17 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,12 @@ void		*ccalloc(size_t nmemb, size_t size, t_collector *col);
 void		create_window(t_window *window, t_collector *col);
 
 void		parse_graphic(t_data *data, char *line);
-void		remove_space(char *line);
 size_t		check_commas(const char *value);
+void		replace_char(char *s, char target, char replace);
 void		add_text(t_data *data, const char *k, const char *v);
-void		add_sprite(t_data *data, const char *k, const char *v);
+void		add_sprite(t_data *data, const char **kvsp);
+void		check_sprite_free_space(t_data *data);
+t_sprite	*check_sprite_pos(t_sprite *sprite, t_vector pos);
 
 t_list		*read_file(const char *file, t_collector *collector);
 void		parse_file(t_data *data, const char *argv);
