@@ -83,7 +83,7 @@ static void	init_img_line(t_data *data, int i, t_hit *hit)
 		start = 0;
 	end = line_height / 2 + HEIGHT / 2;
 	if (end >= HEIGHT)
-		end = HEIGHT - 1;
+		end = HEIGHT;
 	print_img_line(data, *hit, dir, (int [4]){start, end, line_height, i});
 }
 
