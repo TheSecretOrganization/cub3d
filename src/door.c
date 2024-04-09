@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 15:41:32 by averin            #+#    #+#             */
-/*   Updated: 2024/04/09 11:31:43 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/09 17:00:02 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_ws	*get_wall_state(int x, int y, t_map map)
 
 int	is_door_open(int x, int y, t_map map)
 {
-	t_ws	*ws;
+	const t_ws	*ws;
 
 	ws = get_wall_state(x, y, map);
 	if (!ws)
