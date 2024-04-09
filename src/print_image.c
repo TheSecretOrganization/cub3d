@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_image.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:24:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/03 15:24:48 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/09 18:32:58 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_img	*finf_face_texture(t_dir face, t_map map)
 		return (NULL);
 }
 
-static int	get_pixel(t_img *tex, int x, int y)
+int	get_pixel(t_img *tex, int x, int y)
 {
 	return (*(int *)(tex->content + (y * tex->size_line + x * (tex->bpp / 8))));
 }
@@ -85,14 +85,14 @@ static void	init_img_line(t_data *data, int i, t_hit *hit)
 	print_img_line(data, *hit, dir, (int [4]){start, end, line_height, i});
 }
 
-void	print_image(t_data *data)
+void	print_image(t_data *d)
 {
 	int		i;
 	int		y;
 	t_hit	hit;
 
-	ft_bzero(data->window.img.content, HEIGHT * data->window.img.size_line
-		+ WIDTH * (data->window.img.bpp / 8));
+	ft_bzero(d->window.img.content, HEIGHT * d->window.img.size_line
+		+ WIDTH * (d->window.img.bpp / 8));
 	i = -1;
 	while (++i <= WIDTH)
 	{
@@ -100,16 +100,15 @@ void	print_image(t_data *data)
 		while (++y <= HEIGHT)
 		{
 			if (y < HEIGHT / 2)
-				img_pixel_put(&data->window.img, i, y,
-					search_color("C", data->map));
+				img_pixel_put(&d->window.img, i, y, search_color("C", d->map));
 			else
-				img_pixel_put(&data->window.img, i, y,
-					search_color("F", data->map));
+				img_pixel_put(&d->window.img, i, y, search_color("F", d->map));
 		}
 	}
 	i = -1;
 	while (++i <= WIDTH)
-		init_img_line(data, i, &hit);
-	mlx_put_image_to_window(data->window.mlx, data->window.ptr,
-		data->window.img.ptr, 0, 0);
+		(init_img_line(d, i, &hit), d->map.graphic.zbuffer[i] = hit.distance);
+	put_sprites_to_image(d);
+	mlx_put_image_to_window(d->window.mlx, d->window.ptr,
+		d->window.img.ptr, 0, 0);
 }

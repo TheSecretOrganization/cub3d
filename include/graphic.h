@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:15:07 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/09 11:23:05 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/09 16:26:44 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_sprite
 {
 	const char		*key;
 	t_vector		pos;
+	float			distance;
 	t_img			img;
 	void			*mlx;
 	struct s_sprite	*next;
@@ -52,6 +53,7 @@ typedef struct s_graphic
 	t_color		*color;
 	t_texture	*texture;
 	t_sprite	*sprite;
+	float		zbuffer[WIDTH];
 }	t_graphic;
 
 #endif

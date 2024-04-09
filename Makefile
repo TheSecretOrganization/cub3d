@@ -59,8 +59,10 @@ define SRC	:=
 	parse_file.c
 	parse_map.c
 	print_image.c
+	print_sprites.c
 	raycast.c
 	read_file.c
+	sort_sprites.c
 	sprite.c
 	texture.c
 	utils.c

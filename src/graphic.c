@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:35:32 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/08 18:34:34 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:48:09 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	check_keys(t_data *data, const char *k)
 	t_graphic	cpy;
 
 	cpy = (t_graphic){data->map.graphic.color, data->map.graphic.texture,
-		data->map.graphic.sprite};
+		data->map.graphic.sprite, {0}};
 	if (k[1] && !ft_isalpha(k[1]))
 		cerror(KEY_ERROR, k, data->collector);
 	while (cpy.color || cpy.texture

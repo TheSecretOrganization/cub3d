@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/04/03 14:50:21 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:48:20 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char const *argv[])
 	data.window = (t_window){NULL, NULL,
 	{NULL, NULL, 0, 0, 0, 0, 0}};
 	data.player = (t_player){{0, 0}, {0, 0.66f}, {-1, 0}};
-	data.map = (t_map){0, {NULL, NULL, NULL}, 0, 0};
+	data.map = (t_map){0, {NULL, NULL, NULL, {0}}, 0, 0};
 	data.collector = init_collector();
 	create_window(&data.window, data.collector);
 	parse_file(&data, argv[1]);
