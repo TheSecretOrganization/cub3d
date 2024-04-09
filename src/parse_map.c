@@ -6,13 +6,11 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:03:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/09 16:56:37 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/09 17:48:33 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-#define DOOR "D"
 
 static int	parse_player(size_t i, size_t j, t_player *p, char *view)
 {
@@ -48,7 +46,7 @@ static void	process_char(t_data *data, char *c, size_t i, size_t j)
 	if (ft_strchr(PLAYER_VIEW, *c)
 		&& parse_player(i, j, &data->player, c))
 		cerror(MULTIPLE_PLAYER, c, data->collector);
-	if (ft_strchr(DOOR, *c))
+	if (ft_strchr("D", *c))
 		parse_door(data, i, j);
 }
 
