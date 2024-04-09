@@ -3,42 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:03:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/03 11:33:15 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:48:33 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	create_rectangle(t_list *line, t_map *map, t_collector *collector)
-{
-	char	*tmp;
-	size_t	i;
-	size_t	len;
-
-	i = 0;
-	map->content = ccalloc(map->heigh + 1, sizeof(char *), collector);
-	while (line)
-	{
-		len = ft_strlen((char *)line->content);
-		if (len < map->width)
-		{
-			tmp = ft_calloc(map->width + 1, sizeof(char));
-			if (!tmp)
-				cerror(MALLOC_ERROR, "create_rectangle", collector);
-			ft_memcpy(tmp, (char *)line->content, len);
-			(free(line->content), line->content = tmp);
-		}
-		len = -1;
-		while (((char *)line->content)[++len])
-			if (((char *)line->content)[len] == ' ')
-				((char *)line->content)[len] = '\0';
-		map->content[i++] = line->content;
-		line = line->next;
-	}
-}
 
 static int	parse_player(size_t i, size_t j, t_player *p, char *view)
 {
@@ -56,6 +28,28 @@ static int	parse_player(size_t i, size_t j, t_player *p, char *view)
 	return (0);
 }
 
+static void	parse_door(t_data *data, size_t i, size_t j)
+{
+	t_ws	*ws;
+
+	ws = ccalloc(1, sizeof(t_ws), data->collector);
+	ws->position = (t_vector){j, i};
+	ws->state = CLOSE;
+	ws->next = data->map.graphic.wall_state;
+	data->map.graphic.wall_state = ws;
+}
+
+static void	process_char(t_data *data, char *c, size_t i, size_t j)
+{
+	if (!ft_strchr(VALID_CHAR, *c))
+		cerror(CHAR_ERROR, c, data->collector);
+	if (ft_strchr(PLAYER_VIEW, *c)
+		&& parse_player(i, j, &data->player, c))
+		cerror(MULTIPLE_PLAYER, c, data->collector);
+	if (ft_strchr("D", *c))
+		parse_door(data, i, j);
+}
+
 static void	parse_lines(t_data *d, t_list *l)
 {
 	size_t	i;
@@ -67,13 +61,7 @@ static void	parse_lines(t_data *d, t_list *l)
 	{
 		j = -1;
 		while (((char *)l->content)[++j])
-		{
-			if (!ft_strchr(VALID_CHAR, ((char *)l->content)[j]))
-				cerror(CHAR_ERROR, &(((char *)l->content)[j]), d->collector);
-			if (ft_strchr(PLAYER_VIEW, ((char *)l->content)[j])
-				&& parse_player(i, j, &d->player, &((char *)l->content)[j]))
-				cerror(MULTIPLE_PLAYER, (char *)l->content, d->collector);
-		}
+			process_char(d, &((char *)l->content)[j], i, j);
 		len = ft_strlen(l->content);
 		if (len > d->map.width)
 			d->map.width = len;

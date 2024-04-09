@@ -6,15 +6,17 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:24:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/03 15:24:48 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/04 18:23:45 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static t_img	*finf_face_texture(t_dir face, t_map map)
+static t_img	*finf_face_texture(t_dir face, t_map map, t_hit hit)
 {
-	if (face == NO)
+	if (hit.type == 'D')
+		return (search_texture("D", map));
+	else if (face == NO)
 		return (search_texture("NO", map));
 	else if (face == SO)
 		return (search_texture("SO", map));
@@ -52,7 +54,7 @@ static void	print_img_line(t_data *data, t_hit hit, t_vector dir, int *tools)
 	else
 		wall_x = data->player.pos.x + hit.distance * dir.x;
 	wall_x -= floor(wall_x);
-	tex = finf_face_texture(hit.face, data->map);
+	tex = finf_face_texture(hit.face, data->map, hit);
 	tex_x = wall_x * (double) tex->width;
 	step = 1.0f * tex->width / tools[2];
 	tex_pos = (tools[0] - HEIGHT / 2 + tools[2] / 2) * step;
@@ -74,7 +76,7 @@ static void	init_img_line(t_data *data, int i, t_hit *hit)
 	dir = (t_vector){data->player.direction.x + data->player.plane.x
 		* (2.0f * i / WIDTH - 1), data->player.direction.y
 		+ data->player.plane.y * (2.0f * i / WIDTH - 1)};
-	raycast(data->player.pos, dir, data->map, hit);
+	raycast((t_vector [2]){data->player.pos, dir}, data->map, hit, 0);
 	line_height = (int)(HEIGHT / hit->distance);
 	start = -line_height / 2 + HEIGHT / 2;
 	if (start < 0)

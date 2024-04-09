@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:35:32 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/22 16:56:30 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:12:20 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ static void	dispatch(t_data *data, const char *k, const char *v)
 
 	if (k[1] && !ft_isalpha(k[1]))
 		cerror(KEY_ERROR, k, data->collector);
-	cpy = (t_graphic){data->map.graphic.color, data->map.graphic.texture};
+	cpy = (t_graphic){data->map.graphic.color, data->map.graphic.texture,
+		data->map.graphic.wall_state};
 	while (cpy.color || cpy.texture)
 	{
 		if ((cpy.color && !ft_strncmp(cpy.color->key, k, ft_strlen(k)))
