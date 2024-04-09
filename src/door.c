@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 15:41:32 by averin            #+#    #+#             */
-/*   Updated: 2024/04/04 18:54:01 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/09 11:31:43 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,17 @@ int	is_door_open(int x, int y, t_map map)
 	if (!ws)
 		return (0);
 	return (ws->state == OPEN);
+}
+
+void	close_door(t_player player, t_map map)
+{
+	t_hit	hit;
+	t_ws	*ws;
+
+	raycast((t_vector [2]){player.pos, player.direction}, map, &hit, R_DOOR);
+	if (hit.type == 'D' && hit.distance <= 1)
+	{
+		ws = get_wall_state(hit.position.x, hit.position.y, map);
+		ws->state = !ws->state;
+	}
 }

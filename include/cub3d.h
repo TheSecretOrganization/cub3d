@@ -109,6 +109,7 @@ void		raycast(t_vector *view, t_map map, t_hit *hit, int option);
 
 t_ws		*get_wall_state(int x, int y, t_map map);
 int			is_door_open(int x, int y, t_map map);
+void		close_door(t_player player, t_map map);
 
 void		print_image(t_data *data);
 
