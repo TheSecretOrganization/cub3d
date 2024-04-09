@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:29:25 by averin            #+#    #+#             */
-/*   Updated: 2024/04/09 11:31:18 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/09 16:54:18 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,17 @@ static void	conclude_raycast(int face, t_hit *hit, const t_vector *tools)
 		hit->face = WE;
 }
 
-static int	check_collision(t_map map, int x, int y, t_hit *hit, int option)
+static int	check_collision(t_map map, int *pos, t_hit *hit, int option)
 {
 	char	c;
 
-	c = map.content[y][x];
+	c = map.content[pos[1]][pos[0]];
 	if (c == '\0' || c == '0')
 		return (0);
 	hit->type = c;
-	hit->position.x = x;
-	hit->position.y = y;
-	if (c == 'D' && (option & R_DOOR || !is_door_open(x, y, map)))
+	hit->position.x = pos[0];
+	hit->position.y = pos[1];
+	if (c == 'D' && (option & R_DOOR || !is_door_open(pos[0], pos[1], map)))
 		return (1);
 	return (c == '1');
 }
@@ -99,7 +99,7 @@ void	raycast(t_vector *view, t_map map, t_hit *hit, int option)
 			view[0].y += step.y;
 			face = 1;
 		}
-		if (check_collision(map, view[0].x, view[0].y, hit, option))
+		if (check_collision(map, (int [2]){view[0].x, view[0].y}, hit, option))
 			break ;
 	}
 	conclude_raycast(face, hit, (t_vector[3]){side, delta, view[1]});
