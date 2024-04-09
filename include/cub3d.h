@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/04/04 18:39:11 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/09 16:57:06 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,7 @@ int			is_door_open(int x, int y, t_map map);
 void		close_door(t_player player, t_map map);
 
 void		print_image(t_data *data);
+
+void		create_rectangle(t_list *line, t_map *map, t_collector *collector);
 
 #endif

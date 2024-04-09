@@ -59,6 +59,7 @@ define SRC	:=
 	move.c
 	parse_file.c
 	parse_map.c
+	parse_map_utils.c
 	print_image.c
 	raycast.c
 	read_file.c
