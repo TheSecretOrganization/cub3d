@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/04/09 18:33:36 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:54:29 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@
 # include <math.h>
 
 # define STEP 0.2f
-# define VALID_CHAR "10NSEW "
+# define VALID_CHAR "10NSEWD "
 # define PLAYER_VIEW "NSEW"
-# define NB_SPRITE 1
+# define R_DOOR 1
 
 typedef struct s_player
 {
@@ -67,7 +67,9 @@ typedef enum e_dir
 typedef struct s_hit
 {
 	float		distance;
+	t_vector	position;
 	t_dir		face;
+	char		type;
 }	t_hit;
 
 void		init_hook(t_data *data);
@@ -109,9 +111,14 @@ void		forward(float step, t_player *player, t_map map);
 void		side(int is_left, t_player *player, t_map map);
 void		rotate(float v, t_player *player);
 
-void		raycast(t_vector position, t_vector direction, t_map map,
-				t_hit *hit);
+void		raycast(t_vector *view, t_map map, t_hit *hit, int option);
+
+t_ws		*get_wall_state(int x, int y, t_map map);
+int			is_door_open(int x, int y, t_map map);
+void		close_door(t_player player, t_map map);
 
 void		print_image(t_data *data);
+
+void		create_rectangle(t_list *line, t_map *map, t_collector *collector);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:15:07 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/09 16:26:44 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:56:01 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define GRAPHIC_H
 
 # include "window.h"
+
+# define OPEN 1
+# define CLOSE 0
 
 typedef struct s_vector
 {
@@ -38,6 +41,13 @@ typedef struct s_texture
 	struct s_texture	*next;
 }	t_texture;
 
+typedef struct s_ws
+{
+	t_vector	position;
+	int			state;
+	struct s_ws	*next;
+}	t_ws;
+
 typedef struct s_sprite
 {
 	const char		*key;
@@ -52,6 +62,7 @@ typedef struct s_graphic
 {
 	t_color		*color;
 	t_texture	*texture;
+	t_ws		*wall_state;
 	t_sprite	*sprite;
 	float		zbuffer[WIDTH];
 }	t_graphic;
