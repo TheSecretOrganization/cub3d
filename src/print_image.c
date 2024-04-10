@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:24:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/04 18:23:45 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/10 10:57:28 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	print_img_line(t_data *data, t_hit hit, t_vector dir, int *tools)
 	double	tex_pos;
 	t_img	*tex;
 
-	if (hit.face == NO || hit.face == SO)
+	if (hit.face == EA || hit.face == WE)
 		wall_x = data->player.pos.y + hit.distance * dir.y;
 	else
 		wall_x = data->player.pos.x + hit.distance * dir.x;
@@ -84,7 +84,8 @@ static void	init_img_line(t_data *data, int i, t_hit *hit)
 	end = line_height / 2 + HEIGHT / 2;
 	if (end >= HEIGHT)
 		end = HEIGHT;
-	print_img_line(data, *hit, dir, (int [4]){start, end, line_height, i});
+	print_img_line(data, *hit, dir,
+		(int [4]){start, end, line_height, WIDTH - i});
 }
 
 void	print_image(t_data *data)
