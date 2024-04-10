@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 16:12:40 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/10 12:24:09 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:44:59 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ static void	do_s_cast(t_data *d, t_sprite *s, t_vector tr, int screen_x)
 						(((tools[1] * 256 - HEIGHT * 128 + sprt_dim * 128)
 								* s->img.height) / sprt_dim) / 256);
 				if ((tools[3] & 0x00FFFFFF) != 0)
-					img_pixel_put(&d->window.img, tools[0], tools[1], tools[3]);
+					img_pixel_put(&d->window.img,
+						WIDTH - tools[0], tools[1], tools[3]);
 			}
 		}
 	}

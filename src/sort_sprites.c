@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:06:53 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/09 18:51:11 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:44:06 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_sprite	*sorted_merge(t_sprite *a, t_sprite *b)
 		return (b);
 	else if (b == NULL)
 		return (a);
-	if (a->distance <= b->distance)
+	if (a->distance >= b->distance)
 	{
 		result = a;
 		result->next = sorted_merge(a->next, b);
