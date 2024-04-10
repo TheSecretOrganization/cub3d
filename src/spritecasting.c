@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 16:12:40 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/10 19:00:03 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/10 19:04:10 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static void	do_s_cast(t_data *d, t_sprite *s, t_vector tr, int screen_x)
 
 void	spritecasting(t_data *d)
 {
-	t_player	*p;
+	const t_player	*p;
 	t_sprite	*s;
 	t_vector	tr;
 	int			screen_x;
