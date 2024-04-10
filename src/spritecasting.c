@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_sprites.c                                    :+:      :+:    :+:   */
+/*   spritecasting.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 16:12:40 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/10 16:44:59 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/10 19:00:03 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	init_s_cast(t_player *p, t_sprite *s, t_vector *tr)
+static int	init_s_cast(const t_player *p, const t_sprite *s, t_vector *tr)
 {
 	t_vector	sprt;
 	float		inv_det;
@@ -41,6 +41,12 @@ static void	init_draw(int *draw, int sprt_dim, int screen_x)
 		draw[1] = WIDTH - 1;
 }
 
+static void	conclude_s_cast(t_img *img, int x, int y, int color)
+{
+	if ((color & 0x00FFFFFF) != 0)
+		img_pixel_put(img, x, y, color);
+}
+
 /*
 	draw[0] = draw_x_start,
 	draw[1] = draw_x_end,
@@ -49,33 +55,28 @@ static void	init_draw(int *draw, int sprt_dim, int screen_x)
 	tools[0] = x,
 	tools[1] = y,
 	tools[2] = texX,
-	tools[3] = color
 */
 static void	do_s_cast(t_data *d, t_sprite *s, t_vector tr, int screen_x)
 {
 	int			draw[4];
 	int			sprt_dim;
-	int			tools[4];
+	int			tools[3];
 
 	sprt_dim = abs((int)(HEIGHT / (tr.y)));
 	(init_draw(draw, sprt_dim, screen_x), tools[0] = draw[0] - 1);
 	while (++tools[0] < draw[1])
 	{
-		tools[2] = (int)(256 * (tools[0] - (-sprt_dim / 2 + screen_x))
+		tools[2] = (256 * (tools[0] - (-sprt_dim / 2 + screen_x))
 				* s->img.width / sprt_dim) / 256;
 		if (tr.y > 0 && tools[0] > 0 && tools[0] < WIDTH
 			&& tr.y < d->map.graphic.zbuffer[tools[0]])
 		{
 			tools[1] = draw[2] - 1;
 			while (++tools[1] < draw[3])
-			{
-				tools[3] = get_pixel(&s->img, tools[2],
+				conclude_s_cast(&d->window.img, WIDTH - tools[0], tools[1],
+					get_pixel(&s->img, tools[2],
 						(((tools[1] * 256 - HEIGHT * 128 + sprt_dim * 128)
-								* s->img.height) / sprt_dim) / 256);
-				if ((tools[3] & 0x00FFFFFF) != 0)
-					img_pixel_put(&d->window.img,
-						WIDTH - tools[0], tools[1], tools[3]);
-			}
+								* s->img.height) / sprt_dim) / 256));
 		}
 	}
 }
