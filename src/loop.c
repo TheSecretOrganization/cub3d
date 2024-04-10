@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:45:31 by averin            #+#    #+#             */
-/*   Updated: 2024/04/04 18:39:38 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/10 10:57:04 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ static int	handle_key(int keycode, t_data *data)
 	if (keycode == XK_Escape)
 		handle_destroy(data);
 	if (keycode == XK_Left)
-		rotate(STEP, &data->player);
-	if (keycode == XK_Right)
 		rotate(-STEP, &data->player);
+	if (keycode == XK_Right)
+		rotate(STEP, &data->player);
 	if (keycode == XK_a)
-		side(1, &data->player, data->map);
-	if (keycode == XK_d)
 		side(0, &data->player, data->map);
+	if (keycode == XK_d)
+		side(1, &data->player, data->map);
 	if (keycode == XK_w)
 		forward(STEP, &data->player, data->map);
 	if (keycode == XK_s)
