@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:17:25 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/08 17:34:27 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:51:08 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,25 @@ static int	ft_isspace(char c)
 		|| c == '\r' || c == '\t' || c == '\v');
 }
 
-static void	init_ft_atof(float *r, float *frac_mult, int *sign, int *frac_part)
+static void	init_ft_atof(float *r, float *frac_mult, int *frac_part)
 {
 	*r = 0.0;
 	*frac_mult = 1.0;
-	*sign = 1;
 	*frac_part = 0;
+}
+
+static int	check_sign(const char **nptr)
+{
+	int	sign;
+
+	sign = 1;
+	if (**nptr == '+' || **nptr == '-')
+	{
+		if (**nptr == '-')
+			sign = -1;
+		(*nptr)++;
+	}
+	return (sign);
 }
 
 float	ft_atof(const char *nptr)
@@ -33,12 +46,10 @@ float	ft_atof(const char *nptr)
 	int		sign;
 	int		frac_part;
 
-	init_ft_atof(&r, &frac_mult, &sign, &frac_part);
+	init_ft_atof(&r, &frac_mult, &frac_part);
 	while (ft_isspace(*nptr))
 		nptr++;
-	if (*nptr == '+' || *nptr == '-')
-		if (*(nptr++) == '-')
-			sign = -1;
+	sign = check_sign(&nptr);
 	while (*nptr && (ft_isdigit(*nptr) || (!frac_part && *nptr == '.')))
 	{
 		if (!frac_part && *nptr == '.')
