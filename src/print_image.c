@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:24:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/09 18:58:31 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:46:35 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	print_image(t_data *d)
 	i = -1;
 	while (++i <= WIDTH)
 		(init_img_line(d, i, &hit), d->map.graphic.zbuffer[i] = hit.distance);
-	put_sprites_to_image(d);
+	spritecasting(d);
 	mlx_put_image_to_window(d->window.mlx, d->window.ptr,
 		d->window.img.ptr, 0, 0);
 }

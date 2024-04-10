@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/04/09 18:54:29 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:46:35 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void		flood_map(const t_map *map, t_collector *collector);
 void		print_image(t_data *data);
 int			get_pixel(t_img *tex, int x, int y);
 void		img_pixel_put(t_img *img, int x, int y, int color);
-void		put_sprites_to_image(t_data *data);
+void		spritecasting(t_data *data);
 void		sort_sprites(t_sprite **sprites, t_vector pos);
 
 void		forward(float step, t_player *player, t_map map);
