@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:29:25 by averin            #+#    #+#             */
-/*   Updated: 2024/04/09 17:01:37 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/10 10:36:28 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ static void	conclude_raycast(int face, t_hit *hit, const t_vector *tools)
 	else
 		hit->distance = tools[0].y - tools[1].y;
 	if (face == 0 && tools[2].x >= 0)
-		hit->face = NO;
-	else if (face == 0 && tools[2].x < 0)
-		hit->face = SO;
-	else if (face == 1 && tools[2].y >= 0)
 		hit->face = EA;
-	else
+	else if (face == 0 && tools[2].x < 0)
 		hit->face = WE;
+	else if (face == 1 && tools[2].y >= 0)
+		hit->face = SO;
+	else
+		hit->face = NO;
 }
 
 static int	check_collision(t_map map, const int *pos, t_hit *hit, int option)
