@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:03:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/09 19:00:07 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/11 10:30:18 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static void	parse_door(t_data *data, size_t i, size_t j)
 {
 	t_ws	*ws;
 
+	if (!search_texture("D", data->map))
+		cerror(DOOR_ERROR, "D", data->collector);
 	ws = ccalloc(1, sizeof(t_ws), data->collector);
 	ws->position = (t_vector){j, i};
 	ws->state = CLOSE;
