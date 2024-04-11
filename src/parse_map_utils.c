@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 16:56:13 by averin            #+#    #+#             */
-/*   Updated: 2024/04/09 16:57:43 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/09 19:00:57 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ void	create_rectangle(t_list *line, t_map *map, t_collector *collector)
 			ft_memcpy(tmp, (char *)line->content, len);
 			(free(line->content), line->content = tmp);
 		}
-		len = -1;
-		while (((char *)line->content)[++len])
-			if (((char *)line->content)[len] == ' ')
-				((char *)line->content)[len] = '\0';
+		replace_char(((char *)line->content), ' ', '1');
 		map->content[i++] = line->content;
 		line = line->next;
 	}

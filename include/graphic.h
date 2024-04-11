@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:15:07 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/09 16:55:03 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/09 18:56:01 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,23 @@ typedef struct s_ws
 	struct s_ws	*next;
 }	t_ws;
 
+typedef struct s_sprite
+{
+	const char		*key;
+	t_vector		pos;
+	float			distance;
+	t_img			img;
+	void			*mlx;
+	struct s_sprite	*next;
+}	t_sprite;
+
 typedef struct s_graphic
 {
 	t_color		*color;
 	t_texture	*texture;
 	t_ws		*wall_state;
+	t_sprite	*sprite;
+	float		zbuffer[WIDTH];
 }	t_graphic;
 
 #endif

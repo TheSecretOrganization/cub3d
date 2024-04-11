@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:03:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/09 17:48:33 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/09 19:00:07 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ void	parse_map(t_data *data, t_list *line)
 	if (data->map.width > 300)
 		cerror(MAP_TOO_BIG, NULL, data->collector);
 	create_rectangle(line, &data->map, data->collector);
+	check_sprite_free_space(data);
 	flood_map(&data->map, data->collector);
 }
