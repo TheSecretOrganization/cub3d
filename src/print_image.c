@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_image.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:24:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/10 16:04:30 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/11 10:16:11 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static void	print_img_line(t_data *data, t_hit hit, t_vector dir, int *tools)
 	else
 		wall_x = data->player.pos.x + hit.distance * dir.x;
 	wall_x -= floor(wall_x);
+	if (hit.face == SO || hit.face == WE)
+		wall_x = 1 - wall_x;
 	tex = finf_face_texture(hit.face, data->map, hit);
 	tex_x = wall_x * (double) tex->width;
 	step = 1.0f * tex->width / tools[2];
