@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 11:22:41 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/09 18:55:11 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/11 10:31:38 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ NO, SO, WE and EA"
 # define OPEN_ERROR "Cannot open file"
 # define SUFFIX_ERROR "Invalid suffix, use a <map.cub>"
 # define CHAR_ERROR "Invalid char found in the map"
+# define DOOR_ERROR "Invalid door found in the map, \
+there is no texture for the doors"
 # define NO_PLAYER "No starting position was found"
 # define MULTIPLE_PLAYER "Multiple starting position found"
 # define MAP_TOO_BIG "The map is too big, a 300x300 is the maximum"
