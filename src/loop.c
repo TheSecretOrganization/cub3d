@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:45:31 by averin            #+#    #+#             */
-/*   Updated: 2024/04/10 10:57:04 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/17 15:47:53 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	handle_loop(t_data *data)
 {
-	(void) data;
+	print_image(data);
 	return (0);
 }
 
@@ -42,7 +42,6 @@ static int	handle_key(int keycode, t_data *data)
 		forward(-STEP, &data->player, data->map);
 	if (keycode == XK_e)
 		close_door(data->player, data->map);
-	print_image(data);
 	return (0);
 }
 

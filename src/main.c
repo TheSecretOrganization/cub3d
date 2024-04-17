@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/04/09 18:59:30 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:47:50 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main(int argc, char const *argv[])
 	data.collector = init_collector();
 	create_window(&data.window, data.collector);
 	parse_file(&data, argv[1]);
-	print_image(&data);
 	init_hook(&data);
 	mlx_loop(data.window.mlx);
 	return (free_collector(data.collector), 0);
