@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/04/10 11:46:35 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:30:02 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ void		raycast(t_vector *view, t_map map, t_hit *hit, int option);
 t_ws		*get_wall_state(int x, int y, t_map map);
 int			is_door_open(int x, int y, t_map map);
 void		close_door(t_player player, t_map map);
+
+void		draw_minimap(t_data *data);
 
 void		print_image(t_data *data);
 

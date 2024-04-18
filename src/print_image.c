@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_image.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:24:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/11 10:16:11 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/18 14:30:07 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	print_image(t_data *d)
 	while (++i <= WIDTH)
 		(init_img_line(d, i, &hit), d->map.graphic.zbuffer[i] = hit.distance);
 	spritecasting(d);
+	draw_minimap(d);
 	mlx_put_image_to_window(d->window.mlx, d->window.ptr,
 		d->window.img.ptr, 0, 0);
 }
