@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 08:57:21 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/18 10:13:19 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:57:23 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	forward(float step, t_player *player, t_map map)
 
 	x = player->pos.x + step * player->direction.x;
 	y = player->pos.y + step * player->direction.y;
-	if ((size_t)x > map.width || (size_t)y > map.heigh)
+	if ((size_t)x > map.width || (size_t)y > map.height)
 		return ;
 	if (!check_collision(x, player->pos.y, map, 0))
 		player->pos.x = x;

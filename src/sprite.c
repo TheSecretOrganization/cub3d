@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 13:42:04 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/09 16:59:38 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:57:23 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	check_sprite_free_space(t_data *data)
 	while (s)
 	{
 		if ((size_t)(int)s->pos.x >= data->map.width - 1
-			|| (size_t)(int)s->pos.y >= data->map.heigh - 1)
+			|| (size_t)(int)s->pos.y >= data->map.height - 1)
 			cerror(SPRITE_POS_ERROR_1, s->key, data->collector);
 		if (data->map.content[(int)s->pos.y][(int)s->pos.x] != '0')
 			cerror(SPRITE_POS_ERROR_2, s->key, data->collector);
