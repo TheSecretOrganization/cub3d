@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 08:57:21 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/10 18:39:15 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/18 10:13:19 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ static int	check_collision(float x, float y, t_map map, int side)
 {
 	t_sprite	*s;
 
-	if (map.content[(int)y][(int)x] == '1'
-		|| map.content[(int)y][(int)x] == '\0')
+	if (map.content[(size_t)y][(size_t)x] == '1'
+		|| map.content[(size_t)y][(size_t)x] == '\0')
 		return (1);
-	if (map.content[(int)y][(int)x] == 'D' && !is_door_open(x, y, map))
+	if (map.content[(size_t)y][(size_t)x] == 'D' && !is_door_open(x, y, map))
 		return (1);
 	s = map.graphic.sprite;
 	while (s)
@@ -76,9 +76,9 @@ void	side(int is_left, t_player *player, t_map map)
 		perpendicular = (t_vector){player->direction.y, -player->direction.x};
 	x = player->pos.x + STEP * perpendicular.x;
 	y = player->pos.y + STEP * perpendicular.y;
-	if (!check_collision(player->pos.y, x, map, 1))
+	if (!check_collision(x, player->pos.y, map, 1))
 		player->pos.x = x;
-	if (!check_collision(y, player->pos.x, map, 1))
+	if (!check_collision(player->pos.x, y, map, 1))
 		player->pos.y = y;
 }
 
