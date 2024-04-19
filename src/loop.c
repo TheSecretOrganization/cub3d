@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:45:31 by averin            #+#    #+#             */
-/*   Updated: 2024/04/17 15:47:53 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/19 17:20:14 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static int	handle_key(int keycode, t_data *data)
 		forward(-STEP, &data->player, data->map);
 	if (keycode == XK_e)
 		close_door(data->player, data->map);
+	if (keycode == XK_m)
+		toggle_control(&data->controls, 1);
 	return (0);
 }
 
