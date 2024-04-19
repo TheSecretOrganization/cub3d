@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:14:09 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/18 15:01:15 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/03/26 11:23:57 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 
 # define WIDTH 800
 # define HEIGHT 600
-# define MINIMAP_WIDTH 80
-# define MINIMAP_HEIGHT 60
 
 typedef struct t_img
 {
