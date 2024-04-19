@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:26:54 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/18 17:13:48 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/19 16:14:57 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,30 @@ static int	get_color(char tile, int is_player)
 
 void	draw_minimap(t_data *data)
 {
-	int	y;
-	int	x;
-	int	color = -1;
-    int start_x = (int)data->player.pos.x - 5;
-    int start_y = (int)data->player.pos.y - 5;
+	size_t	y;
+	size_t	x;
+	size_t	color = -1;
+	size_t	i;
+	size_t	j;
 
 	y =  - 1;
-	while (++y < MINIMAP_HEIGHT)
+	while (++y < data->map.height)
 	{
 		x = - 1;
-		while (++x < MINIMAP_WIDTH)
+		while (++x < data->map.width)
 		{
-			size_t map_x = start_x + x;
-            size_t map_y = start_y + y;
-			if (map_x >= 0 && map_x < data->map.width && map_y >= 0 && map_y < data->map.height)
+			color = get_color(data->map.content[y][x], (y == (size_t)data->player.pos.y
+				&& x == (size_t)data->player.pos.x));
+			i = -1;
+			while (++i < 10)
 			{
-				if (color == -1 || !(x % 10))
+				j = -1;
+				while (++j < 10)
 				{
-					// printf("%d %d\n", x, y);
-					// printf("%ld %ld\n", map_x, map_y);
-					// printf("%c\n", data->map.content[map_y][map_x]);
-					color = get_color(data->map.content[map_y][map_x], (map_y == (size_t)data->player.pos.y
-						&& map_x == (size_t)data->player.pos.x));
+					img_pixel_put(&data->window.img, x * 10 + j, y * 10 + i, color);
 				}
-				img_pixel_put(&data->window.img, x, y, color);
 			}
 		}
 	}
+	// printf("%ld %ld\n", x, y);
 }
