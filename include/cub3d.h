@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/04/18 14:57:40 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:20:10 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_data
 	t_player	player;
 	t_collector	*collector;
 	t_window	window;
+	int			controls;
 }	t_data;
 
 typedef enum e_dir
@@ -122,5 +123,8 @@ void		draw_minimap(t_data *data);
 void		print_image(t_data *data);
 
 void		create_rectangle(t_list *line, t_map *map, t_collector *collector);
+
+void		toggle_control(int *controls, int key);
+int			get_control_value(int controls, int key);
 
 #endif

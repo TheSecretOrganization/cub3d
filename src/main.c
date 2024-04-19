@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 10:52:38 by averin            #+#    #+#             */
-/*   Updated: 2024/04/17 15:47:50 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/19 17:05:58 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int argc, char const *argv[])
 	data.player = (t_player){{0, 0}, {0, 0.66f}, {-1, 0}};
 	data.map = (t_map){0, {NULL, NULL, NULL, NULL, {0}}, 0, 0};
 	data.collector = init_collector();
+	data.controls = 0;
 	create_window(&data.window, data.collector);
 	parse_file(&data, argv[1]);
 	init_hook(&data);

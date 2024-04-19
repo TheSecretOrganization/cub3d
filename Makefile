@@ -50,6 +50,7 @@ LIB 		:= $(strip $(LIB))
 
 define SRC	:=
 	collector.c
+	controls.c
 	door.c
 	flood_map.c
 	graphic_utils.c
