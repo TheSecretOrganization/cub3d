@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:56:21 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/18 14:57:23 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/22 10:29:49 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	is_texture(const char *line, int found_map)
 		return (-1);
 	if (!line[i])
 		return (2);
-	alpha = ft_isalpha(line[i]);
+	alpha = (ft_isalpha(line[i]) || line[i] == '.' || line[i] == '|');
 	if ((!alpha && !ft_isdigit(line[i])) || (found_map && alpha))
 		return (-1);
 	return (alpha);

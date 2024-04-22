@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 11:22:41 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/22 09:14:32 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/22 10:19:40 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define MALLOC_ERROR "Malloc failed"
 # define WALL_ERROR "There is a hole in the walls"
 # define NB_ERROR "Textures and colors are composed of one key value couple \
-by element, sprites take two additional X Y position arguments"
+by element, sprites take a path and two additional X Y position arguments"
 # define KEY_ERROR "Element key is invalid: \
 It must be start by one or two alphabetical char"
 # define UNIQUE_KEY_ERROR "Element key is invalid: each key must be unique"

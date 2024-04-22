@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 13:42:04 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/18 14:57:23 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/22 10:23:31 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ static void	destroy_sprite(void *sprite)
 	free(s);
 }
 
-static t_sprite	*init_sprite(t_data *data, const char *k, const char *v)
+static t_sprite	*init_sprite(t_data *data, const char *v)
 {
 	t_sprite	*new;
 
 	new = ft_calloc(1, sizeof(t_sprite));
 	if (!new)
 		cerror(MALLOC_ERROR, "init_text", data->collector);
-	new->key = k;
+	new->key = v;
 	new->distance = 0;
 	new->next = NULL;
 	new->mlx = data->window.mlx;
@@ -52,12 +52,12 @@ void	add_sprite(t_data *data, const char **kvsp)
 	t_sprite	*last;
 	int			fd;
 
-	fd = open(kvsp[1], O_RDONLY);
+	fd = open(kvsp[0], O_RDONLY);
 	if (fd == -1)
-		cerror(TEXTURE_ERROR, kvsp[1], data->collector);
+		cerror(TEXTURE_ERROR, kvsp[0], data->collector);
 	close(fd);
-	new = init_sprite(data, kvsp[0], kvsp[1]);
-	new->pos = (t_vector){ft_atof(kvsp[2]), ft_atof(kvsp[3])};
+	new = init_sprite(data, kvsp[0]);
+	new->pos = (t_vector){ft_atof(kvsp[1]), ft_atof(kvsp[2])};
 	if (new->pos.x <= 0 || (int)new->pos.x >= WIDTH - 1
 		|| new->pos.y <= 0 || (int)new->pos.y >= HEIGHT - 1)
 		cerror(SPRITE_POS_ERROR_1, kvsp[0], data->collector);
