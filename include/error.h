@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 11:22:41 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/11 10:31:38 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/22 09:14:32 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ NO, SO, WE and EA"
 there is no texture for the doors"
 # define NO_PLAYER "No starting position was found"
 # define MULTIPLE_PLAYER "Multiple starting position found"
-# define MAP_TOO_BIG "The map is too big, a 300x300 is the maximum"
+# define MAP_TOO_BIG "The map is too big"
 # define USAGE_ERROR "Usage: ./cub3d <file.cub>"
 # define WINDOW_ERROR "Cannot open window"
 
