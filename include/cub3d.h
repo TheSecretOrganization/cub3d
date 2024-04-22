@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/04/22 09:19:15 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/22 09:50:23 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@
 # define VALID_CHAR "10NSEWD "
 # define PLAYER_VIEW "NSEW"
 # define R_DOOR 1
-# define C_MINIMAP 1
+# define C_MINIMAP 0b1
+# define C_MOUSE 0b10
 
 typedef struct s_player
 {

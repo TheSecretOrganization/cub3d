@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:45:31 by averin            #+#    #+#             */
-/*   Updated: 2024/04/22 09:27:16 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/22 09:51:37 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,21 @@ static int	handle_key(int keycode, t_data *data)
 		close_door(data->player, data->map);
 	if (keycode == XK_m)
 		data->controls ^= C_MINIMAP;
+	if (keycode == XK_n)
+		data->controls ^= C_MOUSE;
 	return (0);
 }
 
 static int	handle_mouse(int x, int new_x, t_data *data)
 {
-	(void)data;
+	if (!(data->controls & C_MOUSE))
+		return (0);
 	if (x > WIDTH / 2 + 20)
-		(rotate(-STEP / 4, &data->player), new_x = WIDTH / 2 + 19);
+		(rotate(STEP / 4, &data->player), new_x = WIDTH / 2 + 19);
 	else if (x < WIDTH / 2 - 20)
-		(rotate(STEP / 4, &data->player), new_x = WIDTH / 2 - 19);
+		(rotate(-STEP / 4, &data->player), new_x = WIDTH / 2 - 19);
 	else
 		return (0);
-	print_image(data);
 	if (x > WIDTH / 2 + 10)
 		mlx_mouse_move(data->window.mlx, data->window.ptr, new_x, HEIGHT / 2);
 	else if (x < WIDTH / 2 - 10)
