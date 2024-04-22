@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:26:54 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/19 17:20:45 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/22 09:18:12 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	draw_minimap(t_data *data)
 	size_t	x;
 	int		is_player;
 
-	if (!get_control_value(data->controls, 1))
+	if (!(data->controls & C_MINIMAP))
 		return ;
 	y = -1;
 	while (++y < data->map.height)

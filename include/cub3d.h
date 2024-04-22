@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/04/19 17:20:10 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/22 09:19:15 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define VALID_CHAR "10NSEWD "
 # define PLAYER_VIEW "NSEW"
 # define R_DOOR 1
+# define C_MINIMAP 1
 
 typedef struct s_player
 {
@@ -123,8 +124,5 @@ void		draw_minimap(t_data *data);
 void		print_image(t_data *data);
 
 void		create_rectangle(t_list *line, t_map *map, t_collector *collector);
-
-void		toggle_control(int *controls, int key);
-int			get_control_value(int controls, int key);
 
 #endif
