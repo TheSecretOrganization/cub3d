@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 16:56:13 by averin            #+#    #+#             */
-/*   Updated: 2024/04/09 19:00:57 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:57:23 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	create_rectangle(t_list *line, t_map *map, t_collector *collector)
 	size_t	len;
 
 	i = 0;
-	map->content = ccalloc(map->heigh + 1, sizeof(char *), collector);
+	map->content = ccalloc(map->height + 1, sizeof(char *), collector);
 	while (line)
 	{
 		len = ft_strlen((char *)line->content);

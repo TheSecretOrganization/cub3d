@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 10:40:19 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/26 11:24:35 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/18 14:57:23 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ void	flood_map(const t_map *map, t_collector *collector)
 	size_t	y;
 	size_t	x;
 
-	cpy = ft_calloc(map->heigh + 1, sizeof(char *));
+	cpy = ft_calloc(map->height + 1, sizeof(char *));
 	if (!cpy)
 		cerror(MALLOC_ERROR, "flood_map", collector);
 	y = -1;
-	while (++y < map->heigh)
+	while (++y < map->height)
 	{
 		cpy[y] = ft_calloc(map->width + 1, sizeof(char));
 		if (!cpy[y])
@@ -71,7 +71,7 @@ void	flood_map(const t_map *map, t_collector *collector)
 		while (++x < map->width)
 			cpy[y][x] = map->content[y][x];
 	}
-	if (find_starting_points(cpy, (size_t[2]){map->heigh, map->width}))
+	if (find_starting_points(cpy, (size_t[2]){map->height, map->width}))
 		(ft_fsplit(cpy), cerror(WALL_ERROR, NULL, collector));
 	ft_fsplit(cpy);
 }

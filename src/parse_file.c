@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:56:21 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/22 16:37:36 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:57:23 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ void	parse_file(t_data *d, const char *argv)
 		code = is_texture((const char *)file->content, found_map);
 		if (code == -1)
 			cerror(FILE_ERROR, (const char *)file->content, d->collector);
-		else if (code == 0 && ++(d->map.heigh))
+		else if (code == 0 && ++(d->map.height))
 		{
 			found_map = 1;
-			if (d->map.heigh == 1)
+			if (d->map.height == 1)
 				line = file;
 		}
 		else if (code == 1)

@@ -56,6 +56,7 @@ define SRC	:=
 	graphic.c
 	loop.c
 	main.c
+	minimap.c
 	move.c
 	parse_file.c
 	parse_map.c

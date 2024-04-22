@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:15:07 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/09 18:56:01 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:55:47 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_graphic
 	t_texture	*texture;
 	t_ws		*wall_state;
 	t_sprite	*sprite;
-	float		zbuffer[WIDTH];
+	float		zbuffer[WIDTH + 1];
 }	t_graphic;
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:15:26 by averin            #+#    #+#             */
-/*   Updated: 2024/04/10 11:46:35 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/22 09:19:15 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define VALID_CHAR "10NSEWD "
 # define PLAYER_VIEW "NSEW"
 # define R_DOOR 1
+# define C_MINIMAP 1
 
 typedef struct s_player
 {
@@ -44,7 +45,7 @@ typedef struct s_map
 {
 	char		**content;
 	t_graphic	graphic;
-	size_t		heigh;
+	size_t		height;
 	size_t		width;
 }	t_map;
 
@@ -54,6 +55,7 @@ typedef struct s_data
 	t_player	player;
 	t_collector	*collector;
 	t_window	window;
+	int			controls;
 }	t_data;
 
 typedef enum e_dir
@@ -116,6 +118,8 @@ void		raycast(t_vector *view, t_map map, t_hit *hit, int option);
 t_ws		*get_wall_state(int x, int y, t_map map);
 int			is_door_open(int x, int y, t_map map);
 void		close_door(t_player player, t_map map);
+
+void		draw_minimap(t_data *data);
 
 void		print_image(t_data *data);
 
