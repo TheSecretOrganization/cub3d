@@ -6,33 +6,11 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:35:32 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/22 16:56:30 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:58:10 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	add_text(t_data *data, const char *k, const char *v)
-{
-	t_texture	*new;
-	t_texture	*last;
-	int			fd;
-
-	fd = open(v, O_RDONLY);
-	if (fd == -1)
-		cerror(TEXTURE_ERROR, v, data->collector);
-	close(fd);
-	new = init_text(data, k, v);
-	if (!data->map.graphic.texture)
-		data->map.graphic.texture = new;
-	else
-	{
-		last = data->map.graphic.texture;
-		while (last->next)
-			last = last->next;
-		last->next = new;
-	}
-}
 
 static void	split_atoi(char **s, t_color *new, t_collector *col, const char *v)
 {
@@ -89,55 +67,68 @@ static void	add_color(t_data *data, const char *k, const char *v)
 	}
 }
 
-static void	dispatch(t_data *data, const char *k, const char *v)
+static void	check_keys(t_data *data, const char *k)
 {
-	size_t		len;
 	t_graphic	cpy;
 
 	if (k[1] && !ft_isalpha(k[1]))
 		cerror(KEY_ERROR, k, data->collector);
-	cpy = (t_graphic){data->map.graphic.color, data->map.graphic.texture};
-	while (cpy.color || cpy.texture)
+	cpy = (t_graphic){data->map.graphic.color, data->map.graphic.texture,
+		data->map.graphic.wall_state, data->map.graphic.sprite, {0}};
+	while (cpy.color || cpy.texture || cpy.sprite)
 	{
 		if ((cpy.color && !ft_strncmp(cpy.color->key, k, ft_strlen(k)))
-			|| (cpy.texture && !ft_strncmp(cpy.texture->key, k, ft_strlen(k))))
+			|| (cpy.texture && !ft_strncmp(cpy.texture->key, k, ft_strlen(k)))
+			|| (cpy.sprite && !ft_strncmp(cpy.sprite->key, k, ft_strlen(k))))
 			cerror(UNIQUE_KEY_ERROR, k, data->collector);
 		if (cpy.color)
 			cpy.color = cpy.color->next;
 		if (cpy.texture)
 			cpy.texture = cpy.texture->next;
+		if (cpy.sprite)
+			cpy.sprite = cpy.sprite->next;
 	}
-	len = ft_strlen(v);
-	if (len >= 4 && v[len - 4] == '.' && v[len - 3] == 'x' && v[len - 2] == 'p'
-		&& v[len - 1] == 'm')
-		add_text(data, k, v);
+}
+
+static void	dispatch(t_data *data, const char **kvsp)
+{
+	size_t		l;
+
+	(check_keys(data, kvsp[0]), l = ft_strlen(kvsp[1]));
+	if (kvsp[2] && l >= 4 && kvsp[1][l - 4] == '.' && kvsp[1][l - 3] == 'x'
+		&& kvsp[1][l - 2] == 'p' && kvsp[1][l - 1] == 'm')
+		add_sprite(data, kvsp);
+	else if (kvsp[2])
+		cerror(NB_ERROR, kvsp[0], data->collector);
+	else if (l >= 4 && kvsp[1][l - 4] == '.' && kvsp[1][l - 3] == 'x'
+		&& kvsp[1][l - 2] == 'p' && kvsp[1][l - 1] == 'm')
+		add_text(data, kvsp[0], kvsp[1]);
 	else
-		add_color(data, k, v);
+		add_color(data, kvsp[0], kvsp[1]);
 }
 
 void	parse_graphic(t_data *data, char *line)
 {
 	size_t		i;
 	char		**split;
-	const char	*key;
-	const char	*value;
+	const char	*kvsp[4];
 
-	i = -1;
-	while (line[++i])
-		if (line[i] == '\t')
-			line[i] = ' ';
-	if (!ft_strnstr(line, ".xpm", ft_strlen(line)))
-		remove_space(line);
+	(replace_char(line, '\t', ' '), i = -1);
 	split = ft_split(line, ' ');
 	if (!split)
 		cerror(MALLOC_ERROR, "parse_graphic", data->collector);
-	i = -1;
 	while (split[++i])
 		;
-	if (i != 2)
+	if (i != 2 && i != 4)
 		(ft_fsplit(split), cerror(NB_ERROR, line, data->collector));
-	(add_collector(data->collector, split[0], &free), key = split[0]);
-	(add_collector(data->collector, split[1], &free), value = split[1]);
-	(free(split[2]), free(split));
-	dispatch(data, key, value);
+	(add_collector(data->collector, split[0], &free), kvsp[0] = split[0]);
+	(add_collector(data->collector, split[1], &free), kvsp[1] = split[1]);
+	if (i == 4)
+	{
+		(add_collector(data->collector, split[2], &free), kvsp[2] = split[2]);
+		(add_collector(data->collector, split[3], &free), kvsp[3] = split[3]);
+	}
+	else
+		kvsp[2] = NULL;
+	(free(split[i]), free(split), dispatch(data, kvsp));
 }

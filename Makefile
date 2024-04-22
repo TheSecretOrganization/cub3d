@@ -50,17 +50,24 @@ LIB 		:= $(strip $(LIB))
 
 define SRC	:=
 	collector.c
+	door.c
 	flood_map.c
 	graphic_utils.c
 	graphic.c
 	loop.c
 	main.c
+	minimap.c
 	move.c
 	parse_file.c
 	parse_map.c
+	parse_map_utils.c
 	print_image.c
 	raycast.c
 	read_file.c
+	sort_sprites.c
+	sprite.c
+	spritecasting.c
+	texture.c
 	utils.c
 	window.c
 endef

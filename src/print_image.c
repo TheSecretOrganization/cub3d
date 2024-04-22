@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   print_image.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 11:24:57 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/29 15:54:45 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/18 14:30:07 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static t_img	*finf_face_texture(t_dir face, t_map map)
+static t_img	*finf_face_texture(t_dir face, t_map map, t_hit hit)
 {
-	if (face == NO)
+	if (hit.type == 'D')
+		return (search_texture("D", map));
+	else if (face == NO)
 		return (search_texture("NO", map));
 	else if (face == SO)
 		return (search_texture("SO", map));
@@ -26,7 +28,7 @@ static t_img	*finf_face_texture(t_dir face, t_map map)
 		return (NULL);
 }
 
-static int	get_pixel(t_img *tex, int x, int y)
+int	get_pixel(t_img *tex, int x, int y)
 {
 	return (*(int *)(tex->content + (y * tex->size_line + x * (tex->bpp / 8))));
 }
@@ -47,12 +49,14 @@ static void	print_img_line(t_data *data, t_hit hit, t_vector dir, int *tools)
 	double	tex_pos;
 	t_img	*tex;
 
-	if (hit.face == NO || hit.face == SO)
+	if (hit.face == EA || hit.face == WE)
 		wall_x = data->player.pos.y + hit.distance * dir.y;
 	else
 		wall_x = data->player.pos.x + hit.distance * dir.x;
 	wall_x -= floor(wall_x);
-	tex = finf_face_texture(hit.face, data->map);
+	if (hit.face == SO || hit.face == WE)
+		wall_x = 1 - wall_x;
+	tex = finf_face_texture(hit.face, data->map, hit);
 	tex_x = wall_x * (double) tex->width;
 	step = 1.0f * tex->width / tools[2];
 	tex_pos = (tools[0] - HEIGHT / 2 + tools[2] / 2) * step;
@@ -74,25 +78,26 @@ static void	init_img_line(t_data *data, int i, t_hit *hit)
 	dir = (t_vector){data->player.direction.x + data->player.plane.x
 		* (2.0f * i / WIDTH - 1), data->player.direction.y
 		+ data->player.plane.y * (2.0f * i / WIDTH - 1)};
-	raycast(data->player.pos, dir, data->map, hit);
+	raycast((t_vector [2]){data->player.pos, dir}, data->map, hit, 0);
 	line_height = (int)(HEIGHT / hit->distance);
 	start = -line_height / 2 + HEIGHT / 2;
 	if (start < 0)
 		start = 0;
 	end = line_height / 2 + HEIGHT / 2;
 	if (end >= HEIGHT)
-		end = HEIGHT - 1;
-	print_img_line(data, *hit, dir, (int [4]){start, end, line_height, i});
+		end = HEIGHT;
+	print_img_line(data, *hit, dir,
+		(int [4]){start, end, line_height, WIDTH - i});
 }
 
-void	print_image(t_data *data)
+void	print_image(t_data *d)
 {
 	int		i;
 	int		y;
 	t_hit	hit;
 
-	ft_bzero(data->window.img.content, HEIGHT * data->window.img.size_line
-		+ WIDTH * (data->window.img.bpp / 8));
+	ft_bzero(d->window.img.content, HEIGHT * d->window.img.size_line
+		+ WIDTH * (d->window.img.bpp / 8));
 	i = -1;
 	while (++i <= WIDTH)
 	{
@@ -100,16 +105,16 @@ void	print_image(t_data *data)
 		while (++y <= HEIGHT)
 		{
 			if (y < HEIGHT / 2)
-				img_pixel_put(&data->window.img, i, y,
-					search_color("C", data->map));
+				img_pixel_put(&d->window.img, i, y, search_color("C", d->map));
 			else
-				img_pixel_put(&data->window.img, i, y,
-					search_color("F", data->map));
+				img_pixel_put(&d->window.img, i, y, search_color("F", d->map));
 		}
 	}
 	i = -1;
 	while (++i <= WIDTH)
-		init_img_line(data, i, &hit);
-	mlx_put_image_to_window(data->window.mlx, data->window.ptr,
-		data->window.img.ptr, 0, 0);
+		(init_img_line(d, i, &hit), d->map.graphic.zbuffer[i] = hit.distance);
+	spritecasting(d);
+	draw_minimap(d);
+	mlx_put_image_to_window(d->window.mlx, d->window.ptr,
+		d->window.img.ptr, 0, 0);
 }

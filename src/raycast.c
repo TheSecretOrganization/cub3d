@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:29:25 by averin            #+#    #+#             */
-/*   Updated: 2024/03/29 11:42:18 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/10 10:36:28 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,40 +49,58 @@ static void	conclude_raycast(int face, t_hit *hit, const t_vector *tools)
 	else
 		hit->distance = tools[0].y - tools[1].y;
 	if (face == 0 && tools[2].x >= 0)
-		hit->face = NO;
-	else if (face == 0 && tools[2].x < 0)
-		hit->face = SO;
-	else if (face == 1 && tools[2].y >= 0)
 		hit->face = EA;
-	else
+	else if (face == 0 && tools[2].x < 0)
 		hit->face = WE;
+	else if (face == 1 && tools[2].y >= 0)
+		hit->face = SO;
+	else
+		hit->face = NO;
 }
 
-void	raycast(t_vector position, t_vector direction, t_map map, t_hit *hit)
+static int	check_collision(t_map map, const int *pos, t_hit *hit, int option)
+{
+	char	c;
+
+	c = map.content[pos[1]][pos[0]];
+	if (c == '\0' || c == '0')
+		return (0);
+	hit->type = c;
+	hit->position.x = pos[0];
+	hit->position.y = pos[1];
+	if (c == 'D' && (option & R_DOOR || !is_door_open(pos[0], pos[1], map)))
+		return (1);
+	return (c == '1');
+}
+
+/*
+ * view { position, direction }
+*/
+void	raycast(t_vector *view, t_map map, t_hit *hit, int option)
 {
 	int			face;
 	t_vector	step;
 	t_vector	side;
 	t_vector	delta;
 
-	init_raycast((t_vector [2]){position, direction}, &step, &side, &delta);
-	position = (t_vector){(int)position.x, (int)position.y};
+	init_raycast((t_vector [2]){view[0], view[1]}, &step, &side, &delta);
+	view[0] = (t_vector){(int)view[0].x, (int)view[0].y};
 	while (1)
 	{
 		if (side.x < side.y)
 		{
 			side.x += delta.x;
-			position.x += step.x;
+			view[0].x += step.x;
 			face = 0;
 		}
 		else
 		{
 			side.y += delta.y;
-			position.y += step.y;
+			view[0].y += step.y;
 			face = 1;
 		}
-		if (map.content[(int)position.y][(int)position.x] == '1')
+		if (check_collision(map, (int [2]){view[0].x, view[0].y}, hit, option))
 			break ;
 	}
-	conclude_raycast(face, hit, (t_vector[3]){side, delta, direction});
+	conclude_raycast(face, hit, (t_vector[3]){side, delta, view[1]});
 }

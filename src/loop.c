@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:45:31 by averin            #+#    #+#             */
-/*   Updated: 2024/04/01 00:13:53 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/22 09:27:16 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static int	handle_loop(t_data *data)
 {
-	(void) data;
+	print_image(data);
 	return (0);
 }
 
@@ -31,18 +31,21 @@ static int	handle_key(int keycode, t_data *data)
 	if (keycode == XK_Escape)
 		handle_destroy(data);
 	if (keycode == XK_Left)
-		rotate(STEP, &data->player);
-	if (keycode == XK_Right)
 		rotate(-STEP, &data->player);
+	if (keycode == XK_Right)
+		rotate(STEP, &data->player);
 	if (keycode == XK_a)
-		side(1, &data->player, data->map);
-	if (keycode == XK_d)
 		side(0, &data->player, data->map);
+	if (keycode == XK_d)
+		side(1, &data->player, data->map);
 	if (keycode == XK_w)
 		forward(STEP, &data->player, data->map);
 	if (keycode == XK_s)
 		forward(-STEP, &data->player, data->map);
-	print_image(data);
+	if (keycode == XK_e)
+		close_door(data->player, data->map);
+	if (keycode == XK_m)
+		data->controls ^= C_MINIMAP;
 	return (0);
 }
 

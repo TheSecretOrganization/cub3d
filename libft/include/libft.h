@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 09:55:16 by averin            #+#    #+#             */
-/*   Updated: 2024/02/06 15:23:12 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:35:12 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ char	*ft_strcut(char *str, char delimiter);
 char	*ft_strrplc(char *from, char *td, char *tr);
 char	*ft_fstrrplc(char *from, char *td, char *tr);
 
+float	ft_atof(const char *nptr);
 int		ft_atoi(const char *nptr);
 long	ft_atol(const char *nptr);
 char	*ft_itoa(int n);
