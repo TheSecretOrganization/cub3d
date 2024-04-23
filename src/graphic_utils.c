@@ -25,6 +25,16 @@ size_t	check_commas(const char *value)
 	return (commas);
 }
 
+int	check_split_color(const char **split)
+{
+	size_t	i;
+
+	i = 0;
+	while (split[i])
+		i++;
+	return (i == 3);
+}
+
 void	replace_char(char *s, char target, char replace)
 {
 	size_t	i;
