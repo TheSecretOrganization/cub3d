@@ -6,7 +6,7 @@
 /*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:26:54 by abasdere          #+#    #+#             */
-/*   Updated: 2024/04/22 09:18:12 by averin           ###   ########.fr       */
+/*   Updated: 2024/04/23 14:54:51 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ static int	get_color(char tile, int is_player)
 		return (WALL);
 	else if (tile == 'D')
 		return (DOOR);
-	else
+	else if (tile == '0')
 		return (PATH);
+	else
+		return (WALL);
 }
 
 static void	draw(t_data *data, size_t x, size_t y, int color)
