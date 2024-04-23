@@ -55,6 +55,8 @@ static void	add_color(t_data *data, const char *k, const char *v)
 	split = ft_split(v, ',');
 	if (!split)
 		cerror(MALLOC_ERROR, "add_color", data->collector);
+	if (!check_split_color((const char **)split))
+		(ft_fsplit(split), cerror(EL_ERROR, "add_color", data->collector));
 	(split_atoi(split, new, data->collector, v), ft_fsplit(split));
 	if (!data->map.graphic.color)
 		data->map.graphic.color = new;
