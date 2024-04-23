@@ -2,13 +2,13 @@ NO ./textures/1.xpm
 SO ./textures/2.xpm
 WE ./textures/3.xpm
 EA ./textures/4.xpm
-D ./textures/tbd.xpm
+D ./textures/door.xpm
 
-./textures/tbd.xpm 2 8
-./textures/tbd.xpm 9 8
+./textures/barrel.xpm 2 8
+./textures/barrel.xpm 9 8
 
-F tbd
-C tbd
+C 9,8,14
+F 35,38,46
 
 1111111
 1E00001
