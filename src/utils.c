@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: averin <averin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:59:20 by abasdere          #+#    #+#             */
-/*   Updated: 2024/03/29 09:09:36 by abasdere         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:22:51 by averin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	search_color(const char *name, t_map map)
 	{
 		if (ft_strncmp(name, color->key, ft_strlen(name)) == 0)
 			return (
-				color->red << 16 | color->blue << 8 | color->green << 4
+				color->red << 16 | color->blue << 8 | color->green
 			);
 		color = color->next;
 	}
