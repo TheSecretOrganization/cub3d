@@ -93,6 +93,7 @@ void		create_window(t_window *window, t_collector *col);
 
 void		parse_graphic(t_data *data, char *line);
 size_t		check_commas(const char *value);
+int			check_split_color(const char **split);
 void		replace_char(char *s, char target, char replace);
 void		add_text(t_data *data, const char *k, const char *v);
 void		add_sprite(t_data *data, const char **kvsp);
